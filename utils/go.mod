@@ -1,3 +1,3 @@
-module go-commons/utils
+module github.com/joshua-chen/go-commons/utils
 
 go 1.14

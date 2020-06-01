@@ -9,7 +9,7 @@
 package models
 
 import (
-	"go-commons/datasource"
+	"github.com/joshua-chen/go-commons/datasource"
 )
 
 // 角色-菜单关联表

@@ -1,3 +1,3 @@
-module go-commons/utils/security
+module github.com/joshua-chen/go-commons/utils/security
 
 go 1.14

@@ -1,10 +1,10 @@
-module go-commons/config
+module github.com/joshua-chen/go-commons/config
 
 go 1.14
 
 require (
-	go-commons/exception v0.0.0-00010101000000-000000000000
-	go-commons/utils/yaml v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/exception v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/utils/yaml v0.0.0-00010101000000-000000000000
 	github.com/Chronokeeper/anyxml v0.0.0-20160530174208-54457d8e98c6 // indirect
 	github.com/CloudyKit/fastprinter v0.0.0-20200109182630-33d98a066a53 // indirect
 	github.com/CloudyKit/jet v2.1.2+incompatible
@@ -26,10 +26,10 @@ require (
 	gopkg.in/yaml.v2 v2.3.0
 )
 
-replace go-commons/utils/yaml => ../utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ../utils/yaml
 
-replace go-commons/utils/security => ../utils/security
+replace github.com/joshua-chen/go-commons/utils/security => ../utils/security
 
-replace go-commons/utils/security/aes => ../utils/security/aes
+replace github.com/joshua-chen/go-commons/utils/security/aes => ../utils/security/aes
 
-replace go-commons/exception => ../exception
+replace github.com/joshua-chen/go-commons/exception => ../exception

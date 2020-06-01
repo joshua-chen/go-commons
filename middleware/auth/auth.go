@@ -9,11 +9,11 @@
 package auth
 
 import (
-	"go-commons/config"
-	"go-commons/middleware/casbin"
-	"go-commons/middleware/jwt"
-	_ "go-commons/mvc/context"
-	"go-commons/utils"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/casbin"
+	"github.com/joshua-chen/go-commons/middleware/jwt"
+	_ "github.com/joshua-chen/go-commons/mvc/context"
+	"github.com/joshua-chen/go-commons/utils"
 	_ "strings"
 	"sync"
 

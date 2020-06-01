@@ -10,7 +10,7 @@ package datasource
 
 import (
 	"fmt"
-	"go-commons/config"
+	"github.com/joshua-chen/go-commons/config"
 	"sync"
 
 	_ "github.com/go-sql-driver/mysql"

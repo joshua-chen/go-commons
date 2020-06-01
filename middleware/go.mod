@@ -1,24 +1,24 @@
-module go-commons/middleware
+module github.com/joshua-chen/go-commons/middleware
 
 go 1.14
 
 require (
-	go-commons/config v0.0.0-00010101000000-000000000000
-	go-commons/datasource v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/middleware/auth v0.0.0-00010101000000-000000000000
-	go-commons/middleware/casbin v0.0.0-00010101000000-000000000000
-	go-commons/middleware/cors v0.0.0-00010101000000-000000000000
-	go-commons/middleware/jwt v0.0.0-00010101000000-000000000000
-	go-commons/middleware/models v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/middleware/recover v0.0.0-00010101000000-000000000000
-	go-commons/mvc/context v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/context/response v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/context/response/msg v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/models v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/utils v0.0.0-00010101000000-000000000000
-	go-commons/utils/security v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/utils/security/aes v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/config v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/datasource v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/middleware/auth v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/casbin v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/cors v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/jwt v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/models v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/middleware/recover v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/mvc/context v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/context/response v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/context/response/msg v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/models v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/utils v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/utils/security v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/utils/security/aes v0.0.0-00010101000000-000000000000 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/casbin/casbin v1.9.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
@@ -49,38 +49,38 @@ require (
 	moul.io/http2curl v1.0.0 // indirect
 )
 
-replace go-commons/config => ../config
+replace github.com/joshua-chen/go-commons/config => ../config
 
-replace go-commons/utils/yaml => ../utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ../utils/yaml
 
-replace go-commons/utils/security => ../utils/security
+replace github.com/joshua-chen/go-commons/utils/security => ../utils/security
 
-replace go-commons/utils/security/aes => ../utils/security/aes
+replace github.com/joshua-chen/go-commons/utils/security/aes => ../utils/security/aes
 
-replace go-commons/exception => ../exception
+replace github.com/joshua-chen/go-commons/exception => ../exception
 
-replace go-commons/middleware/recover => ../middleware/recover
+replace github.com/joshua-chen/go-commons/middleware/recover => ../middleware/recover
 
-replace go-commons/middleware/jwt => ../middleware/jwt
+replace github.com/joshua-chen/go-commons/middleware/jwt => ../middleware/jwt
 
-replace go-commons/middleware/cors => ../middleware/cors
+replace github.com/joshua-chen/go-commons/middleware/cors => ../middleware/cors
 
-replace go-commons/middleware/models => ../middleware/models
+replace github.com/joshua-chen/go-commons/middleware/models => ../middleware/models
 
-replace go-commons/mvc/context/response => ../mvc/context/response
+replace github.com/joshua-chen/go-commons/mvc/context/response => ../mvc/context/response
 
-replace go-commons/mvc/context/response/msg => ../mvc/context/response/msg
+replace github.com/joshua-chen/go-commons/mvc/context/response/msg => ../mvc/context/response/msg
 
-replace go-commons/mvc/context/request => ../mvc/context/request
+replace github.com/joshua-chen/go-commons/mvc/context/request => ../mvc/context/request
 
-replace go-commons/datasource => ../datasource
+replace github.com/joshua-chen/go-commons/datasource => ../datasource
 
-replace go-commons/mvc/models => ../mvc/models
+replace github.com/joshua-chen/go-commons/mvc/models => ../mvc/models
 
-replace go-commons/utils => ../utils
+replace github.com/joshua-chen/go-commons/utils => ../utils
 
-replace go-commons/middleware/auth => ../middleware/auth
+replace github.com/joshua-chen/go-commons/middleware/auth => ../middleware/auth
 
-replace go-commons/middleware/casbin => ../middleware/casbin
+replace github.com/joshua-chen/go-commons/middleware/casbin => ../middleware/casbin
 
-replace go-commons/mvc/context => ../mvc/context
+replace github.com/joshua-chen/go-commons/mvc/context => ../mvc/context

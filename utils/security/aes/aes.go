@@ -15,7 +15,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
-	"go-commons/utils/security"
+	"github.com/joshua-chen/go-commons/utils/security"
 )
 
 /**

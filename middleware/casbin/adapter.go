@@ -16,7 +16,7 @@ package casbin
 
 import (
 	"errors"
-	"go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/middleware/models"
 	"runtime"
 
 	"github.com/casbin/casbin/model"

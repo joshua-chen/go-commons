@@ -1,4 +1,4 @@
-module go-commons/mvc/context
+module github.com/joshua-chen/go-commons/mvc/context
 
 go 1.14
 

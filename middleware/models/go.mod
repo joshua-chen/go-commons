@@ -1,20 +1,20 @@
-module go-commons/middleware/models
+module github.com/joshua-chen/go-commons/middleware/models
 
 go 1.14
 
-replace go-commons/datasource => ../../datasource
+replace github.com/joshua-chen/go-commons/datasource => ../../datasource
 
-replace go-commons/config => ../../config
+replace github.com/joshua-chen/go-commons/config => ../../config
 
-replace go-commons/exception => ../../exception
+replace github.com/joshua-chen/go-commons/exception => ../../exception
 
-replace go-commons/utils/yaml => ../../utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ../../utils/yaml
 
-replace go-commons/mvc/context/request => ../../mvc/context/request
+replace github.com/joshua-chen/go-commons/mvc/context/request => ../../mvc/context/request
 
 require (
-	go-commons/datasource v0.0.0-00010101000000-000000000000 //indirect
-	go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 //indirect
+	github.com/joshua-chen/go-commons/datasource v0.0.0-00010101000000-000000000000 //indirect
+	github.com/joshua-chen/go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 //indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect

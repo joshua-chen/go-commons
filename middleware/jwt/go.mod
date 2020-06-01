@@ -1,14 +1,14 @@
-module go-commons/middleware/jwt
+module github.com/joshua-chen/go-commons/middleware/jwt
 
 go 1.14
 
 require (
-	go-commons/config v0.0.0-00010101000000-000000000000
-	go-commons/datasource v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/middleware/models v0.0.0-00010101000000-000000000000
-	go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/context/response v0.0.0-00010101000000-000000000000
-	go-commons/mvc/context/response/msg v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/config v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/datasource v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/middleware/models v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/context/response v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/mvc/context/response/msg v0.0.0-00010101000000-000000000000
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
@@ -36,18 +36,18 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 )
 
-replace go-commons/config => ../../config
+replace github.com/joshua-chen/go-commons/config => ../../config
 
-replace go-commons/datasource => ../../datasource
+replace github.com/joshua-chen/go-commons/datasource => ../../datasource
 
-replace go-commons/mvc/context/request => ../../mvc/context/request
+replace github.com/joshua-chen/go-commons/mvc/context/request => ../../mvc/context/request
 
-replace go-commons/utils/yaml => ../../utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ../../utils/yaml
 
-replace go-commons/exception => ../../exception
+replace github.com/joshua-chen/go-commons/exception => ../../exception
 
-replace go-commons/middleware/models => ../models
+replace github.com/joshua-chen/go-commons/middleware/models => ../models
 
-replace go-commons/mvc/context/response => ../../mvc/context/response
+replace github.com/joshua-chen/go-commons/mvc/context/response => ../../mvc/context/response
 
-replace go-commons/mvc/context/response/msg => ../../mvc/context/response/msg
+replace github.com/joshua-chen/go-commons/mvc/context/response/msg => ../../mvc/context/response/msg

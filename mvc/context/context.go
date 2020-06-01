@@ -9,7 +9,7 @@
 package context
 
 import (
-	"go-commons/mvc/context/request"
+	"github.com/joshua-chen/go-commons/mvc/context/request"
 
 	"github.com/kataras/iris/v12"
 )

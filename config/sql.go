@@ -10,7 +10,7 @@ package config
 
 import (
 	_ "fmt"
-	"go-commons/exception"
+	"github.com/joshua-chen/go-commons/exception"
 	_ "sync"
 
 	_ "github.com/CloudyKit/jet"

@@ -1,4 +1,4 @@
-module go-commons/exception
+module github.com/joshua-chen/go-commons/exception
 
 go 1.14
 

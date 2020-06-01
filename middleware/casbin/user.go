@@ -9,9 +9,9 @@
 package casbin
 
 import (
-	"go-commons/datasource"
-	"go-commons/middleware/models"
-	"go-commons/utils/security/aes"
+	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/utils/security/aes"
 	"strconv"
 	"time"
 

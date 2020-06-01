@@ -2,11 +2,11 @@ package casbin
 
 import (
 	"fmt"
-	"go-commons/config"
-	"go-commons/datasource"
-	"go-commons/middleware/jwt"
-	"go-commons/mvc/context/response"
-	"go-commons/mvc/context/response/msg"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/middleware/jwt"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	"net/http"
 	"strconv"
 	"sync"

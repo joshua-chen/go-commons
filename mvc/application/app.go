@@ -1,12 +1,12 @@
 package application
 
 import (
-	"go-commons/config"
-	"go-commons/middleware"
-	_ "go-commons/middleware/auth"
-	_ "go-commons/middleware/cors"
-	_ "go-commons/middleware/recover"
-	"go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware"
+	_ "github.com/joshua-chen/go-commons/middleware/auth"
+	_ "github.com/joshua-chen/go-commons/middleware/cors"
+	_ "github.com/joshua-chen/go-commons/middleware/recover"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
 	_ "time"
 
 	"github.com/betacraft/yaag/irisyaag"

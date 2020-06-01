@@ -9,8 +9,8 @@
 package casbin
 
 import (
-	_ "go-commons/config"
-	"go-commons/middleware/models"
+	_ "github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/models"
 
 	"github.com/kataras/golog"
 )

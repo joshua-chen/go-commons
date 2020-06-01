@@ -17,7 +17,7 @@ package recover
 
 import (
 	"fmt"
-	"go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"runtime"
 	_ "strconv"
 	"sync"

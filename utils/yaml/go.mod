@@ -1,4 +1,4 @@
-module go-commons/utils/yaml
+module github.com/joshua-chen/go-commons/utils/yaml
 
 go 1.14
 

@@ -1,4 +1,4 @@
-module go-commons
+module github.com/joshua-chen/go-commons
 
 go 1.14
 
@@ -31,26 +31,26 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 )
 
-replace go-commons/config => ./config
+replace github.com/joshua-chen/go-commons/config => ./config
 
-replace go-commons/mvc/context => ./mvc/context
+replace github.com/joshua-chen/go-commons/mvc/context => ./mvc/context
 
-replace go-commons/mvc/context/request => ./mvc/context/request
+replace github.com/joshua-chen/go-commons/mvc/context/request => ./mvc/context/request
 
-replace go-commons/mvc/context/response => ./mvc/context/response
+replace github.com/joshua-chen/go-commons/mvc/context/response => ./mvc/context/response
 
-replace go-commons/mvc/context/response/msg => ./mvc/context/response/msg
+replace github.com/joshua-chen/go-commons/mvc/context/response/msg => ./mvc/context/response/msg
 
-replace go-commons/mvc/models => ./mvc/models
+replace github.com/joshua-chen/go-commons/mvc/models => ./mvc/models
 
-replace go-commons/utils => ./utils
+replace github.com/joshua-chen/go-commons/utils => ./utils
 
-replace go-commons/middleware/jwt => ./middleware/jwt
+replace github.com/joshua-chen/go-commons/middleware/jwt => ./middleware/jwt
 
-replace go-commons/middleware/casbin => ./middleware/casbin
+replace github.com/joshua-chen/go-commons/middleware/casbin => ./middleware/casbin
 
-replace go-commons/middleware/auth => ./middleware/auth
+replace github.com/joshua-chen/go-commons/middleware/auth => ./middleware/auth
 
-replace go-commons/exception => ./exception
+replace github.com/joshua-chen/go-commons/exception => ./exception
 
-replace go-commons/utils/yaml => ./utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ./utils/yaml

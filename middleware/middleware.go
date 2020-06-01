@@ -9,13 +9,13 @@
 package middleware
 
 import (
-	_ "go-commons/config"
-	"go-commons/middleware/auth"
-	"go-commons/middleware/casbin"
-	"go-commons/middleware/cors"
-	"go-commons/middleware/jwt"
-	"go-commons/middleware/recover"
-	_ "go-commons/utils"
+	_ "github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/auth"
+	"github.com/joshua-chen/go-commons/middleware/casbin"
+	"github.com/joshua-chen/go-commons/middleware/cors"
+	"github.com/joshua-chen/go-commons/middleware/jwt"
+	"github.com/joshua-chen/go-commons/middleware/recover"
+	_ "github.com/joshua-chen/go-commons/utils"
 	_ "strings"
 	"sync"
 

@@ -1,4 +1,4 @@
-module go-commons/mvc
+module github.com/joshua-chen/go-commons/mvc
 
 go 1.14
 

@@ -9,7 +9,7 @@
 package sys
 
 import (
-	"go-commons/datasource"
+	"github.com/joshua-chen/go-commons/datasource"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/core"

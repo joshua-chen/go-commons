@@ -1,4 +1,4 @@
-module go-commons/middleware/cors
+module github.com/joshua-chen/go-commons/middleware/cors
 
 go 1.14
 

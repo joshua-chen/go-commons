@@ -9,7 +9,7 @@
 package route
 
 import (
-	"go-commons/config"
+	"github.com/joshua-chen/go-commons/config"
 
 	"github.com/kataras/iris/v12"
 )

@@ -10,10 +10,10 @@ package jwt
 
 import (
 	"fmt"
-	"go-commons/config"
-	"go-commons/middleware/models"
-	"go-commons/mvc/context/response"
-	"go-commons/mvc/context/response/msg"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	_ "log"
 	"strings"
 	"sync"

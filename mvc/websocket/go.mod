@@ -1,4 +1,4 @@
-module go-commons/mvc/websocket
+module github.com/joshua-chen/go-commons/mvc/websocket
 
 go 1.14
 
@@ -26,4 +26,4 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 )
 
-replace go-commons/utils/security/aes => ../utils/security/aes
+replace github.com/joshua-chen/go-commons/utils/security/aes => ../utils/security/aes

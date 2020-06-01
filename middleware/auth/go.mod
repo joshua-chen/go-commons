@@ -1,35 +1,35 @@
-module go-commons/middleware/auth
+module github.com/joshua-chen/go-commons/middleware/auth
 
 go 1.14
 
-replace go-commons/config => ../../config
+replace github.com/joshua-chen/go-commons/config => ../../config
 
-replace go-commons/mvc/context => ../../mvc/context
+replace github.com/joshua-chen/go-commons/mvc/context => ../../mvc/context
 
-replace go-commons/mvc/context/request => ../../mvc/context/request
+replace github.com/joshua-chen/go-commons/mvc/context/request => ../../mvc/context/request
 
-replace go-commons/mvc/models => ../../mvc/models
+replace github.com/joshua-chen/go-commons/mvc/models => ../../mvc/models
 
-replace go-commons/utils => ../../utils
+replace github.com/joshua-chen/go-commons/utils => ../../utils
 
-replace go-commons/middleware/jwt => ../jwt
+replace github.com/joshua-chen/go-commons/middleware/jwt => ../jwt
 
-replace go-commons/middleware/casbin => ../casbin
+replace github.com/joshua-chen/go-commons/middleware/casbin => ../casbin
 
-replace go-commons/middleware/auth => ../auth
+replace github.com/joshua-chen/go-commons/middleware/auth => ../auth
 
-replace go-commons/exception => ../../exception
+replace github.com/joshua-chen/go-commons/exception => ../../exception
 
-replace go-commons/utils/yaml => ../../utils/yaml
+replace github.com/joshua-chen/go-commons/utils/yaml => ../../utils/yaml
 
 require (
-	go-commons/config v0.0.0-00010101000000-000000000000
-	go-commons/middleware/casbin v0.0.0-00010101000000-000000000000
-	go-commons/middleware/jwt v0.0.0-00010101000000-000000000000
-	go-commons/mvc/context v0.0.0-00010101000000-000000000000
-	go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/mvc/models v0.0.0-00010101000000-000000000000 // indirect
-	go-commons/utils v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/config v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/casbin v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/middleware/jwt v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/mvc/context v0.0.0-00010101000000-000000000000
+	github.com/joshua-chen/go-commons/mvc/context/request v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/mvc/models v0.0.0-00010101000000-000000000000 // indirect
+	github.com/joshua-chen/go-commons/utils v0.0.0-00010101000000-000000000000
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/casbin/casbin v1.9.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect

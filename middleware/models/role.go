@@ -9,8 +9,8 @@
 package models
 
 import (
-	"go-commons/datasource"
-	"go-commons/mvc/context/request"
+	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/mvc/context/request"
 )
 
 type CasbinRule struct {

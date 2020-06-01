@@ -1,4 +1,4 @@
-module github.com/joshua-chen/go-commons/mvc/models
+module github.com/joshua-chen/go-commons/mvc/route
 
 go 1.14
 

@@ -21,7 +21,7 @@ import (
 	_ "bytes"
 	_ "compress/gzip"
 	_ "fmt"
-	"go-commons/utils/yaml"
+	"github.com/joshua-chen/go-commons/utils/yaml"
 	_ "io"
 	_ "io/ioutil"
 	_ "os"

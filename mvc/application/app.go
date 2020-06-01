@@ -1,12 +1,12 @@
 package application
 
 import (
-	"commons/config"
-	"commons/middleware"
-	_ "commons/middleware/auth"
-	_ "commons/middleware/cors"
-	_ "commons/middleware/recover"
-	"commons/mvc/context/response"
+	"go-commons/config"
+	"go-commons/middleware"
+	_ "go-commons/middleware/auth"
+	_ "go-commons/middleware/cors"
+	_ "go-commons/middleware/recover"
+	"go-commons/mvc/context/response"
 	_ "time"
 
 	"github.com/betacraft/yaag/irisyaag"

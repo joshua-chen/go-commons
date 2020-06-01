@@ -1,4 +1,4 @@
-module commons/exception
+module go-commons/exception
 
 go 1.14
 

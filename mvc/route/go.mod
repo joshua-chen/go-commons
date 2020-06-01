@@ -1,15 +1,15 @@
-module commons/mvc/models
+module go-commons/mvc/models
 
 go 1.14
 
-replace commons/config => ../../config
+replace go-commons/config => ../../config
 
-replace commons/exception => ../../exception
+replace go-commons/exception => ../../exception
 
-replace commons/utils/yaml => ../../utils/yaml
+replace go-commons/utils/yaml => ../../utils/yaml
 
 require (
-	commons/config v0.0.0-00010101000000-000000000000
+	go-commons/config v0.0.0-00010101000000-000000000000
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect

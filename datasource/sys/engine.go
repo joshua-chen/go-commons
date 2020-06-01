@@ -9,12 +9,11 @@
 package sys
 
 import (
-	"commons/datasource"
+	"go-commons/datasource"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/core"
 	"github.com/xormplus/xorm"
-
 )
 
 // 主库，单例
@@ -33,4 +32,3 @@ func SlaveEngine() *xorm.Engine {
 	engine.SetTableMapper(tbMapper)
 	return engine
 }
- 

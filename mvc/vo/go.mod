@@ -1,4 +1,4 @@
-module commons/mvc/vo
+module go-commons/mvc/vo
 
 go 1.14
 

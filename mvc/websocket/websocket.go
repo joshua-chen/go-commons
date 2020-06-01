@@ -9,7 +9,6 @@
 package websocket
 
 import (
-	_ "commons/utils/security/aes"
 	_ "errors"
 	"log"
 	_ "time"
@@ -18,7 +17,6 @@ import (
 	"github.com/kataras/iris/v12/hero"
 	_ "github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/websocket"
-
 )
 
 type clientPage struct {

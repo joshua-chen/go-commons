@@ -9,11 +9,11 @@
 package jwt
 
 import (
-	"commons/config"
-	"commons/middleware/models"
-	"commons/mvc/context/response"
-	"commons/mvc/context/response/msg"
 	"fmt"
+	"go-commons/config"
+	"go-commons/middleware/models"
+	"go-commons/mvc/context/response"
+	"go-commons/mvc/context/response/msg"
 	_ "log"
 	"strings"
 	"sync"
@@ -27,7 +27,6 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	_ "github.com/spf13/cast"
-
 )
 
 type (

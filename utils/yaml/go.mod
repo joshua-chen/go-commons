@@ -1,4 +1,4 @@
-module commons/utils/yaml
+module go-commons/utils/yaml
 
 go 1.14
 

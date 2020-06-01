@@ -1,12 +1,12 @@
 package casbin
 
 import (
-	"commons/config"
-	"commons/datasource"
-	"commons/middleware/jwt"
-	"commons/mvc/context/response"
-	"commons/mvc/context/response/msg"
 	"fmt"
+	"go-commons/config"
+	"go-commons/datasource"
+	"go-commons/middleware/jwt"
+	"go-commons/mvc/context/response"
+	"go-commons/mvc/context/response/msg"
 	"net/http"
 	"strconv"
 	"sync"
@@ -15,15 +15,14 @@ import (
 	//"github.com/casbin/xorm-adapter"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/kataras/iris/v12/context"
-
 )
 
 var (
-	adapter *Adapter // Your driver and data source.
-	enforcer   *casbin.Enforcer
+	adapter  *Adapter // Your driver and data source.
+	enforcer *casbin.Enforcer
 
-	adapterLook sync.Mutex
-	enforcerLook   sync.Mutex
+	adapterLook  sync.Mutex
+	enforcerLook sync.Mutex
 
 	rbacModel string
 )
@@ -83,7 +82,7 @@ m = g(r.sub, p.sub) && keyMatch(r.obj, p.obj) && regexMatch(r.suf, p.suf) && reg
 `, rootID)
 }
 
-// 
+//
 func GetEnforcer() *casbin.Enforcer {
 	if enforcer != nil {
 		enforcer.LoadPolicy()

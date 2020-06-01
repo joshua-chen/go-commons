@@ -1,1 +1,1 @@
-# golang-commons
+# golang-go-commons

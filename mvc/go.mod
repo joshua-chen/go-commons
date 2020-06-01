@@ -1,4 +1,4 @@
-module commons/mvc
+module go-commons/mvc
 
 go 1.14
 

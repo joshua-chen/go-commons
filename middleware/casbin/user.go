@@ -1,22 +1,21 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: joshua
  * @Date: 2020-05-28 15:04:13
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:40:21
- */ 
+ */
 package casbin
 
 import (
-	"commons/utils/security/aes"
-	"commons/datasource"
-	"commons/middleware/models"
+	"go-commons/datasource"
+	"go-commons/middleware/models"
+	"go-commons/utils/security/aes"
 	"strconv"
 	"time"
 
 	"github.com/kataras/golog"
-
 )
 
 const (
@@ -44,7 +43,6 @@ func CheckRootExit() bool {
 	}
 	return exit
 }
-
 
 func CreateRoot() {
 	newRoot := models.User{
@@ -77,5 +75,3 @@ func addAllpolicy(rooId string) {
 		e.AddGroupingPolicy(rooId, v[0])
 	}
 }
-
-

@@ -1,32 +1,32 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: joshua
  * @Date: 2020-05-27 15:43:36
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-29 00:28:24
- */ 
+ */
 package models
 
 import (
-	"commons/datasource"
-	"commons/mvc/context/request"
-
+	"go-commons/datasource"
+	"go-commons/mvc/context/request"
 )
 
 type CasbinRule struct {
-	Id    int64  `xorm:"pk autoincr INT(10) notnull" json:"id" form:"id"`
-	PType string `xorm:"varchar(100) index" json:"p_type"`
-	Sub    string `xorm:"varchar(100) index" json:"sub"`
-	Obj    string `xorm:"varchar(100) index" json:"obj"`
-	Act    string `xorm:"varchar(100) index" json:"act"`
-	Ext    string `xorm:"varchar(100) index" json:"ex"`
-	Name    string `xorm:"varchar(100) index" json:"name"`
-	Des    string `xorm:"varchar(100) index" json:"des"`
-	CreateTime   string `xorm:"datetime" json:"create_time"`
+	Id         int64  `xorm:"pk autoincr INT(10) notnull" json:"id" form:"id"`
+	PType      string `xorm:"varchar(100) index" json:"p_type"`
+	Sub        string `xorm:"varchar(100) index" json:"sub"`
+	Obj        string `xorm:"varchar(100) index" json:"obj"`
+	Act        string `xorm:"varchar(100) index" json:"act"`
+	Ext        string `xorm:"varchar(100) index" json:"ex"`
+	Name       string `xorm:"varchar(100) index" json:"name"`
+	Des        string `xorm:"varchar(100) index" json:"des"`
+	CreateTime string `xorm:"datetime" json:"create_time"`
 }
+
 //{"admin", "/admin*", "GET|POST|DELETE|PUT", ".*", "角色管理"},
-func(m *CasbinRule) TableName() string {
+func (m *CasbinRule) TableName() string {
 	return "sys_casbin_rule"
 }
 

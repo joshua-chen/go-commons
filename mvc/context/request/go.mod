@@ -1,4 +1,4 @@
-module commons/mvc/context/request
+module go-commons/mvc/context/request
 
 go 1.14
 

@@ -2,16 +2,15 @@ package models
 
 import (
 	"fmt"
-	"commons/datasource"
-	"commons/mvc/context/request"
+	"go-commons/datasource"
+	"go-commons/mvc/context/request"
 	"strconv"
 	"time"
-
 )
 
 /** gov doc
 http://www.xorm.io/docs/
- */
+*/
 
 type (
 	// 菜单表
@@ -54,7 +53,7 @@ type (
 	}
 )
 
-func(m *Menu) TableName() string {
+func (m *Menu) TableName() string {
 	return "sys_menu"
 }
 

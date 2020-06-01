@@ -9,16 +9,15 @@
 package config
 
 import (
-	"commons/exception"
 	_ "fmt"
+	"go-commons/exception"
 	_ "sync"
 
-	_"github.com/CloudyKit/jet"
+	_ "github.com/CloudyKit/jet"
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/xormplus/core"
 	_ "github.com/kataras/golog"
+	_ "github.com/xormplus/core"
 	"github.com/xormplus/xorm"
-
 )
 
 func RegisterSql(engine *xorm.Engine) {

@@ -1,9 +1,9 @@
-module commons/middleware/recover
+module go-commons/middleware/recover
 
 go 1.14
 
 require (
-	commons/mvc/context/response v0.0.0-00010101000000-000000000000
+	go-commons/mvc/context/response v0.0.0-00010101000000-000000000000
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/google/go-querystring v1.0.0 // indirect
@@ -26,4 +26,4 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 )
 
-replace commons/mvc/context/response => ../../mvc/context/response
+replace go-commons/mvc/context/response => ../../mvc/context/response

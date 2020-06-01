@@ -19,9 +19,9 @@ package config
 
 import (
 	_ "bytes"
-	"commons/utils/yaml"
 	_ "compress/gzip"
 	_ "fmt"
+	"go-commons/utils/yaml"
 	_ "io"
 	_ "io/ioutil"
 	_ "os"
@@ -31,7 +31,6 @@ import (
 
 	"github.com/kataras/golog"
 	_ "gopkg.in/yaml.v2"
-
 )
 
 func init() {
@@ -44,5 +43,3 @@ func init() {
 	golog.Info("[AppConfig]==> ", AppConfig)
 
 }
-
-

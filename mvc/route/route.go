@@ -9,10 +9,9 @@
 package route
 
 import (
-	"commons/config"
+	"go-commons/config"
 
 	"github.com/kataras/iris/v12"
-
 )
 
 func PartyFunc(app *iris.Application, path string, fn func(router iris.Party)) {
@@ -22,7 +21,6 @@ func PartyFunc(app *iris.Application, path string, fn func(router iris.Party)) {
 func PartyCommon(app *iris.Application, fn func(router iris.Party)) {
 	PartyFunc(app, config.AppConfig.ApiPrefix.Common, fn)
 }
-
 
 func PartyWap(app *iris.Application, fn func(router iris.Party)) {
 	//api := app.Party(config.AppConfig.ApiPrefix.Wap)

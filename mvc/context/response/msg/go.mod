@@ -1,3 +1,3 @@
-module commons/mvc/context/response/msg
+module go-commons/mvc/context/response/msg
 
 go 1.14

@@ -1,4 +1,4 @@
-module commons/mvc/context
+module go-commons/mvc/context
 
 go 1.14
 

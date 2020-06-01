@@ -9,22 +9,18 @@
 package context
 
 import (
-	"commons/mvc/context/request"
-	_"commons/mvc/models"
+	"go-commons/mvc/context/request"
 
 	"github.com/kataras/iris/v12"
-
 )
 
-type HttpContext interface  {
+type HttpContext interface {
 	iris.Context
 }
- 
-type Handler func (ctx HttpContext) 
-type Filter func (ctx HttpContext) bool
 
-func   PagingParams() *request.Pagination {
+type Handler func(ctx HttpContext)
+type Filter func(ctx HttpContext) bool
+
+func PagingParams() *request.Pagination {
 	return &request.Pagination{}
 }
-
-

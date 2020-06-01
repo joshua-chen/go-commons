@@ -9,20 +9,19 @@
 package middleware
 
 import (
-	_ "commons/config"
-	"commons/middleware/auth"
-	 "commons/middleware/casbin"
-	 "commons/middleware/recover"
-	"commons/middleware/cors"
-	"commons/middleware/jwt"
-	_ "commons/utils"
+	_ "go-commons/config"
+	"go-commons/middleware/auth"
+	"go-commons/middleware/casbin"
+	"go-commons/middleware/cors"
+	"go-commons/middleware/jwt"
+	"go-commons/middleware/recover"
+	_ "go-commons/utils"
 	_ "strings"
 	"sync"
 
 	_ "github.com/kataras/golog"
 	_ "github.com/kataras/iris"
 	_ "github.com/kataras/iris/v12/context"
-
 )
 
 var (
@@ -31,11 +30,11 @@ var (
 )
 
 type Middleware struct {
-	Auth   *auth.Auth
-	JWT    *jwt.JWT
-	Cors   *cors.Cors
-	Casbin *casbin.Casbin
-	Recover  *recover.Recover
+	Auth    *auth.Auth
+	JWT     *jwt.JWT
+	Cors    *cors.Cors
+	Casbin  *casbin.Casbin
+	Recover *recover.Recover
 }
 
 func Instance() *Middleware {
@@ -44,10 +43,10 @@ func Instance() *Middleware {
 		defer lock.Unlock()
 		if instance == nil {
 			instance = &Middleware{
-				Auth:   auth.Instance(),
-				JWT:    jwt.Instance(),
-				Cors:   cors.Instance(),
-				Casbin: casbin.Instance(),
+				Auth:    auth.Instance(),
+				JWT:     jwt.Instance(),
+				Cors:    cors.Instance(),
+				Casbin:  casbin.Instance(),
 				Recover: recover.Instance(),
 			}
 		}

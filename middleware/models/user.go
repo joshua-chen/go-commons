@@ -24,8 +24,8 @@ type User struct {
 	Phone      string    `xorm:"notnull" json:"phone" form:"phone"`
 	Email      string    `xorm:"notnull" json:"email" form:"email"`
 	Userface   string    `xorm:"notnull" json:"userface" form:"userface"`
-	CreateTime time.Time `json:"createTime" form:"createTime"`
-	UpdateTime time.Time `json:"updateTime" form:"updateTime"`
+	CreateTime time.Time `json:"create_time" form:"create_time"`
+	UpdateTime time.Time `json:"update_time" form:"update_time"`
 }
 
 func(m *User) TableName() string {

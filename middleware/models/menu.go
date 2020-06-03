@@ -26,8 +26,8 @@ type (
 		RequireAuth string    `xorm:"varchar(64) notnull" json:"require_auth"`
 		ParentId    string    `xorm:"INT(10) notnull" json:"parent_id"`
 		Enabled     string    `xorm:"tinyint(1) notnull" json:"enabled"`
-		CreateTime  time.Time `json:"createTime"`
-		UpdateTime  time.Time `json:"updateTime"`
+		CreateTime  time.Time `json:"create_time"`
+		UpdateTime  time.Time `json:"update_time"`
 
 		Children []Children `xorm:"-" json:"children"`
 	}

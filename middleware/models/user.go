@@ -20,8 +20,10 @@ type User struct {
 	Token      string    `json:"-"`
 	Enabled    int       `xorm:"notnull tinyint(1)" json:"enabled" form:"enabled"`
 	Appid      string    `xorm:"notnull" json:"appid" form:"appid"`
-	Name       string    `xorm:"notnull" json:"name" form:"name"`
+	Nickname       string    `xorm:"notnull" json:"nickname" form:"nickname"`
 	Phone      string    `xorm:"notnull" json:"phone" form:"phone"`
+	Mobile      string    `xorm:"notnull" json:"mobile" form:"mobile"`
+	QQ      string    `xorm:"notnull" json:"qq" form:"qq"`
 	Email      string    `xorm:"notnull" json:"email" form:"email"`
 	Userface   string    `xorm:"notnull" json:"userface" form:"userface"`
 	CreateTime time.Time `json:"create_time" form:"create_time"`

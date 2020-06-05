@@ -65,7 +65,9 @@ func addAllpolicy(rooId string) {
 	// add policy for root
 	//p := casbins.GetEnforcer().AddPolicy(utils.FmtRolePrefix(newRoot.Id), "/*", "ANY", ".*")
 	e := GetEnforcer()
-	p := e.AddPolicy(rooId, "/*", "ANY", ".*", "", "", "", "", "", "超级用户")
+	//{rooId, "/*", "ANY", ".*", "超级用户"},
+	//p := e.AddPolicy(rooId, "/*", "ANY", ".*", "", "", "", "", "", "超级用户")
+	p := e.AddPolicy(rooId, "/*", "ANY", ".*", "超级用户")
 	if !p {
 		golog.Fatalf("初始化用户[%s]权限失败.", username)
 	}

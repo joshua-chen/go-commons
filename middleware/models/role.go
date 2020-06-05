@@ -22,7 +22,7 @@ type CasbinRule struct {
 	Ext        string `xorm:"varchar(100) index" json:"ex"`
 	Name       string `xorm:"varchar(100) index" json:"name"`
 	Des        string `xorm:"varchar(100) index" json:"des"`
-	CreateTime string `xorm:"datetime" json:"create_time"`
+	CreateTime string `xorm:"datetime" json:"create_time"  form:"create_time"`
 }
 
 //{"admin", "/admin*", "GET|POST|DELETE|PUT", ".*", "角色管理"},

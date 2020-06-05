@@ -52,7 +52,7 @@ func NewResult(data interface{}, c int, m ...string) Result {
 		}
 	} else {
 		r.Success = true
-		r.Msg = "SUCCESS"
+		r.Msg = ""
 	}
 	if len(m) > 0 {
 		r.Msg = m[0]

@@ -15,7 +15,7 @@ import (
 
 type User struct {
 	Id         int64     `json:"id"`
-	Username   string    `json:"username"`
+	Username   string    `json:"username" form:"username"`
 	Password   string    `xorm:"notnull" json:"password" form:"password"`
 	Token      string    `json:"-"`
 	Enabled    int       `xorm:"notnull tinyint(1)" json:"enabled" form:"enabled"`

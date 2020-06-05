@@ -62,7 +62,7 @@ func NewResult(data interface{}, c int, m ...string) Result {
 }
 
 func NewUnauthorizedResult(msg string, data ...interface{}) Result {
-	result := Result{Code: iris.StatusUnauthorized, Msg: msg, Success: false}
+	result := Result{Code: iris.StatusUnauthorized, Error: msg, Success: false}
 	if len(data) > 0 {
 		result.Data = data[0]
 	}
@@ -83,10 +83,10 @@ func NewNotFoundResult(msg ...string) Result {
 	return result
 }
 
-func NewErrorResult(code int, msg ...string) Result {
+func NewErrorResult(code int, errMsg ...string) Result {
 	result := Result{Code: code, Msg: "server interal error", Data: iris.Map{}}
-	if len(msg) > 0 {
-		result.Msg = msg[0]
+	if len(errMsg) > 0 {
+		result.Error = errMsg[0]
 	}
 	return result
 }

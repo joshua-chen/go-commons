@@ -60,8 +60,7 @@ func newApp() *iris.Application {
 	})
 	app.Use(irisyaag.New())
 
-	app.RegisterView(iris.HTML("./static", ".html"))
-	app.RegisterView(iris.HTML("./", ".html"))
+	app.RegisterView(iris.HTML("./views", ".html"))
 
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)

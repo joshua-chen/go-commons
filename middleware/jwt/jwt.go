@@ -221,7 +221,7 @@ func ParseToken(tokenString string, key string) (interface{}, bool) {
 }*/
 func ParseToken(ctx context.Context) (*models.User, bool) {
 	//token := GetToken(ctx)
-	mapClaims := (instance.Get(ctx).Claims).(jwt.MapClaims)
+	mapClaims := (Instance().Get(ctx).Claims).(jwt.MapClaims)
 
 	id, ok1 := mapClaims["id"].(float64)
 	username, ok2 := mapClaims["username"].(string)

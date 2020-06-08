@@ -93,6 +93,7 @@ func Configure() *JWT {
 	}
 	instance = &JWT{Config: c}
 	//return &JWT{Config: c}
+	golog.Debugf("instance.Config: %s",instance.Config)
 	return instance
 }
 
@@ -263,6 +264,7 @@ func GetUserID(token string) int {
 func (m *JWT) Get(ctx context.Context) *jwt.Token {
 	golog.Debugf("ContextKey: %s",m.Config.ContextKey)
 	golog.Debugf("ctx.Values(): %s",ctx.Values())
+	golog.Debugf("m.Config: %s",m.Config)
 	return ctx.Values().Get(m.Config.ContextKey).(*jwt.Token)
 }
 

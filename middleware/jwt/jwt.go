@@ -191,7 +191,7 @@ func NewToken(user *models.User) (string, error) {
 
 	//tokenClaims := instance.NewWithClaims(instance.SigningMethodHS256, instance.MapClaims{
 	//	"nick_name": "iris",
-	//	"email":     "go-iris@qq.com",
+	//	"email":     "go-iris@qq.com",token不存在或header设置不正确
 	//	"id":        "1",
 	//	"iss":       "Iris",
 	//	"iat":       time.Now().Unix(),
@@ -261,6 +261,8 @@ func GetUserID(token string) int {
 
 // Get returns the user (&token) information for this client/request
 func (m *JWT) Get(ctx context.Context) *jwt.Token {
+	golog.Debugf("ContextKey: %s",m.Config.ContextKey)
+	golog.Debugf("ctx.Values(): %s",ctx.Values())
 	return ctx.Values().Get(m.Config.ContextKey).(*jwt.Token)
 }
 

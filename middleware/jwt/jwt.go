@@ -91,7 +91,7 @@ func Configure() *JWT {
 		Debug:               true,
 		EnableAuthOnOptions: false,
 	}
-	instance = &JWT{Config: c}
+	instance.Config = c
 	//return &JWT{Config: c}
 	golog.Debugf("instance.Config: %s",instance.Config)
 	return instance

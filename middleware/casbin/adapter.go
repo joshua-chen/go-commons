@@ -150,8 +150,8 @@ func loadPolicyLine(line models.CasbinRule, model model.Model) {
 	if line.Act != "" {
 		lineText += ", " + line.Act
 	}
-	if line.Ext != "" {
-		lineText += ", " + line.Ext
+	if line.Suf != "" {
+		lineText += ", " + line.Suf
 	}
 	if line.Name != "" {
 		lineText += ", " + line.Name
@@ -192,7 +192,7 @@ func savePolicyLine(ptype string, rule []string) models.CasbinRule {
 		line.Act = rule[2]
 	}
 	if len(rule) > 3 {
-		line.Ext = rule[3]
+		line.Suf = rule[3]
 	}
 	if len(rule) > 4 {
 		line.Name = rule[4]
@@ -258,7 +258,7 @@ func (a *Adapter) RemoveFilteredPolicy(sec string, ptype string, fieldIndex int,
 		line.Act = fieldValues[2-fieldIndex]
 	}
 	if fieldIndex <= 3 && 3 < fieldIndex+len(fieldValues) {
-		line.Ext = fieldValues[3-fieldIndex]
+		line.Suf = fieldValues[3-fieldIndex]
 	}
 	if fieldIndex <= 4 && 4 < fieldIndex+len(fieldValues) {
 		line.Name = fieldValues[4-fieldIndex]

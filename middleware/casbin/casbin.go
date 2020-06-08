@@ -69,7 +69,7 @@ func SetRbacModel(rootID string) {
 r = sub, obj, act, suf
 
 [policy_definition]
-p = sub, obj, act, suf
+p = sub, obj, act, suf, name
 
 [role_definition]
 g = _, _

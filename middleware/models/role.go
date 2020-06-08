@@ -19,7 +19,7 @@ type CasbinRule struct {
 	Sub        string `xorm:"varchar(100) index" json:"sub"`
 	Obj        string `xorm:"varchar(100) index" json:"obj"`
 	Act        string `xorm:"varchar(100) index" json:"act"`
-	Ext        string `xorm:"varchar(100) index" json:"ex"`
+	Suf        string `xorm:"varchar(100) index" json:"suf"`
 	Name       string `xorm:"varchar(100) index" json:"name"`
 	Des        string `xorm:"varchar(100) index" json:"des"`
 	CreateTime string `xorm:"datetime" json:"create_time"  form:"create_time"`

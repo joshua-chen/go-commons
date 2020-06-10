@@ -179,7 +179,7 @@ func (a *Adapter) LoadPolicy(model model.Model) error {
 		loadPolicyLine(line, model)
 	}
 
-	golog.Debugf("CasbinRule %s: ",lines)
+	golog.Debugf("CasbinRule model %s: ",lines)
 
 	return nil
 }

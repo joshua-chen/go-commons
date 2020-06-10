@@ -281,7 +281,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	// If an error occurs, call the error handler and return an error
 	if err != nil {
 		golog.Debug("Error extracting JWT: %v", err)
-		m.Config.ErrorHandler(ctx, msg.TokenExactFailur)
+		m.Config.ErrorHandler(ctx, msg.TokenExactFailed)
 		return fmt.Errorf("Error extracting token: %v", err)
 	}
 

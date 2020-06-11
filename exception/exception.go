@@ -34,12 +34,17 @@ func Instance() *Exception {
 	}
 	return instance
 }
-
+func  Fatal(err error) {
+	Instance().Fatal(err)
+}
+func  Fatalf(err error) {
+	Instance().Fatalf(err)
+}
 func (e *Exception) Fatal(err error) {
 	golog.Errorf("Fatal: %s",err.Error())
 	panic(err)
 }
-func (e *Exception) FatalS(err string) {
+func (e *Exception) Fatalf(err string) {
 	golog.Errorf("Fatal: %s",err)
 	panic(errors.New(err))
 }

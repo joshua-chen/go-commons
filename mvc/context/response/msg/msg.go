@@ -31,7 +31,7 @@ const (
 	PasswordFailed             string = "密码错误"
 	TokenCreateFailed          string = "生成token错误"
 	TokenExactFailed           string = "token不存在或header设置不正确"
-	TokenExpired               string = "回话已过期"
+	TokenExpired               string = "token已过期"
 	TokenParseFailed           string = "token解析错误"
 	TokenParseFailedAndEmpty   string = "解析错误,token为空"
 	TokenParseFailedAndInvalid string = "解析错误,token无效"

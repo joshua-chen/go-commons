@@ -37,7 +37,7 @@ func Instance() *Exception {
 func  Fatal(err error) {
 	Instance().Fatal(err)
 }
-func  Fatalf(err error) {
+func  Fatalf(err string) {
 	Instance().Fatalf(err)
 }
 func (e *Exception) Fatal(err error) {

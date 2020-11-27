@@ -11,7 +11,7 @@ package utils
 import (
 	"os"
 	"path/filepath"
-	"strings"
+	_"strings"
 
 	"github.com/kataras/golog"
 

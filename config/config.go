@@ -21,7 +21,6 @@ import (
 	_ "bytes"
 	_ "compress/gzip"
 	_ "fmt"
-	"github.com/joshua-chen/go-commons/utils/yaml"
 	_ "io"
 	_ "io/ioutil"
 	_ "os"
@@ -29,17 +28,23 @@ import (
 	_ "strings"
 	_ "time"
 
+	"github.com/joshua-chen/go-commons/utils/yaml"
 	"github.com/kataras/golog"
 	_ "gopkg.in/yaml.v2"
+
 )
 
 func init() {
-	//GetAppConfig()
-	//GetDbConfig()
+	
 	yaml.ReadYaml("config/app.yml", &AppConfig)
 	yaml.ReadYaml("config/db.yml", &DBConfig)
-	//initRootUser()
+	 
 	golog.Info("[DBConfig]==> ", DBConfig)
 	golog.Info("[AppConfig]==> ", AppConfig)
 
+	
 }
+
+
+
+

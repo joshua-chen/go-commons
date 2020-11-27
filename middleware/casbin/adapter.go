@@ -16,12 +16,12 @@ package casbin
 
 import (
 	"errors"
-	"github.com/joshua-chen/go-commons/middleware/models"
-	"github.com/kataras/golog"
 	"runtime"
 
 	"github.com/casbin/casbin/model"
 	"github.com/casbin/casbin/persist"
+	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/kataras/golog"
 	"github.com/lib/pq"
 	"github.com/xormplus/xorm"
 )
@@ -155,14 +155,14 @@ func loadPolicyLine(line models.CasbinRule, model model.Model) {
 		lineText += ", " + line.Suf
 	}
 	/*
-	if line.Name != "" {
-		lineText += ", " + line.Name
-	}
-	if line.Des != "" {
-		lineText += ", " + line.Des
-	}
+		if line.Name != "" {
+			lineText += ", " + line.Name
+		}
+		if line.Des != "" {
+			lineText += ", " + line.Des
+		}
 
-	 */
+	*/
 
 	persist.LoadPolicyLine(lineText, model)
 }
@@ -179,7 +179,7 @@ func (a *Adapter) LoadPolicy(model model.Model) error {
 		loadPolicyLine(line, model)
 	}
 
-	golog.Debugf("CasbinRule model %s: ",lines)
+	golog.Debugf("CasbinRule model %s: ", lines)
 
 	return nil
 }

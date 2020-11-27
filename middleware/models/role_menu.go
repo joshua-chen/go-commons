@@ -14,9 +14,9 @@ import (
 
 // 角色-菜单关联表
 type RoleMenu struct {
-	Id  int64 `xorm:"pk autoincr INT(10) notnull" json:"id"`
-	Rid int64 `xorm:"pk autoincr INT(10) notnull" json:"rid"`
-	Mid int64 `xorm:"pk autoincr INT(10) notnull" json:"mid"`
+	Id  int64 `xorm:"pk autoincr bigint notnull" json:"id"`
+	Rid int64 `xorm:"pk autoincr bigint notnull" json:"rid"`
+	Mid int64 `xorm:"pk autoincr bigint notnull" json:"mid"`
 }
 
 func (m *RoleMenu) TableName() string {

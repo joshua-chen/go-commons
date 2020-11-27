@@ -14,7 +14,7 @@ import (
 )
 
 type User struct {
-	Id         int64     `json:"id"`
+	Id         int64     `xorm:"pk autoincr bigint notnull" json:"id"  form:"id"`
 	Username   string    `json:"username" form:"username"`
 	Password   string    `xorm:"notnull" json:"password" form:"password"`
 	Token      string    `json:"-"`
@@ -24,12 +24,16 @@ type User struct {
 	Phone      string    `xorm:"null" json:"phone" form:"phone"`
 	Mobile      string    `xorm:"null" json:"mobile" form:"mobile"`
 	QQ      string    `xorm:"null" json:"qq" form:"qq"`
-	Email      string    `xorm:"notnull" json:"email" form:"email"`
-	Userface   string    `xorm:"notnull" json:"userface" form:"userface"`
-	CreateTime time.Time  `xorm:"notnull" json:"create_time" form:"create_time"`
-	UpdateTime time.Time `json:"update_time" form:"update_time"`
+	Email      string    `xorm:"null" json:"email" form:"email"`
+	Userface   string    `xorm:"null" json:"userface" form:"userface"`
+	CreateTime time.Time  `xorm:"null" json:"create_time" form:"create_time"`
+	UpdateTime time.Time  `xorm:"null" json:"update_time" form:"update_time"`
 }
 
+ 
+//
+// Table
+//
 func(m *User) TableName() string {
 	return "sys_user"
 }

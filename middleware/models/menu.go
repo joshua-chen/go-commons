@@ -2,10 +2,11 @@ package models
 
 import (
 	"fmt"
-	"github.com/joshua-chen/go-commons/datasource"
-	"github.com/joshua-chen/go-commons/mvc/context/request"
 	"strconv"
 	"time"
+
+	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/mvc/context/request"
 )
 
 /** gov doc
@@ -15,7 +16,7 @@ http://www.xorm.io/docs/
 type (
 	// 菜单表
 	Menu struct {
-		Id          int64     `xorm:"pk autoincr INT(10) notnull" json:"id"`
+		Id          int64     `xorm:"pk autoincr bigint notnull" json:"id"`
 		Path        string    `xorm:"varchar(64) notnull" json:"path"`
 		Url         string    `xorm:"varchar(64) notnull" json:"url"`
 		Modular     string    `xorm:"varchar(64) notnull" json:"modular"`
@@ -24,7 +25,7 @@ type (
 		Icon        string    `xorm:"varchar(64) notnull" json:"icon"`
 		KeepAlive   string    `xorm:"varchar(64) notnull" json:"keep_alive"`
 		RequireAuth string    `xorm:"varchar(64) notnull" json:"require_auth"`
-		ParentId    string    `xorm:"INT(10) notnull" json:"parent_id"`
+		ParentId    string    `xorm:"bigint notnull" json:"parent_id"`
 		Enabled     string    `xorm:"tinyint(1) notnull" json:"enabled"`
 		CreateTime  time.Time `json:"create_time"`
 		UpdateTime  time.Time `json:"update_time"`
@@ -34,7 +35,7 @@ type (
 
 	// 子菜单
 	Children struct {
-		Id2          int64  `xorm:"pk autoincr INT(10) notnull" json:"id"`
+		Id2          int64  `xorm:"pk autoincr bigint notnull" json:"id"`
 		Path2        string `xorm:"varchar(64) notnull" json:"path"`
 		Modular2     string `xorm:"varchar(64) notnull" json:"modular"`
 		Component2   string `xorm:"varchar(64) notnull" json:"component"`
@@ -42,7 +43,7 @@ type (
 		Icon2        string `xorm:"varchar(64) notnull" json:"icon"`
 		KeepAlive2   string `xorm:"varchar(64) notnull" json:"keep_alive"`
 		RequireAuth2 string `xorm:"varchar(64) notnull" json:"require_auth"`
-		ParentId2    string `xorm:"INT(10) notnull" json:"parent_id"`
+		ParentId2    string `xorm:"bigint notnull" json:"parent_id"`
 		Enabled2     string `xorm:"tinyint(1) notnull" json:"enabled"`
 	}
 

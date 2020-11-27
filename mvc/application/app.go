@@ -1,24 +1,27 @@
 package application
 
 import (
-	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware"
-	_ "github.com/joshua-chen/go-commons/middleware/auth"
-	_ "github.com/joshua-chen/go-commons/middleware/cors"
-	_ "github.com/joshua-chen/go-commons/middleware/recover"
-	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"os"
 	_ "time"
 
 	"github.com/betacraft/yaag/irisyaag"
 	"github.com/betacraft/yaag/yaag"
 	_ "github.com/iris-contrib/swagger/v12"
 	_ "github.com/iris-contrib/swagger/v12/swaggerFiles"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware"
+	_ "github.com/joshua-chen/go-commons/middleware/auth"
+	_ "github.com/joshua-chen/go-commons/middleware/cors"
+	_ "github.com/joshua-chen/go-commons/middleware/recover"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	"github.com/kataras/iris/v12/middleware/logger"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
 	_ "github.com/kataras/iris/v12/mvc"
 	_ "github.com/kataras/iris/v12/sessions"
+
 )
 
 func Run(appFunc func(app *iris.Application)) {
@@ -60,7 +63,11 @@ func newApp() *iris.Application {
 	})
 	app.Use(irisyaag.New())
 
-	app.RegisterView(iris.HTML("./views", ".html"))
+	exists, _ := pathExists("views")
+	if exists {
+		app.RegisterView(iris.HTML("./views", ".html"))
+		golog.Info("[RegisterView]==> ./views, ok")
+	}
 
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)
@@ -104,6 +111,21 @@ func newApp() *iris.Application {
 	*/
 
 	return app
+}
+
+// @Title  PathExists
+// @Description  路径是否存在
+// @Author  joshua  ${DATE} ${TIME}
+// @Update  joshua  ${DATE} ${TIME}
+func pathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
 }
 
 func handleStatic(app *iris.Application) {

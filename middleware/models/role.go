@@ -14,7 +14,7 @@ import (
 )
 
 type CasbinRule struct {
-	Id         int64  `xorm:"pk autoincr INT(10) notnull" json:"id" form:"id"`
+	Id         int64  `xorm:"pk autoincr bigint notnull" json:"id" form:"id"`
 	PType      string `xorm:"varchar(100) index" json:"p_type"`
 	Sub        string `xorm:"varchar(100) index" json:"sub"`
 	Obj        string `xorm:"varchar(100) index" json:"obj"`

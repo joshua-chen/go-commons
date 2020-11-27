@@ -16,7 +16,10 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/joshua-chen/go-commons/utils"
+	"github.com/kataras/golog"
 	yamlutil "gopkg.in/yaml.v2"
+
 )
 
 type ConfigEngine struct {
@@ -221,6 +224,8 @@ func ReadYaml(path string, out interface{}) error {
 
 func readYamlFile(path string, out interface{}) error {
 
+	path = utils.GetAbsolutePath(path) 
+	golog.Info("Yaml path==========>" + path)
 	yamlS, err := ioutil.ReadFile(path)
 	if err != nil {
 		return err

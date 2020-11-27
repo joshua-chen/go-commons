@@ -52,9 +52,11 @@ func GetCurrentDir() string{
 
 func GetAbsolutePath(path string) string{
 	if !IsAbsolutePath(path) {
+		path = strings.ReplaceAll(path,`./`,"")
+		path = strings.ReplaceAll(path,`.\`,"")
 		if path[0:1] != `\` {
 			path = `\` + path
-		}
+		} 
 		path = GetCurrentDir() + path
 		path = strings.ReplaceAll(path,`\`,"/")
 		

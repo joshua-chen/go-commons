@@ -11,7 +11,8 @@ package utils
 import (
 	"os"
 	"path/filepath"
-	_"strings"
+	"strings"
+	_ "strings"
 
 	"github.com/kataras/golog"
 
@@ -55,6 +56,8 @@ func GetAbsolutePath(path string) string{
 			path = `\` + path
 		}
 		path = GetCurrentDir() + path
+		path = strings.ReplaceAll(path,`\`,"/")
+		
 	}
 	return path;
 }

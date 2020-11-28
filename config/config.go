@@ -28,6 +28,7 @@ import (
 	_ "strings"
 	_ "time"
 
+	"github.com/joshua-chen/go-commons/utils"
 	"github.com/joshua-chen/go-commons/utils/yaml"
 	"github.com/kataras/golog"
 	_ "gopkg.in/yaml.v2"
@@ -35,16 +36,19 @@ import (
 )
 
 func init() {
-	
+
 	yaml.ReadYaml("config/app.yml", &AppConfig)
 	yaml.ReadYaml("config/db.yml", &DBConfig)
-	 
+
+	if AppConfig.AnonymousRequset.Path != "" {
+		exist, _ := utils.PathExisted(AppConfig.AnonymousRequset.Path)
+		if exist {
+			var AnonymousRequset AnonymousRequset
+			yaml.ReadYaml(AppConfig.AnonymousRequset.Path, &AnonymousRequset)
+			AppConfig.AnonymousRequset = AnonymousRequset
+		}
+	}
 	golog.Info("[DBConfig]==> ", DBConfig)
 	golog.Info("[AppConfig]==> ", AppConfig)
 
-	
 }
-
-
-
-

@@ -32,6 +32,7 @@ type AppInfo struct {
 }
 
 type AnonymousRequset struct{
+	Path string `yaml:"path"`
 	Urls []string `yaml:"urls"`
 	Prefixes []string `yaml:"prefixes"`
 	Suffixes []string `yaml:"suffixes"`

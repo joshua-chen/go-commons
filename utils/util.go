@@ -30,36 +30,51 @@ func HasSuffix(s, suffix string) bool {
 
 func IsAbsolutePath(path string) bool {
 	name := filepath.VolumeName(path)
-	return name  != ""
+	return name != ""
 }
 
-func GetRunDir() string{
+func GetRunDir() string {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
 		golog.Fatal(err)
 	}
-	 //golog.Info("[dir]==============================> ", dir)
-	 
-	 return dir
-	
+	//golog.Info("[dir]==============================> ", dir)
+
+	return dir
+
 }
 
-func GetCurrentDir() string{
+func GetCurrentDir() string {
 	dir, _ := os.Getwd()
 	golog.Info("[current dir]==============================> ", dir)
 	return dir
 }
 
-func GetAbsolutePath(path string) string{
+func GetAbsolutePath(path string) string {
 	if !IsAbsolutePath(path) {
-		path = strings.ReplaceAll(path,`./`,"")
-		path = strings.ReplaceAll(path,`.\`,"")
+		path = strings.ReplaceAll(path, `./`, "")
+		path = strings.ReplaceAll(path, `.\`, "")
 		if path[0:1] != `\` {
 			path = `\` + path
-		} 
+		}
 		path = GetCurrentDir() + path
-		path = strings.ReplaceAll(path,`\`,"/")
-		
+		path = strings.ReplaceAll(path, `\`, "/")
+
 	}
-	return path;
+	return path
+}
+
+// @Title  PathExists
+// @Description  路径是否存在
+// @Author  joshua  ${DATE} ${TIME}
+// @Update  joshua  ${DATE} ${TIME}
+func PathExisted(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/betacraft/yaag/yaag"
 	_ "github.com/iris-contrib/swagger/v12"
 	_ "github.com/iris-contrib/swagger/v12/swaggerFiles"
+	"github.com/joshua-chen/go-commons/utils"
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware"
 	_ "github.com/joshua-chen/go-commons/middleware/auth"
@@ -63,7 +64,7 @@ func newApp() *iris.Application {
 	})
 	app.Use(irisyaag.New())
 
-	exists, _ := pathExists("views")
+	exists, _ := utils.PathExisted("views")
 	if exists {
 		app.RegisterView(iris.HTML("./views", ".html"))
 		golog.Info("[RegisterView]==> ./views, ok")
@@ -113,21 +114,6 @@ func newApp() *iris.Application {
 	return app
 }
 
-// @Title  PathExists
-// @Description  路径是否存在
-// @Author  joshua  ${DATE} ${TIME}
-// @Update  joshua  ${DATE} ${TIME}
-func pathExists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return false, err
-}
-
 func handleStatic(app *iris.Application) {
 	//注册静态资源
 	staticPath := config.AppConfig.StaticPath
@@ -141,9 +127,11 @@ func handleStatic(app *iris.Application) {
  */
 func configation(app *iris.Application) {
 
+	path:= utils.GetAbsolutePath("./config/iris.yml");
 	//配置 字符编码
-	app.Configure(iris.WithConfiguration(iris.YAML("./config/iris.yml")))
+	app.Configure(iris.WithConfiguration(iris.YAML(path)))
 	//
+	golog.Info("[app.Configure]==>  ok")
 
 	//错误配置
 	//未发现错误

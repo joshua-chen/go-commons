@@ -12,7 +12,7 @@ import "github.com/dgrijalva/jwt-go"
 
 const (
 	//DefaultContextKey jwts
-	DefaultContextKey = "iris-jwt-kboneshop"
+	DefaultContextKey = "iris-jwt-joshua"
 )
 
 // Config is a struct for specifying configuration options for the jwts middleware.

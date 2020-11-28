@@ -1,7 +1,7 @@
 package application
 
 import (
-	"os"
+	_"os"
 	_ "time"
 
 	"github.com/betacraft/yaag/irisyaag"

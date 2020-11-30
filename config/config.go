@@ -40,12 +40,12 @@ func init() {
 	yaml.ReadYaml("config/app.yml", &AppConfig)
 	yaml.ReadYaml("config/db.yml", &DBConfig)
 
-	if AppConfig.AnonymousRequset.Path != "" {
-		exist, _ := utils.PathExisted(AppConfig.AnonymousRequset.Path)
+	if AppConfig.AnonymousRequest.Path != "" {
+		exist, _ := utils.PathExisted(AppConfig.AnonymousRequest.Path)
 		if exist {
-			var AnonymousRequset AnonymousRequset
-			yaml.ReadYaml(AppConfig.AnonymousRequset.Path, &AnonymousRequset)
-			AppConfig.AnonymousRequset = AnonymousRequset
+			var AnonymousRequest AnonymousRequest
+			yaml.ReadYaml(AppConfig.AnonymousRequest.Path, &AnonymousRequest)
+			AppConfig.AnonymousRequest = AnonymousRequest
 		}
 	}
 	golog.Info("[DBConfig]==> ", DBConfig)

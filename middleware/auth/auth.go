@@ -84,21 +84,21 @@ func checkURL(requestPath string) bool {
 		return true
 	}
 
-	anonymousUrls := config.AppConfig.AnonymousRequset.Urls
+	anonymousUrls := config.AppConfig.AnonymousRequest.Urls
 	for _, v := range anonymousUrls {
 		if requestPath == v {
 			return true
 		}
 	}
 
-	anonymousPrefixes := config.AppConfig.AnonymousRequset.Prefixes
+	anonymousPrefixes := config.AppConfig.AnonymousRequest.Prefixes
 	for _, v := range anonymousPrefixes {
 		if utils.HasPrefix(requestPath, v) {
 			return true
 		}
 	}
 
-	anonymousSuffixes := config.AppConfig.AnonymousRequset.Suffixes
+	anonymousSuffixes := config.AppConfig.AnonymousRequest.Suffixes
 	for _, v := range anonymousSuffixes {
 		if utils.HasSuffix(requestPath, v) {
 			return true

@@ -42,7 +42,7 @@ func New() context.Handler {
 		AllowedOrigins:   []string{"*"}, // allows everything, use that to change the hosts.
 		AllowedMethods:   []string{"PUT", "PATCH", "GET", "POST", "OPTIONS", "DELETE"},
 		AllowedHeaders:   []string{"*"},
-		ExposedHeaders:   []string{"Accept", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization"},
+		ExposedHeaders:   []string{"Accept", "Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "X-Token", "Authorization"},
 		AllowCredentials: true,
 	})
 }

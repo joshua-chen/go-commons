@@ -136,6 +136,7 @@ func Error(statusCode int, msg ...string) Result{
 }
 
 //
+//
 func OkCtx(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	result := NewSuccessResult(data, msg...)

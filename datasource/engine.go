@@ -10,13 +10,14 @@ package datasource
 
 import (
 	"fmt"
-	"github.com/joshua-chen/go-commons/config"
 	"sync"
 
+	"github.com/joshua-chen/go-commons/config"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/kataras/golog"
 	"github.com/xormplus/core"
 	"github.com/xormplus/xorm"
+
 )
 
 var (
@@ -30,6 +31,7 @@ func MasterEngineByFeature(featureName string) {
 	for _, v := range config.DBConfig.TablePrefixes {
 		if v.FeatureName == featureName {
 			prefix = v.PrefixName
+			break;
 		}
 	}
 	engine := MasterEngine()
@@ -67,6 +69,7 @@ func SlaveEngineByFeature(featureName string) {
 	for _, v := range config.DBConfig.TablePrefixes {
 		if v.FeatureName == featureName {
 			prefix = v.PrefixName
+			break;
 		}
 	}
 	engine := SlaveEngine()

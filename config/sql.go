@@ -33,7 +33,7 @@ func RegisterSql(engine *xorm.Engine) {
 	}
 	//注册动态SQL模板配置，可选功能，如应用中无需使用SqlTemplate，可无需初始化
 	//此处注册动态SQL模板配置，使用Pongo2模板引擎，配置文件根目录为"./sql/oracle"，配置文件后缀为".stpl"
-	err = engine.RegisterSqlTemplate(xorm.Jet(AppConfig.SqlPath, ".jet"))
+	err = engine.RegisterSqlTemplate(xorm.Jet(path, ".jet"))
 	if err != nil {
 		exception.Instance().Fatal(err)
 	}

@@ -137,3 +137,10 @@ func Error(ctx iris.Context, statusCode int, msg ...string) {
 	ctx.StatusCode(statusCode)
 	ctx.JSON(result)
 }
+
+//
+//
+func PaginationResult(rows []interface{}, total int64) Result {	 
+	return NewResult(iris.Map{"rows": rows, "total": total}, 200)
+	//return result
+}

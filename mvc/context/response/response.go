@@ -107,7 +107,7 @@ func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 }
 
 // common error define
-func Error(ctx iris.Context,  statusCode int, msg ...string) {
+func ErrorCtx(ctx iris.Context,  statusCode int, msg ...string) {
 	 
 	result := NewErrorResult( msg...)
 
@@ -125,8 +125,18 @@ func Error(ctx iris.Context,  statusCode int, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	ctx.JSON(result)
 }
+
+func Error(statusCode int, msg ...string) Result{
+	 
+	result := NewErrorResult( msg...)
+
+	result.Code = statusCode 
+	  
+	return result
+}
+
 //
-func Ok(ctx iris.Context, data interface{}, msg ...string) {
+func OkCtx(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	result := NewSuccessResult(data, msg...)
 	ctx.JSON(result)
@@ -150,3 +160,7 @@ func PaginationResult(rows []interface{}, total int64) Result {
 	return NewSuccessResult(iris.Map{"rows": rows, "total": total})
 	//return result
 }
+
+func OkPg(rows []interface{}, total int64) Result {
+	return PaginationResult( rows,  total )
+ }

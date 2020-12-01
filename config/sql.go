@@ -25,8 +25,8 @@ import (
 func RegisterSql(engine *xorm.Engine) {
 	//注册SqlMap配置，可选功能，如应用中无需使用SqlMap，可无需初始化
 	//此处使用xml格式的配置，配置文件根目录为"./sql/oracle"，配置文件后缀为".xml"
-	path := utils.GetAbsolutePath(AppConfig.SqlPath) 
-	golog.Info("SqlPath==========>" + path)
+	path := utils.GetAbsolutePath(AppConfig.SQLPath) 
+	golog.Info("SQLPath==========>" + path)
 	err := engine.RegisterSqlMap(xorm.Xml(path, ".xml"))
 	if err != nil {
 		exception.Instance().Fatal(err)

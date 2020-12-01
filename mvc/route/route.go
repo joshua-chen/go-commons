@@ -15,18 +15,18 @@ import (
 )
 
 func PartyFunc(app *iris.Application, path string, fn func(router iris.Party)) {
-	api := app.Party(config.AppConfig.ApiPrefix.Base)
+	api := app.Party(config.AppConfig.APIPrefix.Base)
 	api.PartyFunc(path, fn)
 }
 func PartyCommon(app *iris.Application, fn func(router iris.Party)) {
-	PartyFunc(app, config.AppConfig.ApiPrefix.Common, fn)
+	PartyFunc(app, config.AppConfig.APIPrefix.Common, fn)
 }
 
 func PartyWap(app *iris.Application, fn func(router iris.Party)) {
-	//api := app.Party(config.AppConfig.ApiPrefix.Wap)
-	PartyFunc(app, config.AppConfig.ApiPrefix.Wap, fn)
+	//api := app.Party(config.AppConfig.APIPrefix.Wap)
+	PartyFunc(app, config.AppConfig.APIPrefix.Wap, fn)
 }
 
 func PartyWeb(app *iris.Application, fn func(router iris.Party)) {
-	PartyFunc(app, config.AppConfig.ApiPrefix.Web, fn)
+	PartyFunc(app, config.AppConfig.APIPrefix.Web, fn)
 }

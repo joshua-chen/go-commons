@@ -25,8 +25,8 @@ type AppInfo struct {
 	JwtTimeout int64    `yaml:"jwtTimeout"`
 	LogLevel   string   `yaml:"logLevel"`
 	Secret     string   `yaml:"secret"`
-	ApiPrefix  ApiPrefix   `yaml:"apiPrefix"`
-	SqlPath  string   `yaml:"sqlPath"`
+	APIPrefix  APIPrefix   `yaml:"apiPrefix"`
+	SQLPath  string   `yaml:"sqlPath"`
 	Swagger Swagger   `yaml:"swagger"`
 }
 
@@ -38,7 +38,7 @@ type AnonymousRequest struct{
 }
 
 
-type ApiPrefix struct{
+type APIPrefix struct{
 	Base string `yaml:"base"`
 	Web string `yaml:"web"`
 	Wap string `yaml:"wap"`

@@ -9,14 +9,14 @@
 package auth
 
 import (
+	_ "strings"
+	"sync"
+
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/casbin"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
 	_ "github.com/joshua-chen/go-commons/mvc/context"
 	"github.com/joshua-chen/go-commons/utils"
-	_ "strings"
-	"sync"
-
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12/context"
 
@@ -48,7 +48,7 @@ func (a *Auth) New() context.Handler {
 func New() context.Handler {
 	handler := func(ctx context.Context) {
 		path := ctx.Path()
-		golog.Debug(path)
+		golog.Debug("request path===> ",path)
 		// 过滤静态资源、login接口、首页等...不需要验证
 		if checkURL(path) {
 			ctx.Next()
@@ -79,6 +79,7 @@ return
 	false:需要进一步验证
 */
 func checkURL(requestPath string) bool {
+	
 	requestStaticPath := config.AppConfig.StaticPath[0]
 	if utils.HasPrefix(requestPath, requestStaticPath) {
 		return true

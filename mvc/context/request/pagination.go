@@ -43,6 +43,9 @@ func NewPagination(ctx iris.Context) (*Pagination) {
 	sortOrder := ctx.URLParamDefault("sortOrder","-1")
 	
 	 
+	if(pageNum == -1){
+		pageNum = ctx.URLParamIntDefault("page",-1)
+	}
 	var page Pagination
 	if(offset != -1 && limit != -1){
 		page = Pagination{
@@ -71,7 +74,7 @@ func (p *Pagination) set() {
 		p.PageNum = 1
 	}
 	if p.PageSize < 1 {
-		p.PageSize = 1
+		p.PageSize = 10 //默认10条记录
 	}
 
 	p.Offset = (p.PageNum - 1) * p.PageSize

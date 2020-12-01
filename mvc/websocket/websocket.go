@@ -14,9 +14,10 @@ import (
 	_ "time"
 
 	"github.com/kataras/iris/v12"
-	"github.com/kataras/iris/v12/hero"
+	_"github.com/kataras/iris/v12/hero"
 	_ "github.com/kataras/iris/v12/mvc"
 	"github.com/kataras/iris/v12/websocket"
+
 )
 
 type clientPage struct {

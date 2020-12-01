@@ -10,15 +10,15 @@ package jwt
 
 import (
 	"fmt"
-	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware/models"
-	"github.com/joshua-chen/go-commons/mvc/context/response"
-	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	_ "log"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	jwt "github.com/dgrijalva/jwt-go"
 	_ "github.com/dgrijalva/jwt-go/request"
 	_ "github.com/iris-contrib/middleware/cors"
@@ -27,6 +27,7 @@ import (
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	_ "github.com/spf13/cast"
+
 )
 
 type (
@@ -228,7 +229,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 
 	//golog.Infof("*** MapClaims=%v, [id=%f, ok1=%t]; [username=%s, ok2=%t]", mapClaims, id, ok1, username, ok2)
 	if !ok1 || !ok2 {
-		response.Error(ctx, iris.StatusInternalServerError, msg.TokenParseFailed)
+		response.ErrorCtx(ctx,   msg.TokenParseFailed)
 		return nil, false
 	}
 

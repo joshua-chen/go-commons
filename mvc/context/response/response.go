@@ -107,18 +107,15 @@ func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 }
 
 // common error define
-func ErrorCtx(ctx iris.Context,  statusCode int, msg ...string) {
+func ErrorCtx(ctx iris.Context,   msg ...string) {
 	 
-	result := NewErrorResult( msg...)
-
-	result.Code = statusCode
-
+	result := NewErrorResult( msg...) 
 	err := HttpError{
-		Code:   statusCode,
+		Code:   result.Code,
 		Reason: result.Msg,
 	}
 	//记录所有> = 500内部错误。
-	if statusCode >= 500*100 {
+	if result.Code >= 500*100 {
 		ctx.Application().Logger().Error(err)
 	}
 

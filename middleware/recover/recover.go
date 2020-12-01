@@ -17,14 +17,15 @@ package recover
 
 import (
 	"fmt"
-	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"runtime"
 	_ "strconv"
 	"sync"
 
+	"github.com/joshua-chen/go-commons/mvc/context/response"
 	_ "github.com/kataras/golog"
-	"github.com/kataras/iris/v12"
+	_"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
+
 )
 
 type Recover struct {
@@ -75,7 +76,7 @@ func New() context.Handler {
 				// 打印错误日志
 				ctx.Application().Logger().Warn(logMessage)
 				// 返回错误信息
-				result := response.NewErrorResult(iris.StatusInternalServerError, errMsg)
+				result := response.NewErrorResult( errMsg)
 				ctx.JSON(result)
 				ctx.StopExecution()
 			}

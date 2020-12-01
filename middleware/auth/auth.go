@@ -48,7 +48,9 @@ func (a *Auth) New() context.Handler {
 func New() context.Handler {
 	handler := func(ctx context.Context) {
 		path := ctx.Path()
+		
 		golog.Debug("request path===> ",path)
+		golog.Debug("request Params===> ",ctx.Params())
 		// 过滤静态资源、login接口、首页等...不需要验证
 		if checkURL(path) {
 			ctx.Next()

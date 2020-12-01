@@ -24,7 +24,7 @@ func DefaultResult(data interface{}) Result {
 
 	//var result = new(models.ResponseResult)
 	//result := models.NewResponseResult(data, "200")
-	return NewResult(data, 200)
+	return NewResult(data, iris.StatusOK*100)
 	//return result
 }
 func BoolResult(data bool) Result {
@@ -125,12 +125,13 @@ func Error(ctx iris.Context,  statusCode int, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	ctx.JSON(result)
 }
+//
 func Ok(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	result := NewSuccessResult(data, msg...)
 	ctx.JSON(result)
 }
-
+//
 func Ok( data interface{}, msg ...string) Result{
 	 result := NewSuccessResult(data, msg...)
 	 return result

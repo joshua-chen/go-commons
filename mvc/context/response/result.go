@@ -18,7 +18,6 @@ type HttpError struct {
 type Result struct {
 	Code    int      `json:"code"`
 	Msg     string      `json:"message"`
-	Error    string      `json:"error"`
 	Success bool        `json:"success"`
 	Data    interface{} `json:"data"`
 }

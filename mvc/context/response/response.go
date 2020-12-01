@@ -37,7 +37,7 @@ func BoolResult(data bool) Result {
 func NewBoolResult(data bool, c int, m ...string) Result {
 	r := Result{Data: iris.Map{}, Code: c, Success: true}
 
- 	if len(m) > 0 {
+	if len(m) > 0 {
 		r.Msg = m[0]
 	}
 
@@ -62,31 +62,31 @@ func NewResult(data interface{}, c int, m ...string) Result {
 }
 
 func NewUnauthorizedResult(msg string, data ...interface{}) Result {
-	result := Result{Code: iris.StatusUnauthorized, Error: msg, Success: false}
+	result := Result{Code: iris.StatusUnauthorized*100, Msg: msg, Success: false}
 	if len(data) > 0 {
 		result.Data = data[0]
 	}
 	return result
 }
-func NewSuccessResult(data interface{}, c int, msg ...string) Result {
-	result := Result{Data: data, Code: c, Success: true}
+func NewSuccessResult(data interface{}, msg ...string) Result {
+	result := Result{Data: data, Code: iris.StatusOK * 100, Success: true}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 func NewNotFoundResult(msg ...string) Result {
-	result := Result{Code: iris.StatusNotFound, Msg: "not found", Data: iris.Map{}}
+	result := Result{Code: iris.StatusNotFound*100, Msg: "not found", Data: iris.Map{}}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 
-func NewErrorResult(code int, errMsg ...string) Result {
-	result := Result{Code: code, Msg: "server interal error", Data: iris.Map{}}
+func NewErrorResult(errMsg ...string) Result {
+	result := Result{Code: iris.StatusInternalServerError * 100, Msg: "server interal error", Data: iris.Map{}}
 	if len(errMsg) > 0 {
-		result.Error = errMsg[0]
+		result.Msg = errMsg[0]
 	}
 	return result
 }
@@ -97,7 +97,7 @@ func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 		Reason: fmt.Sprintf(format, a...),
 	}
 	//记录所有> = 500内部错误。
-	if statusCode >= 500 {
+	if statusCode >= 500*100 {
 		ctx.Application().Logger().Error(err)
 	}
 	ctx.StatusCode(statusCode)
@@ -106,10 +106,34 @@ func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 	ctx.StopExecution()
 }
 
+// common error define
+func Error(ctx iris.Context,  statusCode int, msg ...string) {
+	 
+	result := NewErrorResult( msg...)
+
+	result.Code = statusCode
+
+	err := HttpError{
+		Code:   statusCode,
+		Reason: result.Msg,
+	}
+	//记录所有> = 500内部错误。
+	if statusCode >= 500*100 {
+		ctx.Application().Logger().Error(err)
+	}
+
+	ctx.StatusCode(iris.StatusOK)
+	ctx.JSON(result)
+}
 func Ok(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
-	result := NewSuccessResult(data, iris.StatusOK, msg...)
+	result := NewSuccessResult(data, msg...)
 	ctx.JSON(result)
+}
+
+func Ok( data interface{}, msg ...string) Result{
+	 result := NewSuccessResult(data, msg...)
+	 return result
 }
 
 // 401 error define
@@ -119,28 +143,9 @@ func Unauthorized(ctx iris.Context, msg string, data interface{}) {
 	ctx.JSON(result)
 }
 
-// common error define
-func Error(ctx iris.Context, statusCode int, msg ...string) {
-	result := NewErrorResult(statusCode, msg...)
-
-	result.Code = statusCode
-
-	err := HttpError{
-		Code:   statusCode,
-		Reason: result.Msg,
-	}
-	//记录所有> = 500内部错误。
-	if statusCode >= 500 {
-		ctx.Application().Logger().Error(err)
-	}
-
-	ctx.StatusCode(statusCode)
-	ctx.JSON(result)
-}
-
 //
 //
-func PaginationResult(rows []interface{}, total int64) Result {	 
-	return NewResult(iris.Map{"rows": rows, "total": total}, 200)
+func PaginationResult(rows []interface{}, total int64) Result {
+	return NewSuccessResult(iris.Map{"rows": rows, "total": total})
 	//return result
 }

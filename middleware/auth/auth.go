@@ -50,7 +50,7 @@ func New() context.Handler {
 		path := ctx.Path()
 		
 		golog.Debug("request path===> ",path)
-		golog.Debug("request Params===> ",ctx.Params())
+		//golog.Debug("request Params===> ",ctx.URLParams() )
 		// 过滤静态资源、login接口、首页等...不需要验证
 		if checkURL(path) {
 			ctx.Next()

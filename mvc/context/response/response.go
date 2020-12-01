@@ -154,11 +154,11 @@ func Unauthorized(ctx iris.Context, msg string, data interface{}) {
 
 //
 //
-func PaginationResult(rows []interface{}, total int64) Result {
+func PaginationResult(rows interface{}, total int64) Result {
 	return NewSuccessResult(iris.Map{"rows": rows, "total": total})
 	//return result
 }
 
-func OkPg(rows []interface{}, total int64) Result {
+func OkPg(rows interface{}, total int64) Result {
 	return PaginationResult( rows,  total )
  }

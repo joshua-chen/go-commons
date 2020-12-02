@@ -1,0 +1,58 @@
+{
+    "editor.formatOnSave": false,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "workbench.settings.openDefaultSettings": false,
+    "go.useLanguageServer": true,
+    "go.buildOnSave": "workspace",
+    "go.lintOnSave": "package",
+    "go.vetOnSave": "package",
+    "go.buildTags": "",
+    "go.buildFlags": [],
+    "go.lintFlags": [
+        "-min_confidence=.8"
+    ],
+    "go.vetFlags": [],
+    "go.coverOnSave": false,
+    "go.formatOnSave": false,
+    "go.autocompleteUnimportedPackages": true,
+    "go.gocodePackageLookupMode": "go",
+    "go.gotoSymbol.includeImports": true,
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+    "go.docsTool": "gogetdoc",
+    //"go.formatTool": "goreturns",
+    "go.goroot": "D:/programs/golang/go",
+    "go.gopath": "D:/programs/golang/gopath",
+    "go.gocodeAutoBuild": true,
+    "go.toolsGopath": "D:/programs/golang/gopath",
+    "files.autoSave": "afterDelay",
+    "groupImports.onSave": true,
+    "[go]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": false,
+            "editor.formatOnSave": false,
+        },
+        "editor.formatOnSave": false,
+    },
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "version": "v1",
+            "prodToken": "foo",
+            "nonProdToken": "bar"
+        },
+        "local": {
+            "version": "v1",
+            "host": "localhost",
+            "dummyhost": "local",
+            "token": "{{$shared nonProdToken}}",
+            "secretKey": "devSecret"
+        },
+        "production": {
+            "host": "api.apiopen.top",
+            "dummyhost": "dummy.restapiexample.com",
+            "token": "{{$shared prodToken}}",
+            "secretKey": "prodSecret"
+        }
+    }
+}

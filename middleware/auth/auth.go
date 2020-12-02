@@ -18,6 +18,7 @@ import (
 	_ "github.com/joshua-chen/go-commons/mvc/context"
 	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
+	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 
 )
@@ -53,6 +54,12 @@ func New() context.Handler {
 		//golog.Debug("request Params===> ",ctx.URLParams() )
 		// 过滤静态资源、login接口、首页等...不需要验证
 		if checkURL(path) {
+			ctx.Next()
+			return
+		}
+
+		//AJAX进行跨域请求时的预检请求 ，跳过检查
+		if(ctx.Method() == iris.MethodOptions){
 			ctx.Next()
 			return
 		}

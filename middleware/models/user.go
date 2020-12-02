@@ -28,6 +28,7 @@ type User struct {
 	Userface   string    `xorm:"null" json:"userface" form:"userface"`
 	CreateTime time.Time  `xorm:"null" json:"create_time" form:"create_time"`
 	UpdateTime time.Time  `xorm:"null" json:"update_time" form:"update_time"`
+	Roles  []string    `json:"roles" `
 }
 
  

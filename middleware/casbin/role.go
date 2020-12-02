@@ -35,3 +35,20 @@ func CreateSystemRole() bool {
 	}
 	return true
 }
+//获取所有角色
+func GetAllRoles() []string {
+	e := GetEnforcer()
+	roles := e.GetAllRoles()
+
+	return roles
+}
+
+ //获取当前命名策略中显示的角色列表
+func GetAllNamedRoles() []string {
+	e := GetEnforcer()
+	allNamedRoles := e.GetAllNamedRoles("g")
+
+	return allNamedRoles
+}
+
+

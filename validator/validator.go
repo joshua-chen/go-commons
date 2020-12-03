@@ -66,19 +66,16 @@ func Error(err error, code ...int) {
 func ErrorS(err string, code ...int) {
 	Instance().ErrorS(err, code...)
 }
+func GetMessage(err error) string {
+	return Instance().GetMessage(err)
+}
 func (e *Validator) Error(err error, code ...int) {
 	if len(code) > 0 {
 		e.Code = code[0]
 	}
 	//e.Err = err
-	errs := err.(validator.ValidationErrors)
-	trans := e.Translator
-	if trans == nil {
-		trans, _ = GetTranslator()
-	}
-
-	msg := removeStructName(errs.Translate(trans))
-	e.Message = fmt.Sprintf("%v ", msg)
+	msg := GetMessage(err)
+	e.Message = msg
 	newErr := errors.New(e.Message)
 	e.Err = newErr
 	golog.Errorf("Error[%d]: %s", e.Code, e.Message)
@@ -123,6 +120,19 @@ func GetTranslator(language ...string) (trans ut.Translator, found bool) {
 		lang = language[0]
 	}
 	return uni.GetTranslator(lang)
+}
+func (e *Validator) GetMessage(err error) string {
+
+	//e.Err = err
+	errs := err.(validator.ValidationErrors)
+	trans := e.Translator
+	if trans == nil {
+		trans, _ = GetTranslator()
+	}
+
+	msgs := removeStructName(errs.Translate(trans))
+	msg := fmt.Sprintf("%v ", msgs)
+	return msg
 }
 
 func removeStructName(fields map[string]string) map[string]string {

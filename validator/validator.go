@@ -70,7 +70,7 @@ func (e *Validator) Error(err error, code ...int) {
 	if len(code) > 0 {
 		e.Code = code[0]
 	}
-	e.Err = err
+	//e.Err = err
 	errs := err.(validator.ValidationErrors)
 	trans := e.Translator
 	if trans == nil {
@@ -79,8 +79,10 @@ func (e *Validator) Error(err error, code ...int) {
 
 	msg := removeStructName(errs.Translate(trans))
 	e.Message = fmt.Sprintf("%v ", msg)
+	newErr := errors.New(e.Message)
+	e.Err = newErr
 	golog.Errorf("Error[%d]: %s", e.Code, e.Message)
-	panic(err)
+	panic(e.Err)
 }
 
 //

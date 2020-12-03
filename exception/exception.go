@@ -27,8 +27,7 @@ var (
 	instance *Exception
 	lock     *sync.Mutex = &sync.Mutex{}
 )
-
-func Instance() *Exception {
+func Singleton() *Exception {
 	if instance == nil {
 		lock.Lock()
 		defer lock.Unlock()
@@ -39,6 +38,9 @@ func Instance() *Exception {
 		}
 	}
 	return instance
+}
+func Instance() *Exception {	 
+	return Singleton()
 }
 func Fatal(err error, code ...int) {
 	Instance().Fatal(err, code...)

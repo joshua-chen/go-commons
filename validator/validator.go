@@ -19,8 +19,8 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	zhtrans "github.com/go-playground/validator/v10/translations/zh"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/kataras/golog"
-	"github.com/kataras/iris/v12"
 
 )
 
@@ -43,8 +43,8 @@ func Singleton() *Validator {
 		defer lock.Unlock()
 		if instance == nil {
 			instance = &Validator{
-				Code:    iris.StatusInternalServerError * 100,
-				Message: "内部服务器错误"}
+				Code:    response.StatusValidatorFailed,
+				Message: "验证未通过"}
 		}
 	}
 	return instance

@@ -22,4 +22,4 @@ const StatusNotFound = iris.StatusNotFound * StatusCoefficient
 
 const StatusExpectationFailed = iris.StatusExpectationFailed * StatusCoefficient
 
-
+const StatusValidatorFailed = 600 * StatusCoefficient

@@ -24,6 +24,7 @@ import (
 
 	"github.com/joshua-chen/go-commons/exception"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/validator"
 	"github.com/kataras/iris/v12/context"
 
 )
@@ -68,16 +69,21 @@ func New() context.Handler {
 					stacktrace += fmt.Sprintf("%s:%d\n", f, l)
 				}
 
-				excep := exception.Instance()
+				excep := exception.Singleton()
 				errCode := response.StatusInternalServerError
 
 				if reflect.DeepEqual(excep.Err, err) {
-					errCode = excep.Code
-					if len(strconv.Itoa(errCode)) < 5 {
-						errCode = errCode * response.StatusCoefficient
+					errCode = excep.Code					
+				} else {
+					vd := validator.Singleton()
+					if reflect.DeepEqual(vd.Err, err) {
+						errCode = vd.Code
 					}
 				}
-
+				
+				if len(strconv.Itoa(errCode)) < 5 {
+					errCode = errCode * response.StatusCoefficient
+				}
 				errMsg := fmt.Sprintf("错误信息: %s", err)
 				// when stack finishes
 				logMessage := fmt.Sprintf("从错误中恢复：('%s')\n", ctx.HandlerName())

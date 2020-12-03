@@ -17,6 +17,8 @@ import (
 )
 
 type Exception struct {
+	Code    int
+	Message string
 }
 
 var (
@@ -34,18 +36,27 @@ func Instance() *Exception {
 	}
 	return instance
 }
-func  Fatal(err error) {
-	Instance().Fatal(err)
+func Fatal(err error, code ...int) {
+	Instance().Fatal(err, code...)
 }
-func  Fatalf(err string) {
-	Instance().Fatalf(err)
+func Fatalf(err string, code ...int) {
+	Instance().Fatalf(err, code...)
 }
-func (e *Exception) Fatal(err error) {
-	golog.Errorf("Fatal: %s",err.Error())
+func (e *Exception) Fatal(err error, code ...int) {
+	if len(code) > 0 {
+		e.Code = code[0]
+	}
+	msg := err.Error()
+	e.Message = msg
+	golog.Errorf("Fatal: %s", msg)
 	panic(err)
 }
-func (e *Exception) Fatalf(err string) {
-	golog.Errorf("Fatal: %s",err)
+func (e *Exception) Fatalf(err string, code ...int) {
+	if len(code) > 0 {
+		e.Code = code[0]
+	}
+	e.Message = err
+	golog.Errorf("Fatal: %s", err)
 	panic(errors.New(err))
 }
 func (e *Exception) Error(err error) {

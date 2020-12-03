@@ -9,16 +9,14 @@
 package response
 
 type HttpError struct {
-    Code   int    `json:"code"`
-    Reason string `json:"reason"`
+	Code   int    `json:"code"`
+	Reason string `json:"reason"`
 }
 
-
-
-type Result struct {
-	Code    int      `json:"code"`
+//
+type JsonResult struct {
+	Code    int         `json:"code"`
 	Msg     string      `json:"message"`
 	Success bool        `json:"success"`
 	Data    interface{} `json:"data"`
 }
-

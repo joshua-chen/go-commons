@@ -229,7 +229,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 
 	//golog.Infof("*** MapClaims=%v, [id=%f, ok1=%t]; [username=%s, ok2=%t]", mapClaims, id, ok1, username, ok2)
 	if !ok1 || !ok2 {
-		response.ErrorCtx(ctx,   msg.TokenParseFailed)
+		response.ContextError(ctx,   msg.TokenParseFailed)
 		return nil, false
 	}
 

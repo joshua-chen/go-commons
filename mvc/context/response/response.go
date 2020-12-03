@@ -20,22 +20,31 @@ import (
 
 )
 
-func DefaultResult(data interface{}) Result {
+func Result(success bool, data interface{}, msg ...string) JsonResult {
+
+	if success {
+		return NewSuccessResult(data, msg...)
+	} 
+
+	return NewFailResult(data, msg...)
+}
+
+func DefaultResult(data interface{}) JsonResult {
 
 	//var result = new(models.ResponseResult)
 	//result := models.NewResponseResult(data, "200")
 	return NewResult(data, iris.StatusOK*100)
 	//return result
 }
-func BoolResult(data bool) Result {
+func BoolResult(data bool) JsonResult {
 
 	//var result = new(models.ResponseResult)
 	//result := models.NewResponseResult(data, "200")
 	return NewBoolResult(data, 200)
 	//return result
 }
-func NewBoolResult(data bool, c int, m ...string) Result {
-	r := Result{Data: iris.Map{}, Code: c, Success: true}
+func NewBoolResult(data bool, c int, m ...string) JsonResult {
+	r := JsonResult{Data: iris.Map{}, Code: c, Success: true}
 
 	if len(m) > 0 {
 		r.Msg = m[0]
@@ -43,8 +52,8 @@ func NewBoolResult(data bool, c int, m ...string) Result {
 
 	return r
 }
-func NewResult(data interface{}, c int, m ...string) Result {
-	r := Result{Data: data, Code: c, Success: false}
+func NewResult(data interface{}, c int, m ...string) JsonResult {
+	r := JsonResult{Data: data, Code: c, Success: false}
 
 	if e, ok := data.(error); ok {
 		if m == nil {
@@ -61,37 +70,44 @@ func NewResult(data interface{}, c int, m ...string) Result {
 	return r
 }
 
-func NewUnauthorizedResult(msg string, data ...interface{}) Result {
-	result := Result{Code: iris.StatusUnauthorized*100, Msg: msg, Success: false}
+func NewUnauthorizedResult(msg string, data ...interface{}) JsonResult {
+	result := JsonResult{Code: iris.StatusUnauthorized * 100, Msg: msg, Success: false}
 	if len(data) > 0 {
 		result.Data = data[0]
 	}
 	return result
 }
-func NewSuccessResult(data interface{}, msg ...string) Result {
-	result := Result{Data: data, Code: iris.StatusOK * 100, Success: true}
+func NewSuccessResult(data interface{}, msg ...string) JsonResult {
+	result := JsonResult{Data: data, Code: iris.StatusOK * 100, Success: true}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
-func NewNotFoundResult(msg ...string) Result {
-	result := Result{Code: iris.StatusNotFound*100, Msg: "not found", Data: iris.Map{}}
+func NewFailResult(data interface{}, msg ...string) JsonResult {
+	result := JsonResult{Data: data, Code: iris.StatusOK * 100, Success: false}
+	if len(msg) > 0 {
+		result.Msg = msg[0]
+	}
+	return result
+}
+func NewNotFoundResult(msg ...string) JsonResult {
+	result := JsonResult{Code: iris.StatusNotFound * 100, Msg: "not found", Data: iris.Map{}}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 
-func NewErrorResult(errMsg ...string) Result {
-	result := Result{Code: iris.StatusInternalServerError * 100, Msg: "server interal error", Data: iris.Map{}}
+func NewErrorResult(errMsg ...string) JsonResult {
+	result := JsonResult{Code: iris.StatusInternalServerError * 100, Msg: "server interal error", Data: iris.Map{}}
 	if len(errMsg) > 0 {
 		result.Msg = errMsg[0]
 	}
 	return result
 }
 
-func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
+func ContextFail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 	err := HttpError{
 		Code:   statusCode,
 		Reason: fmt.Sprintf(format, a...),
@@ -107,9 +123,9 @@ func Fail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 }
 
 // common error define
-func ErrorCtx(ctx iris.Context,   msg ...string) {
-	 
-	result := NewErrorResult( msg...) 
+func ContextError(ctx iris.Context, msg ...string) {
+
+	result := NewErrorResult(msg...)
 	err := HttpError{
 		Code:   result.Code,
 		Reason: result.Msg,
@@ -123,26 +139,27 @@ func ErrorCtx(ctx iris.Context,   msg ...string) {
 	ctx.JSON(result)
 }
 
-func Error(statusCode int, msg ...string) Result{
-	 
-	result := NewErrorResult( msg...)
+func Error(statusCode int, msg ...string) JsonResult {
 
-	result.Code = statusCode 
-	  
+	result := NewErrorResult(msg...)
+
+	result.Code = statusCode
+
 	return result
 }
 
 //
 //
-func OkCtx(ctx iris.Context, data interface{}, msg ...string) {
+func ContextOk(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	result := NewSuccessResult(data, msg...)
 	ctx.JSON(result)
 }
+
 //
-func Ok( data interface{}, msg ...string) Result{
-	 result := NewSuccessResult(data, msg...)
-	 return result
+func Ok(data interface{}, msg ...string) JsonResult {
+	result := NewSuccessResult(data, msg...)
+	return result
 }
 
 // 401 error define
@@ -154,11 +171,11 @@ func Unauthorized(ctx iris.Context, msg string, data interface{}) {
 
 //
 //
-func PaginationResult(rows interface{}, total int64) Result {
+func PaginationResult(rows interface{}, total int64) JsonResult {
 	return NewSuccessResult(iris.Map{"rows": rows, "total": total})
 	//return result
 }
 
-func OkPg(rows interface{}, total int64) Result {
-	return PaginationResult( rows,  total )
- }
+func OkPg(rows interface{}, total int64) JsonResult {
+	return PaginationResult(rows, total)
+}

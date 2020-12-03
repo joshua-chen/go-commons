@@ -86,7 +86,7 @@ func NewFailResult(data interface{}, msg ...string) JsonResult {
 	return result
 }
 func NewNotFoundResult(msg ...string) JsonResult {
-	result := JsonResult{Code: StatusNotFound, Msg: "not found", Data: iris.Map{}}
+	result := JsonResult{Code: StatusNotFound, Msg: "not found"}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
@@ -94,7 +94,7 @@ func NewNotFoundResult(msg ...string) JsonResult {
 }
 
 func NewErrorResult(code int, errMsg ...string) JsonResult {
-	result := JsonResult{Code: code, Msg: "server interal error", Data: iris.Map{}}
+	result := JsonResult{Code: code, Msg: "server interal error"}
 	if len(errMsg) > 0 {
 		result.Msg = errMsg[0]
 	}

@@ -58,23 +58,29 @@ func Instance() *Validator {
 }
 
 //
-func Error(err error, code ...int) {
-	Instance().Error(err, code...)
+func Error(err error,  args ...interface{}) {
+	Instance().Error(err,args...)
 }
 
 //
 func ErrorS(err string, code ...int) {
 	Instance().ErrorS(err, code...)
 }
-func GetMessage(err error) string {
-	return Instance().GetMessage(err)
+func GetMessage(err error, prefix ...string) string {
+	return Instance().GetMessage(err, prefix...)
 }
-func (e *Validator) Error(err error, code ...int) {
-	if len(code) > 0 {
-		e.Code = code[0]
+func (e *Validator) Error(err error, args ...interface{}) {
+
+	if len(args) > 0 {
+		e.Code = (args[0]).(int)
 	}
+	prefix := ""
+	if len(args) > 1 {
+		prefix = (args[1]).(string)
+	}
+
 	//e.Err = err
-	msg := GetMessage(err)
+	msg := GetMessage(err, prefix)
 	e.Message = msg
 	newErr := errors.New(e.Message)
 	e.Err = newErr
@@ -121,7 +127,7 @@ func GetTranslator(language ...string) (trans ut.Translator, found bool) {
 	}
 	return uni.GetTranslator(lang)
 }
-func (e *Validator) GetMessage(err error) string {
+func (e *Validator) GetMessage(err error, prefix ...string) string {
 
 	//e.Err = err
 	errs := err.(validator.ValidationErrors)
@@ -132,6 +138,10 @@ func (e *Validator) GetMessage(err error) string {
 
 	msgs := removeStructName(errs.Translate(trans))
 	msg := fmt.Sprintf("%v ", msgs)
+
+	if len(prefix) > 0 {
+		msg = prefix[0] + msg
+	}
 	return msg
 }
 

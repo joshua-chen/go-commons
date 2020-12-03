@@ -26,9 +26,11 @@ import (
 
 //
 type Validator struct {
-	Code    int
-	Message string
-	Err     error
+	Code       int
+	Message    string
+	Err        error
+	Validate   *validator.Validate
+	Translator ut.Translator
 }
 
 var (
@@ -70,7 +72,11 @@ func (e *Validator) Error(err error, code ...int) {
 	}
 	e.Err = err
 	errs := err.(validator.ValidationErrors)
-	trans, _ := GetTranslator()
+	trans := e.Translator
+	if trans == nil {
+		trans, _ = GetTranslator()
+	}
+
 	msg := removeStructName(errs.Translate(trans))
 	e.Message = fmt.Sprintf("%v ", msg)
 	golog.Errorf("Error[%d]: %s", e.Code, e.Message)
@@ -88,16 +94,18 @@ func (e *Validator) ErrorS(errMsg string, code ...int) {
 	e.Err = err
 	panic(err)
 }
-func New() *validator.Validate{
+func New() *validator.Validate {
 	return Singleton().New()
 }
+
 //
 func (e *Validator) New() *validator.Validate {
 
 	trans, _ := GetTranslator() //获取需要的语言
-	validate := validator.New()
-	zhtrans.RegisterDefaultTranslations(validate, trans)
-	return validate
+	e.Validate = validator.New()
+	e.Translator = trans
+	zhtrans.RegisterDefaultTranslations(e.Validate, trans)
+	return e.Validate
 }
 
 func GetTranslator(language ...string) (trans ut.Translator, found bool) {

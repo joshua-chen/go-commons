@@ -13,12 +13,14 @@ import (
 	"sync"
 
 	"github.com/kataras/golog"
+	"github.com/kataras/iris/v12"
 
 )
 
 type Exception struct {
 	Code    int
 	Message string
+	Err     error
 }
 
 var (
@@ -31,7 +33,9 @@ func Instance() *Exception {
 		lock.Lock()
 		defer lock.Unlock()
 		if instance == nil {
-			instance = &Exception{}
+			instance = &Exception{
+				Code:    iris.StatusInternalServerError * 100,
+				Message: "内部服务器错误"}
 		}
 	}
 	return instance
@@ -47,17 +51,20 @@ func (e *Exception) Fatal(err error, code ...int) {
 		e.Code = code[0]
 	}
 	msg := err.Error()
+	e.Err = err
 	e.Message = msg
-	golog.Errorf("Fatal: %s", msg)
+	golog.Fatalf("Fatal[%s]: %s", e.Code, msg)
 	panic(err)
 }
-func (e *Exception) Fatalf(err string, code ...int) {
+func (e *Exception) Fatalf(errMsg string, code ...int) {
 	if len(code) > 0 {
 		e.Code = code[0]
 	}
-	e.Message = err
-	golog.Errorf("Fatal: %s", err)
-	panic(errors.New(err))
+	e.Message = errMsg
+	golog.Fatalf("Fatal[%s]: %s ", e.Code, errMsg)
+	err := errors.New(errMsg)
+	e.Err = err
+	panic(err)
 }
 func (e *Exception) Error(err error) {
 

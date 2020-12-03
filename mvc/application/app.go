@@ -140,7 +140,7 @@ func configation(app *iris.Application) {
 	})
 
 	app.OnErrorCode(iris.StatusInternalServerError, func(context context.Context) {
-		context.JSON(response.NewErrorResult())
+		context.JSON(response.NewErrorResult(iris.StatusInternalServerError*100))
 	})
 }
 

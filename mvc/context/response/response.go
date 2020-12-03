@@ -24,24 +24,18 @@ func Result(success bool, data interface{}, msg ...string) JsonResult {
 
 	if success {
 		return NewSuccessResult(data, msg...)
-	} 
+	}
 
 	return NewFailResult(data, msg...)
 }
 
 func DefaultResult(data interface{}) JsonResult {
 
-	//var result = new(models.ResponseResult)
-	//result := models.NewResponseResult(data, "200")
-	return NewResult(data, iris.StatusOK*100)
-	//return result
+	return NewResult(data, StatusOK)
 }
 func BoolResult(data bool) JsonResult {
 
-	//var result = new(models.ResponseResult)
-	//result := models.NewResponseResult(data, "200")
-	return NewBoolResult(data, 200)
-	//return result
+	return NewBoolResult(data, StatusOK)
 }
 func NewBoolResult(data bool, c int, m ...string) JsonResult {
 	r := JsonResult{Data: iris.Map{}, Code: c, Success: true}
@@ -71,36 +65,36 @@ func NewResult(data interface{}, c int, m ...string) JsonResult {
 }
 
 func NewUnauthorizedResult(msg string, data ...interface{}) JsonResult {
-	result := JsonResult{Code: iris.StatusUnauthorized * 100, Msg: msg, Success: false}
+	result := JsonResult{Code: StatusUnauthorized, Msg: msg, Success: false}
 	if len(data) > 0 {
 		result.Data = data[0]
 	}
 	return result
 }
 func NewSuccessResult(data interface{}, msg ...string) JsonResult {
-	result := JsonResult{Data: data, Code: iris.StatusOK * 100, Success: true}
+	result := JsonResult{Data: data, Code: StatusOK, Success: true}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 func NewFailResult(data interface{}, msg ...string) JsonResult {
-	result := JsonResult{Data: data, Code: iris.StatusOK * 100, Success: false}
+	result := JsonResult{Data: data, Code: StatusExpectationFailed, Success: false}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 func NewNotFoundResult(msg ...string) JsonResult {
-	result := JsonResult{Code: iris.StatusNotFound * 100, Msg: "not found", Data: iris.Map{}}
+	result := JsonResult{Code: StatusNotFound, Msg: "not found", Data: iris.Map{}}
 	if len(msg) > 0 {
 		result.Msg = msg[0]
 	}
 	return result
 }
 
-func NewErrorResult(errMsg ...string) JsonResult {
-	result := JsonResult{Code: iris.StatusInternalServerError * 100, Msg: "server interal error", Data: iris.Map{}}
+func NewErrorResult(code int, errMsg ...string) JsonResult {
+	result := JsonResult{Code: code, Msg: "server interal error", Data: iris.Map{}}
 	if len(errMsg) > 0 {
 		result.Msg = errMsg[0]
 	}
@@ -125,7 +119,7 @@ func ContextFail(ctx iris.Context, statusCode int, format string, a ...interface
 // common error define
 func ContextError(ctx iris.Context, msg ...string) {
 
-	result := NewErrorResult(msg...)
+	result := NewErrorResult(StatusInternalServerError, msg...)
 	err := HttpError{
 		Code:   result.Code,
 		Reason: result.Msg,
@@ -141,9 +135,7 @@ func ContextError(ctx iris.Context, msg ...string) {
 
 func Error(statusCode int, msg ...string) JsonResult {
 
-	result := NewErrorResult(msg...)
-
-	result.Code = statusCode
+	result := NewErrorResult(statusCode, msg...)
 
 	return result
 }

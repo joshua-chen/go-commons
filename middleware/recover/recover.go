@@ -18,12 +18,11 @@ package recover
 import (
 	"fmt"
 	"runtime"
-	_ "strconv"
+	"strconv"
 	"sync"
 
+	"github.com/joshua-chen/go-commons/exception"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
-	_ "github.com/kataras/golog"
-	_"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 
 )
@@ -68,6 +67,15 @@ func New() context.Handler {
 					stacktrace += fmt.Sprintf("%s:%d\n", f, l)
 				}
 
+				excep := exception.Instance()
+				errCode := response.StatusInternalServerError
+				if excep.Err == err {
+					errCode = excep.Code
+					if len(strconv.Itoa(errCode)) < 5 {
+						errCode = errCode * response.StatusCoefficient
+					}
+				}
+
 				errMsg := fmt.Sprintf("错误信息: %s", err)
 				// when stack finishes
 				logMessage := fmt.Sprintf("从错误中恢复：('%s')\n", ctx.HandlerName())
@@ -76,7 +84,8 @@ func New() context.Handler {
 				// 打印错误日志
 				ctx.Application().Logger().Warn(logMessage)
 				// 返回错误信息
-				result := response.NewErrorResult( errMsg)
+
+				result := response.NewErrorResult(errCode, errMsg)
 				ctx.JSON(result)
 				ctx.StopExecution()
 			}

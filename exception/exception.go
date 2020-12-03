@@ -53,7 +53,7 @@ func (e *Exception) Fatal(err error, code ...int) {
 	msg := err.Error()
 	e.Err = err
 	e.Message = msg
-	golog.Fatalf("Fatal[%s]: %s", e.Code, msg)
+	golog.Errorf("Fatal[%d]: %s", e.Code, msg)
 	panic(err)
 }
 func (e *Exception) Fatalf(errMsg string, code ...int) {
@@ -61,7 +61,7 @@ func (e *Exception) Fatalf(errMsg string, code ...int) {
 		e.Code = code[0]
 	}
 	e.Message = errMsg
-	golog.Fatalf("Fatal[%s]: %s ", e.Code, errMsg)
+	golog.Errorf("Fatal[%d]: %s ", e.Code, errMsg)
 	err := errors.New(errMsg)
 	e.Err = err
 	panic(err)

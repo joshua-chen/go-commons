@@ -17,6 +17,7 @@ package recover
 
 import (
 	"fmt"
+	"reflect"
 	"runtime"
 	"strconv"
 	"sync"
@@ -69,7 +70,8 @@ func New() context.Handler {
 
 				excep := exception.Instance()
 				errCode := response.StatusInternalServerError
-				if excep.Err == err {
+
+				if reflect.DeepEqual(excep.Err, err) {
 					errCode = excep.Code
 					if len(strconv.Itoa(errCode)) < 5 {
 						errCode = errCode * response.StatusCoefficient

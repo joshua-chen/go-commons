@@ -78,3 +78,11 @@ func PathExisted(path string) (bool, error) {
 	}
 	return false, err
 }
+
+func If(condition bool, trueVal, falseVal interface{}) interface{} {
+	if condition {
+		return trueVal
+	}
+	return falseVal
+}
+

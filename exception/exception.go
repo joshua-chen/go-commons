@@ -43,8 +43,8 @@ func Instance() *Exception {
 func Fatal(err error, code ...int) {
 	Instance().Fatal(err, code...)
 }
-func Fatalf(err string, code ...int) {
-	Instance().Fatalf(err, code...)
+func FatalS(err string, code ...int) {
+	Instance().FatalS(err, code...)
 }
 func (e *Exception) Fatal(err error, code ...int) {
 	if len(code) > 0 {
@@ -56,7 +56,7 @@ func (e *Exception) Fatal(err error, code ...int) {
 	golog.Errorf("Fatal[%d]: %s", e.Code, msg)
 	panic(err)
 }
-func (e *Exception) Fatalf(errMsg string, code ...int) {
+func (e *Exception) FatalS(errMsg string, code ...int) {
 	if len(code) > 0 {
 		e.Code = code[0]
 	}

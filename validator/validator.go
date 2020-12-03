@@ -88,7 +88,9 @@ func (e *Validator) ErrorS(errMsg string, code ...int) {
 	e.Err = err
 	panic(err)
 }
-
+func New() *validator.Validate{
+	return Singleton().New()
+}
 //
 func (e *Validator) New() *validator.Validate {
 

@@ -10,7 +10,6 @@ package validator
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 	"sync"
 
@@ -28,6 +27,7 @@ import (
 type Validator struct {
 	Code       int
 	Message    string
+	Messages   map[string]string
 	Err        error
 	Validate   *validator.Validate
 	Translator ut.Translator
@@ -58,8 +58,8 @@ func Instance() *Validator {
 }
 
 //
-func Error(err error,  args ...interface{}) {
-	Instance().Error(err,args...)
+func Error(err error, args ...interface{}) {
+	Instance().Error(err, args...)
 }
 
 //
@@ -137,8 +137,10 @@ func (e *Validator) GetMessage(err error, prefix ...string) string {
 	}
 
 	msgs := removeStructName(errs.Translate(trans))
-	msg := fmt.Sprintf("%v ", msgs)
 
+	msg := msgToString(msgs) // fmt.Sprintf("%v ", msgs)
+	e.Message = msg
+	e.Messages = msgs
 	if len(prefix) > 0 {
 		msg = prefix[0] + msg
 	}
@@ -150,6 +152,22 @@ func removeStructName(fields map[string]string) map[string]string {
 
 	for field, err := range fields {
 		result[field[strings.Index(field, ".")+1:]] = err
+	}
+	return result
+}
+
+func msgToString(msgs map[string]string) string {
+	result := ""
+
+	for key, msg := range msgs {
+		if key != "" {
+			result += `'` + key + `'`
+		}
+		result += msg + "\n"
+	}
+
+	if result != "" {
+		result = result[0 : len(result)-1]
 	}
 	return result
 }

@@ -13,12 +13,12 @@ const (
 
 	// msg define
 	Success                  = "恭喜, 成功"
-	OperateSuccess     string = "恭喜, 操作成功"
-	OperateFailed      string = "抱歉, 操作失败"
+	OperateSuccess    string = "恭喜, 操作成功"
+	OperateFailed     string = "抱歉, 操作失败"
 	ParseParamsFailed string = "解析参数失败"
 
-	RegisterSuccess     string = "恭喜, 注册用户成功"
-	RegisterFailed      string = "注册失败"
+	RegisterSuccess    string = "恭喜, 注册用户成功"
+	RegisterFailed     string = "注册失败"
 	LoginSuccess       string = "恭喜, 登录成功"
 	LoginFailed        string = "登录失败"
 	DeleteUsersSuccess string = "删除用户成功"
@@ -44,3 +44,21 @@ const (
 	// value define
 
 )
+
+//msg := commons.If(affects > 0, "删除成功", "删除失败").(string)
+
+func ActionMessage(condition bool, msgArgs ...string) string {
+	trueMsg := "操作成功"
+	falseMsg := "操作失败"
+	if len(msgArgs) > 0 {
+		trueMsg = msgArgs[0]
+	}
+	if len(msgArgs) > 1 {
+		falseMsg = msgArgs[1]
+	}
+
+	if condition {
+		return trueMsg
+	}
+	return falseMsg
+}

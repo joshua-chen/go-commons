@@ -45,7 +45,7 @@ func Singleton() *Validator {
 		defer lock.Unlock()
 		if instance == nil {
 			instance = &Validator{
-				Code:    response.StatusValidatorFailed,
+				Code:    response.StatusValidateFailed,
 				Message: "验证未通过"}
 		}
 	}

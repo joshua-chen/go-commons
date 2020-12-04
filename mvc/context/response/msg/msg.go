@@ -29,6 +29,7 @@ const (
 
 	UsernameFailed             string = "用户名错误"
 	PasswordFailed             string = "密码错误"
+	TokenParamEmpty           string = "token参数为空"
 	TokenCreateFailed          string = "生成token错误"
 	TokenExactFailed           string = "token不存在或header设置不正确"
 	TokenExpired               string = "token已过期"

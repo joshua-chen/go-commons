@@ -10,7 +10,8 @@ package response
 
 import "github.com/kataras/iris/v12"
 
-const StatusCoefficient = 100
+//状态系数
+const StatusCoefficient = 100 
 
 const StatusInternalServerError = iris.StatusInternalServerError * StatusCoefficient
 
@@ -22,6 +23,9 @@ const StatusNotFound = iris.StatusNotFound * StatusCoefficient
 
 const StatusExpectationFailed = iris.StatusExpectationFailed * StatusCoefficient
 
-const StatusValidatorCodeBase = 600
+//验证状态码基数
+const StatusValidateCodeBase = 600
 
-const StatusValidatorFailed = StatusValidatorCodeBase * StatusCoefficient
+const StatusValidateFailed = StatusValidateCodeBase * StatusCoefficient
+
+const StatusTokenParamEmpty = StatusInternalServerError + 999

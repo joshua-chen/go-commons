@@ -2,19 +2,20 @@ package casbin
 
 import (
 	"fmt"
+	"net/http"
+	"strconv"
+	"sync"
+
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/datasource"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
-	"net/http"
-	"strconv"
-	"sync"
-
 	"github.com/casbin/casbin"
 	//"github.com/casbin/xorm-adapter"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/kataras/iris/v12/context"
+
 )
 
 var (

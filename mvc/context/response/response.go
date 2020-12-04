@@ -10,10 +10,13 @@
 package response
 
 import (
+	"errors"
 	"fmt"
 	_ "strings"
 
 	_ "github.com/jmespath/go-jmespath"
+	"github.com/joshua-chen/go-commons/exception"
+	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	"github.com/kataras/iris/v12"
 	_ "github.com/kataras/iris/v12/context"
 	_ "github.com/kataras/iris/v12/hero"
@@ -101,7 +104,7 @@ func NewErrorResult(code int, errMsg ...string) JsonResult {
 	return result
 }
 
-func ContextFail(ctx iris.Context, statusCode int, format string, a ...interface{}) {
+func FailCtx(ctx iris.Context, statusCode int, format string, a ...interface{}) {
 	err := HttpError{
 		Code:   statusCode,
 		Reason: fmt.Sprintf(format, a...),
@@ -117,7 +120,7 @@ func ContextFail(ctx iris.Context, statusCode int, format string, a ...interface
 }
 
 // common error define
-func ContextError(ctx iris.Context, msg ...string) {
+func ErrorCtx(ctx iris.Context, msg ...string) {
 
 	result := NewErrorResult(StatusInternalServerError, msg...)
 	err := HttpError{
@@ -142,7 +145,7 @@ func Error(statusCode int, msg ...string) JsonResult {
 
 //
 //
-func ContextOk(ctx iris.Context, data interface{}, msg ...string) {
+func OkCtx(ctx iris.Context, data interface{}, msg ...string) {
 	ctx.StatusCode(iris.StatusOK)
 	result := NewSuccessResult(data, msg...)
 	ctx.JSON(result)
@@ -170,4 +173,8 @@ func PaginationResult(rows interface{}, total int64) JsonResult {
 
 func OkPg(rows interface{}, total int64) JsonResult {
 	return PaginationResult(rows, total)
+}
+
+func TokenEmpty(ctx iris.Context) {
+	exception.Fatal(errors.New(msg.TokenParamEmpty), StatusTokenParamEmpty)
 }

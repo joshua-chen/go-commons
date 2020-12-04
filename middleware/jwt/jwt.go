@@ -15,18 +15,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware/models"
-	"github.com/joshua-chen/go-commons/mvc/context/response"
-	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	jwt "github.com/dgrijalva/jwt-go"
 	_ "github.com/dgrijalva/jwt-go/request"
 	_ "github.com/iris-contrib/middleware/cors"
 	_ "github.com/iris-contrib/middleware/jwt"
+	"github.com/joshua-chen/go-commons/config"
+	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
-	_ "github.com/spf13/cast"
+	"github.com/spf13/cast"
 
 )
 
@@ -94,7 +94,7 @@ func Configure() *JWT {
 	}
 	instance.Config = c
 	//return &JWT{Config: c}
-	golog.Debugf("instance.Config: %s",instance.Config)
+	golog.Debugf("instance.Config: %s", instance.Config)
 	return instance
 }
 
@@ -109,46 +109,23 @@ func Filter(ctx context.Context) bool {
 	//ctx.Next()
 }
 
-/*
-func NewJWT() *jwtmiddleware.Middleware {
-	jwtHandler := jwtmiddleware.New(jwtmiddleware.Config{
-		//这个方法将验证jwt的token
-		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
-			//自己加密的秘钥或者说盐值
-			return []byte(config.AppConfig.Secret), nil
-		},
-		Extractor: FromAuthHeader,
-		//加密的方式
-		SigningMethod: jwt.SigningMethodHS256,
-		//验证未通过错误处理方式
-
-		ErrorHandler: func(ctx context.Context, err error) {
-			if err == nil {
-				return
-			}
-			ctx.StopExecution()
-			ctx.JSON(response.NewUnauthorizedResult(err.Error()))
-		},
-		Expiration: true,
-		//Debug:               true,
-		EnableAuthOnOptions: false,
-	})
-	return jwtHandler
-}
-*/
+//
 func FromAuthHeader(ctx context.Context) (string, error) {
-	authHeader := ctx.GetHeader("Authorization")
-	if authHeader == "" {
-		return "", nil // No error, just no token
+	auth := ctx.GetHeader("Authorization")
+	if auth == "" {
+		auth = ctx.GetHeader("X-Token")
+	}
+	if auth == "" {
+		return "", fmt.Errorf("Authorization header is empty") // No error, just no token
 	}
 
 	// TODO: Make this a bit more robust, parsing-wise
-	authHeaderParts := strings.Split(authHeader, " ")
-	if len(authHeaderParts) != 2 || strings.ToLower(authHeaderParts[0]) != "bearer" {
+	authParts := strings.Split(auth, " ")
+	if len(authParts) != 2 || strings.ToLower(authParts[0]) != "bearer" {
 		return "", fmt.Errorf("Authorization header format must be Bearer {token}")
 	}
 
-	return authHeaderParts[1], nil
+	return authParts[1], nil
 }
 
 // below 3 method is get token from url
@@ -205,8 +182,7 @@ func NewToken(user *models.User) (string, error) {
 	return token, err
 }
 
-/*
-func ParseToken(tokenString string, key string) (interface{}, bool) {
+func ParseTokenString(tokenString string, key string) (interface{}, bool) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -215,11 +191,11 @@ func ParseToken(tokenString string, key string) (interface{}, bool) {
 	})
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		return claims, true
-	} else {
-		fmt.Println(err)
-		return "", false
 	}
-}*/
+
+	fmt.Println(err)
+	return "", false
+}
 func ParseToken(ctx context.Context) (*models.User, bool) {
 	//token := GetToken(ctx)
 	mapClaims := (Instance().Get(ctx).Claims).(jwt.MapClaims)
@@ -229,7 +205,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 
 	//golog.Infof("*** MapClaims=%v, [id=%f, ok1=%t]; [username=%s, ok2=%t]", mapClaims, id, ok1, username, ok2)
 	if !ok1 || !ok2 {
-		response.ContextError(ctx,   msg.TokenParseFailed)
+		response.ErrorCtx(ctx, msg.TokenParseFailed)
 		return nil, false
 	}
 
@@ -241,31 +217,27 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 }
 
 func GetToken(ctx context.Context) string {
-	token := ctx.GetHeader("Authorization")
-	if token != "" && len(token) > 7 {
-		token = token[7:]
-	}
+	token, _ := FromAuthHeader(ctx)
+
 	return token
 }
 
-/*
 func GetUserID(token string) int {
 	var userId = 0
 	if token != "" && token != "undefined" && len(token) > 7 {
-		v, _ := ParseToken(token, JwtKey)
+		v, _ := ParseTokenString(token, config.AppConfig.Secret)
 		if v != "" {
 			userId = cast.ToInt(v.(jwt.MapClaims)["id"])
 		}
 	}
 	return userId
 }
-*/
 
 // Get returns the user (&token) information for this client/request
 func (m *JWT) Get(ctx context.Context) *jwt.Token {
-	golog.Debugf("ContextKey: %s",m.Config.ContextKey)
-	golog.Debugf("ctx.Values(): %s",ctx.Values())
-	golog.Debugf("m.Config: %s",m.Config)
+	golog.Debugf("ContextKey: %s", m.Config.ContextKey)
+	golog.Debugf("ctx.Values(): %s", ctx.Values())
+	golog.Debugf("m.Config: %s", m.Config)
 	return ctx.Values().Get(m.Config.ContextKey).(*jwt.Token)
 }
 

@@ -37,10 +37,10 @@ func initRootUser() {
 func addRoleMenu() {
 	// 添加role-menu关系
 	rMenus := []*models.RoleMenu{
-		{Rid: 68, Mid: 2},
-		{Rid: 68, Mid: 3},
-		{Rid: 68, Mid: 4},
-		{Rid: 68, Mid: 5},
+		{RoleId: 68, Mid: 2},
+		{RoleId: 68, Mid: 3},
+		{RoleId: 68, Mid: 4},
+		{RoleId: 68, Mid: 5},
 	}
 	effect, err := models.CreateRoleMenu(rMenus...)
 	if err != nil {

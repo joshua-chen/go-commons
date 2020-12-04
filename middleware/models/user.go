@@ -26,8 +26,8 @@ type User struct {
 	QQ      string    `xorm:"null" json:"qq" form:"qq"`
 	Email      string    `xorm:"null" json:"email" form:"email"`
 	Userface   string    `xorm:"null" json:"userface" form:"userface"`
-	CreateTime time.Time  `xorm:"null" json:"create_time" form:"create_time"`
-	UpdateTime time.Time  `xorm:"null" json:"update_time" form:"update_time"`
+	CreateAt time.Time  `xorm:"null" json:"create_at" form:"create_at"`
+	UpdateAt time.Time  `xorm:"null" json:"update_at" form:"update_at"`
 	Roles  []string   `xorm:"-" json:"roles" `
 }
 

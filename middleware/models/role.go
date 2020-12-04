@@ -11,6 +11,7 @@ package models
 import (
 	"github.com/joshua-chen/go-commons/datasource"
 	"github.com/joshua-chen/go-commons/mvc/context/request"
+
 )
 
 type CasbinRule struct {
@@ -22,7 +23,7 @@ type CasbinRule struct {
 	Suf        string `xorm:"varchar(100) index" json:"suf"`
 	Name       string `xorm:"varchar(100) index" json:"name"`
 	Des        string `xorm:"varchar(100) index" json:"des"`
-	CreateTime string `xorm:"datetime" json:"create_time"  form:"create_time"`
+	CreateAt string `xorm:"datetime" json:"create_at"  form:"create_at"`
 }
 
 //{"admin", "/admin*", "GET|POST|DELETE|PUT", ".*", "角色管理"},

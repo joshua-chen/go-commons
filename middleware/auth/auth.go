@@ -48,10 +48,9 @@ func (a *Auth) New() context.Handler {
 
 func New() context.Handler {
 	handler := func(ctx context.Context) {
-		path := ctx.Path()
-		
+		path := ctx.Path()		
 		golog.Debug("request path===> ",path)
-		//golog.Debug("request Params===> ",ctx.URLParams() )
+
 		// 过滤静态资源、login接口、首页等...不需要验证
 		if checkURL(path) {
 			ctx.Next()
@@ -92,6 +91,12 @@ func checkURL(requestPath string) bool {
 	requestStaticPath := config.AppConfig.StaticPath[0]
 	if utils.HasPrefix(requestPath, requestStaticPath) {
 		return true
+	}
+
+	for _, v := range config.AppConfig.StaticPath {
+		if utils.HasPrefix(requestPath, v) {
+			return true
+		}
 	}
 
 	anonymousUrls := config.AppConfig.AnonymousRequest.Urls

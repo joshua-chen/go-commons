@@ -7,6 +7,7 @@ import (
 
 	"github.com/joshua-chen/go-commons/datasource"
 	"github.com/joshua-chen/go-commons/mvc/context/request"
+
 )
 
 /** gov doc
@@ -27,8 +28,8 @@ type (
 		RequireAuth string    `xorm:"varchar(64) notnull" json:"require_auth"`
 		ParentId    string    `xorm:"bigint notnull" json:"parent_id"`
 		Enabled     string    `xorm:"tinyint(1) notnull" json:"enabled"`
-		CreateTime  time.Time `json:"create_time"`
-		UpdateTime  time.Time `json:"update_time"`
+		CreateAt  time.Time `json:"create_at"`
+		UpdateAt  time.Time `json:"update_at"`
 
 		Children []Children `xorm:"-" json:"children"`
 	}
@@ -78,7 +79,7 @@ WHERE m1.id = m2.parent_id
 	AND m2.id IN 
 (
 		SELECT rm.mid
-		FROM role_menu rm WHERE rm.rid in
+		FROM role_menu rm WHERE rm.role_id in
 		(
 			SELECT id FROM casbin_rule 
 			WHERE 
@@ -128,15 +129,15 @@ func GetPaginationMenus(page *request.Pagination) ([]*Menu, int64, error) {
 	return menuList, count, err
 }
 
-func GetMenusByRoleid(rid int64, page *request.Pagination) ([]*Menu, int64, error) {
+func GetMenusByRoleid(role_id int64, page *request.Pagination) ([]*Menu, int64, error) {
 	e := datasource.MasterEngine()
 	sql := fmt.Sprintf(`
 SELECT * FROM menu
 WHERE id in
 (
-SELECT mid FROM role_menu WHERE rid=%d
+SELECT mid FROM sys_role_menu WHERE role_id=%d
 )
-`, rid)
+`, role_id)
 
 	if page.SortName != "" {
 		sql += " ORDER BY "

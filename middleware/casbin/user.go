@@ -16,6 +16,7 @@ import (
 	"github.com/joshua-chen/go-commons/middleware/models"
 	"github.com/joshua-chen/go-commons/utils/security/aes"
 	"github.com/kataras/golog"
+
 )
 
 const (
@@ -48,7 +49,7 @@ func CreateRoot() {
 	newRoot := models.User{
 		Username:   username,
 		Password:   aes.AESEncrypt([]byte(password)),
-		CreateTime: time.Now(),
+		CreateAt: time.Now(),
 	}
 
 	e := datasource.MasterEngine()

@@ -10,12 +10,13 @@ package models
 
 import (
 	"github.com/joshua-chen/go-commons/datasource"
+
 )
 
 // 角色-菜单关联表
 type RoleMenu struct {
 	Id  int64 `xorm:"pk autoincr bigint notnull" json:"id"`
-	Rid int64 `xorm:"pk autoincr bigint notnull" json:"rid"`
+	RoleId int64 `xorm:"pk autoincr bigint notnull" json:"role_id"`
 	Mid int64 `xorm:"pk autoincr bigint notnull" json:"mid"`
 }
 

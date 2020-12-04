@@ -104,9 +104,7 @@ func Filter(ctx context.Context) bool {
 		golog.Errorf("Check jwt error, %s", err)
 		return false
 	}
-	return true
-	// If everything ok then call next.
-	//ctx.Next()
+	return true	
 }
 
 //
@@ -253,8 +251,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	token, err := m.Config.Extractor(ctx)
 	// If an error occurs, call the error handler and return an error
 	if err != nil {
-		golog.Debug("Error extracting JWT: %v", err)
-		m.Config.ErrorHandler(ctx, msg.TokenExactFailed)
+ 		m.Config.ErrorHandler(ctx, msg.TokenExactFailed)
 		return fmt.Errorf("Error extracting token: %v", err)
 	}
 
@@ -266,9 +263,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 			// No error, just no token (and that is ok given that CredentialsOptional is true)
 			return nil
 		}
-
-		golog.Debug("Error: No credentials found (CredentialsOptional=false)")
-		// If we get here, the required token is missing
+ 		// If we get here, the required token is missing
 		m.Config.ErrorHandler(ctx, msg.TokenParseFailedAndEmpty)
 		return fmt.Errorf(msg.TokenParseFailedAndEmpty)
 	}
@@ -278,17 +273,15 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	parsedToken, err := jwt.Parse(token, m.Config.ValidationKeyGetter)
 	// Check if there was an error in parsing...
 	if err != nil {
-		golog.Errorf("Error parsing token1: %v", err)
 		m.Config.ErrorHandler(ctx, msg.TokenExpired)
-		return fmt.Errorf("Error parsing token2: %v", err)
+		return fmt.Errorf("Error parsing token: %v", err)
 	}
 
 	if m.Config.SigningMethod != nil && m.Config.SigningMethod.Alg() != parsedToken.Header["alg"] {
 		message := fmt.Sprintf("Expected %s signing method but token specified %s",
 			m.Config.SigningMethod.Alg(),
 			parsedToken.Header["alg"])
-		golog.Errorf("Error validating token algorithm: %s", message)
-		m.Config.ErrorHandler(ctx, msg.TokenParseFailed) // 算法错误
+ 		m.Config.ErrorHandler(ctx, msg.TokenParseFailed) // 算法错误
 		return fmt.Errorf("Error validating token algorithm: %s", message)
 	}
 

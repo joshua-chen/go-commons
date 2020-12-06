@@ -29,7 +29,7 @@ func RegisterSql(engine *xorm.Engine) {
 	success := false
 	for _, sqlPath := range AppConfig.SQLPath {
 		if sqlPath != "" {
-			success = registerSql(engine, sqlPath)
+			success = registerSql(engine, sqlPath)			
 		}
 	}
 
@@ -45,7 +45,7 @@ func RegisterSql(engine *xorm.Engine) {
 
 func registerSql(engine *xorm.Engine, sqlPath string) bool {
 	path := utils.GetAbsolutePath(sqlPath)
-	golog.Info("SQLPath==========>" + path)
+	 
 	err := engine.RegisterSqlMap(xorm.Xml(path, ".xml"))
 	if err != nil {
 		exception.Fatal(err)
@@ -56,6 +56,6 @@ func registerSql(engine *xorm.Engine, sqlPath string) bool {
 	if err != nil {
 		exception.Fatal(err)
 	}
-
+	golog.Infof("[registerSql]==> %s, ok", path)
 	return true
 }

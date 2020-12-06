@@ -26,7 +26,8 @@ type AppInfo struct {
 	LogLevel   string   `yaml:"logLevel"`
 	Secret     string   `yaml:"secret"`
 	APIPrefix  APIPrefix   `yaml:"apiPrefix"`
-	SQLPath  string   `yaml:"sqlPath"`
+	SQLPath   []string   `yaml:"sqlPath"`
+	ViewPath   []string   `yaml:"viewPath"`
 	Swagger Swagger   `yaml:"swagger"`
 }
 

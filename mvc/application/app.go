@@ -62,13 +62,9 @@ func newApp() *iris.Application {
 		DocPath:  "apidoc.html",
 		BaseUrls: map[string]string{"Production": "", "Staging": ""},
 	})
-	app.Use(irisyaag.New())
+	app.Use(irisyaag.New()) 
 
-	exists, _ := utils.PathExisted("views")
-	if exists {
-		app.RegisterView(iris.HTML("./views", ".html"))
-		golog.Info("[RegisterView]==> ./views, ok")
-	}
+	config.RegisterView(app)
 
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)

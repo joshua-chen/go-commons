@@ -89,10 +89,10 @@ func If(condition bool, trueVal, falseVal interface{}) interface{} {
 
 //
 func GetUUID() (string, error) {
-	u2, err := uuid.NewV4()
+	u2, err := uuid.NewUUID()
 	if err != nil {
-	   fmt.Printf("Something went wrong: %s", err)
-	   return "", err
+		golog.Warnf("Something went wrong: %s", err)
+ 	   return "", err
 	}
 	return u2.String(), nil
  }

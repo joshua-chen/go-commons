@@ -14,6 +14,7 @@ import (
 	"strings"
 	_ "strings"
 
+	"github.com/google/uuid"
 	"github.com/kataras/golog"
 
 )
@@ -86,3 +87,12 @@ func If(condition bool, trueVal, falseVal interface{}) interface{} {
 	return falseVal
 }
 
+//
+func GetUUID() (string, error) {
+	u2, err := uuid.NewV4()
+	if err != nil {
+	   fmt.Printf("Something went wrong: %s", err)
+	   return "", err
+	}
+	return u2.String(), nil
+ }

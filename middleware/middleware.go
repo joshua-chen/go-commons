@@ -9,6 +9,9 @@
 package middleware
 
 import (
+	_ "strings"
+	"sync"
+
 	_ "github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/auth"
 	"github.com/joshua-chen/go-commons/middleware/casbin"
@@ -16,12 +19,9 @@ import (
 	"github.com/joshua-chen/go-commons/middleware/jwt"
 	"github.com/joshua-chen/go-commons/middleware/recover"
 	_ "github.com/joshua-chen/go-commons/utils"
-	_ "strings"
-	"sync"
-
 	_ "github.com/kataras/golog"
-	_ "github.com/kataras/iris"
-	_ "github.com/kataras/iris/v12/context"
+ 	_ "github.com/kataras/iris/v12/context"
+
 )
 
 var (

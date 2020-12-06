@@ -9,15 +9,13 @@
 package config
 
 import (
-	_ "sync"
-
-	_ "github.com/joshua-chen/go-commons/exception"
-	"github.com/joshua-chen/go-commons/utils"
+ 	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 
 )
 
+//
 func RegisterView(app *iris.Application) {
 
 	for _, viewPath := range AppConfig.ViewPath {

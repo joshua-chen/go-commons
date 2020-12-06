@@ -24,8 +24,7 @@ require (
 	github.com/jmespath/go-jmespath v0.3.0
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/kataras/golog v0.0.15
-	github.com/kataras/iris v11.1.1+incompatible
-	github.com/kataras/iris/v12 v12.1.8
+ 	github.com/kataras/iris/v12 v12.1.8
 	github.com/lib/pq v1.6.0
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect

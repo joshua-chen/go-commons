@@ -46,6 +46,12 @@ func RegisterSql(engine *xorm.Engine) {
 func registerSql(engine *xorm.Engine, sqlPath string) bool {
 	path := utils.GetAbsolutePath(sqlPath)
 	 
+	exists, _ := utils.PathExisted(path)
+	if !exists { 
+		golog.Warnf("[registerSql]==> %s, not exist! register ignored! ", path)
+		return false
+	}
+
 	err := engine.RegisterSqlMap(xorm.Xml(path, ".xml"))
 	if err != nil {
 		exception.Fatal(err)

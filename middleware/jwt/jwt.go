@@ -82,7 +82,7 @@ func Configure() *JWT {
 		SigningMethod: jwt.SigningMethodHS256,
 		//验证未通过错误处理方式
 		ErrorHandler: func(ctx context.Context, errMsg string) {
-			ctx.StopExecution()
+			//ctx.StopExecution()
 			ctx.JSON(response.NewUnauthorizedResult(errMsg))
 		},
 		// 指定func用于提取请求中的token

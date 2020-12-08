@@ -25,7 +25,7 @@ var (
 	slaveEngine  *xorm.Engine
 	lock         sync.Mutex
 )
-
+//
 func MasterEngineByFeature(featureName string) {
 	var prefix string
 	for _, v := range config.DBConfig.TablePrefixes {

@@ -8,9 +8,10 @@ import (
 
 )
 const localDateTimeFormat string = "2006-01-02 15:04:05"
-
+//
 type LocalTime time.Time
  
+//
 func (l LocalTime) MarshalJSON() ([]byte, error) {
 	b := make([]byte, 0, len(localDateTimeFormat)+2)
 	b = append(b, '"')
@@ -19,6 +20,7 @@ func (l LocalTime) MarshalJSON() ([]byte, error) {
 	return b, nil
 }
  
+//
 func (l *LocalTime) UnmarshalJSON(b []byte) error {
 	now, err := time.ParseInLocation(`"`+localDateTimeFormat+`"`, string(b), time.Local)
 	*l = LocalTime(now)

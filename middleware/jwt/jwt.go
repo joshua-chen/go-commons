@@ -273,7 +273,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	parsedToken, err := jwt.Parse(token, m.Config.ValidationKeyGetter)
 	// Check if there was an error in parsing...
 	if err != nil {
-		m.Config.ErrorHandler(ctx, msg.TokenExpired)
+		m.Config.ErrorHandler(ctx, msg.TokenParseFailed)
 		return fmt.Errorf("Error parsing token: %v", err)
 	}
 

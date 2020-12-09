@@ -48,6 +48,8 @@ func init() {
 			AppConfig.AnonymousRequest = AnonymousRequest
 		}
 	}
+
+	
 	golog.Info("[DBConfig]==> ", DBConfig)
 	golog.Info("[AppConfig]==> ", AppConfig)
 

@@ -28,6 +28,7 @@ type AppInfo struct {
 	APIPrefix  APIPrefix   `yaml:"apiPrefix"`
 	SQLPath   []string   `yaml:"sqlPath"`
 	ViewPath   []string   `yaml:"viewPath"`
+	UploadPath   string   `yaml:"uploadPath"`
 	Swagger Swagger   `yaml:"swagger"`
 }
 

@@ -18,8 +18,7 @@ import (
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
-	"github.com/kataras/iris/v12/core/router"
-	"github.com/kataras/iris/v12/middleware/logger"
+ 	"github.com/kataras/iris/v12/middleware/logger"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
 	_ "github.com/kataras/iris/v12/mvc"
 	_ "github.com/kataras/iris/v12/sessions"
@@ -66,7 +65,7 @@ func newApp() *iris.Application {
 	app.Use(irisyaag.New()) 
 
 	config.RegisterView(app)
-
+	config.HandleStatic(app)
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)
 	})
@@ -111,14 +110,7 @@ func newApp() *iris.Application {
 	return app
 }
 
-func handleStatic(app *iris.Application) {
-	//注册静态资源
-	staticPath := config.AppConfig.StaticPath
-	//api.HandleDir("/static", "./assets",  DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
-	app.HandleDir(staticPath.RequestPath, staticPath.Directory,  router.DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
-	//app.HandleDir("/manage/static", staticPath[1])
-	//app.HandleDir(staticPath[0]+"/images", staticPath[1]+"/images")
-}
+
 
 /**
  * 项目设置

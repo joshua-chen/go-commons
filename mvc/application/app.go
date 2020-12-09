@@ -1,23 +1,24 @@
 package application
 
 import (
-	_"os"
+	_ "os"
 	_ "time"
 
 	"github.com/betacraft/yaag/irisyaag"
 	"github.com/betacraft/yaag/yaag"
 	_ "github.com/iris-contrib/swagger/v12"
 	_ "github.com/iris-contrib/swagger/v12/swaggerFiles"
-	"github.com/joshua-chen/go-commons/utils"
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware"
 	_ "github.com/joshua-chen/go-commons/middleware/auth"
 	_ "github.com/joshua-chen/go-commons/middleware/cors"
 	_ "github.com/joshua-chen/go-commons/middleware/recover"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
+	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
+	"github.com/kataras/iris/v12/core/router"
 	"github.com/kataras/iris/v12/middleware/logger"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
 	_ "github.com/kataras/iris/v12/mvc"
@@ -113,9 +114,10 @@ func newApp() *iris.Application {
 func handleStatic(app *iris.Application) {
 	//注册静态资源
 	staticPath := config.AppConfig.StaticPath
-	app.HandleDir(staticPath[0], staticPath[1])
+	//api.HandleDir("/static", "./assets",  DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
+	app.HandleDir(staticPath.RequestPath, staticPath.Directory,  router.DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
 	//app.HandleDir("/manage/static", staticPath[1])
-	app.HandleDir(staticPath[0]+"/images", staticPath[1]+"/images")
+	//app.HandleDir(staticPath[0]+"/images", staticPath[1]+"/images")
 }
 
 /**

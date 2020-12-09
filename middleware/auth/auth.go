@@ -88,16 +88,10 @@ return
 */
 func checkURL(requestPath string) bool {
 	
-	requestStaticPath := config.AppConfig.StaticPath[0]
+	requestStaticPath := config.AppConfig.StaticPath.RequestPath
 	if utils.HasPrefix(requestPath, requestStaticPath) {
 		return true
-	}
-
-	for _, v := range config.AppConfig.StaticPath {
-		if utils.HasPrefix(requestPath, v) {
-			return true
-		}
-	}
+	} 
 
 	anonymousUrls := config.AppConfig.AnonymousRequest.Urls
 	for _, v := range anonymousUrls {

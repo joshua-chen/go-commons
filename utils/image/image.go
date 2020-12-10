@@ -28,8 +28,7 @@ import (
 func SaveAsFile(imageBase64 string, storagePath string) (id string, name string, fullname string, err error) {
 
 	headerIndex := strings.Index(imageBase64, ",")
-	base64Length := len(imageBase64)
-	rawImage := imageBase64[headerIndex+1 : base64Length]
+	rawImage := imageBase64[headerIndex+1:]
 
 	// Encoded Image DataUrl //
 	unbased, _ := base64.StdEncoding.DecodeString(rawImage)

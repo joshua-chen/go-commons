@@ -34,9 +34,9 @@ type AppInfo struct {
 
 type Static  struct{
  	RequestPath string `yaml:"requestPath"`
-	Directory  string `yaml:"directory"`
-	 
-}
+	Directory  string `yaml:"directory"` 
+} 
+ 
 
 type AnonymousRequest struct{
 	Path string `yaml:"path"`

@@ -26,7 +26,12 @@ func HandleUpload(app *iris.Application) bool {
 
 	staticDir := AppConfig.Static.Directory
 	if uploadPath != staticDir {
-		app.HandleDir(uploadPath, uploadPath, router.DirOptions{ShowList: true, Gzip: false, IndexName: "index.html"})
+		requestPath :=  uploadPath
+		if(strings.HasPrefix(uploadPath,"./")){
+			requestPath = uploadPath[1:]
+		}
+
+		app.HandleDir(requestPath, uploadPath, router.DirOptions{ShowList: true, Gzip: false, IndexName: "index.html"})
 	}
 	golog.Infof("[HandleUpload]==> %s, ok", path)
 	return true

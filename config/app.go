@@ -20,8 +20,8 @@ var AppConfig AppInfo
 
 type AppInfo struct {
 	Port       string   `yaml:"port"`
-	AnonymousRequest AnonymousRequest `yaml:"anonymousRequest"`
-	StaticPath  StaticPath   `yaml:"staticPath"`
+	AnonymousRequest *AnonymousRequest `yaml:"anonymousRequest"`
+	Static   *Static   `yaml:"static"`
 	JwtTimeout int64    `yaml:"jwtTimeout"`
 	LogLevel   string   `yaml:"logLevel"`
 	Secret     string   `yaml:"secret"`
@@ -32,7 +32,7 @@ type AppInfo struct {
 	Swagger Swagger   `yaml:"swagger"`
 }
 
-type StaticPath struct{
+type Static  struct{
  	RequestPath string `yaml:"requestPath"`
 	Directory  string `yaml:"directory"`
 	 

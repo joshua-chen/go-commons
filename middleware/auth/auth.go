@@ -88,7 +88,7 @@ return
 */
 func checkURL(requestPath string) bool {
 	
-	requestStaticPath := config.AppConfig.StaticPath.RequestPath
+	requestStaticPath := config.AppConfig.Static.RequestPath
 	if utils.HasPrefix(requestPath, requestStaticPath) {
 		return true
 	} 

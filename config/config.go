@@ -43,7 +43,7 @@ func init() {
 	if AppConfig.AnonymousRequest.Path != "" {
 		exist, _ := utils.PathExisted(AppConfig.AnonymousRequest.Path)
 		if exist {
-			var AnonymousRequest *AnonymousRequest
+			var AnonymousRequest AnonymousRequest
 			yaml.ReadYaml(AppConfig.AnonymousRequest.Path, AnonymousRequest)
 			AppConfig.AnonymousRequest = AnonymousRequest
 		}

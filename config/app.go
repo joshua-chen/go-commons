@@ -20,8 +20,8 @@ var AppConfig AppInfo
 
 type AppInfo struct {
 	Port       string   `yaml:"port"`
-	AnonymousRequest *AnonymousRequest `yaml:"anonymousRequest"`
-	Static   *Static   `yaml:"static"`
+	AnonymousRequest AnonymousRequest `yaml:"anonymousRequest"`
+	Static   Static   `yaml:"static"`
 	JwtTimeout int64    `yaml:"jwtTimeout"`
 	LogLevel   string   `yaml:"logLevel"`
 	Secret     string   `yaml:"secret"`

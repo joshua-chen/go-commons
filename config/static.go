@@ -1,6 +1,7 @@
 package config
 
 import (
+	"reflect"
 	"strings"
 
 	"github.com/joshua-chen/go-commons/utils"
@@ -9,10 +10,11 @@ import (
 	"github.com/kataras/iris/v12/core/router"
 
 )
-func HandleStatic(app *iris.Application) bool{
+
+func HandleStatic(app *iris.Application) bool {
 	//注册静态资源
 	static := AppConfig.Static
-	if( static == nil || strings.Trim(static.Directory,"")== "" ){
+	if (reflect.DeepEqual(static, Static{}) || strings.Trim(static.Directory, "") == "") {
 		return false
 	}
 	path := utils.GetAbsolutePath(static.Directory)
@@ -23,7 +25,7 @@ func HandleStatic(app *iris.Application) bool{
 	}
 
 	//api.HandleDir("/static", "./assets",  DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
-	app.HandleDir(static.RequestPath, static.Directory,  router.DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
+	app.HandleDir(static.RequestPath, static.Directory, router.DirOptions{ShowList: true, Gzip: true, IndexName: "index.html"})
 
 	return true
 	//app.HandleDir("/manage/static", staticPath[1])

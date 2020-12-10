@@ -25,7 +25,7 @@ func HandleStatic(app *iris.Application) bool {
 	}
 
 	//api.HandleDir("/static", "./assets",  DirOptions {ShowList: true, Gzip: true, IndexName: "index.html"})
-	app.HandleDir(static.RequestPath, static.Directory, router.DirOptions{ShowList: true, Gzip: true, IndexName: "index.html"})
+	app.HandleDir(static.RequestPath, static.Directory, router.DirOptions{ShowList: true, Gzip: false, IndexName: "index.html"})
 	golog.Infof("[HandleStatic]==> %s, ok", path)
 	return true
 	//app.HandleDir("/manage/static", staticPath[1])

@@ -18,6 +18,7 @@ require (
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-playground/validator/v10 v10.4.1
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/golang/snappy v0.0.2 // indirect
 	github.com/google/uuid v1.1.2
 	github.com/iris-contrib/middleware/cors v0.0.0-20191219204441-78279b78a367
 	github.com/iris-contrib/middleware/jwt v0.0.0-20191219204441-78279b78a367
@@ -40,10 +41,11 @@ require (
 	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	github.com/xormplus/builder v0.0.0-20200331055651-240ff40009be // indirect
 	github.com/xormplus/core v0.0.0-20200308074340-f3bce19d5f31
-	github.com/xormplus/xorm v0.0.0-20200529061552-7d0d26c6f81c
+	github.com/xormplus/xorm v0.0.0-20201020065950-782d727a761a
 	github.com/yudai/pp v2.0.1+incompatible // indirect
+	golang.org/x/sys v0.0.0-20201207223542-d4d67f95c62d // indirect
 	gopkg.in/flosch/pongo2.v3 v3.0.0-20141028000813-5e81b817a0c4 // indirect
-	gopkg.in/yaml.v2 v2.3.0
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 replace github.com/joshua-chen/go-commons/config => ./config

@@ -82,7 +82,7 @@ func Configure() *JWT {
 		SigningMethod: jwt.SigningMethodHS256,
 		//验证未通过错误处理方式
 		ErrorHandler: func(ctx context.Context, errMsg string) {
-			//ctx.StopExecution()
+			ctx.StopExecution()
 			ctx.JSON(response.NewUnauthorizedResult(errMsg))
 		},
 		// 指定func用于提取请求中的token
@@ -273,7 +273,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	parsedToken, err := jwt.Parse(token, m.Config.ValidationKeyGetter)
 	// Check if there was an error in parsing...
 	if err != nil {
-		m.Config.ErrorHandler(ctx, msg.TokenParseFailed)
+		m.Config.ErrorHandler(ctx, err.Error())
 		return fmt.Errorf("Error parsing token: %v", err)
 	}
 
@@ -281,7 +281,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 		message := fmt.Sprintf("Expected %s signing method but token specified %s",
 			m.Config.SigningMethod.Alg(),
 			parsedToken.Header["alg"])
- 		m.Config.ErrorHandler(ctx, msg.TokenParseFailed) // 算法错误
+ 		m.Config.ErrorHandler(ctx, err.Error()) // 算法错误
 		return fmt.Errorf("Error validating token algorithm: %s", message)
 	}
 

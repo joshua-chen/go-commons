@@ -25,7 +25,7 @@ import (
 )
 
 //
-func SaveAsFile(imageBase64 string, storagePath string) (id string, name string, fullname string, err error) {
+func SaveAsFile(imageBase64 string, storagePath string) (id string, name string, fullpath string, err error) {
 
 	headerIndex := strings.Index(imageBase64, ",")
 	rawImage := imageBase64[headerIndex+1:]
@@ -74,9 +74,9 @@ func SaveAsFile(imageBase64 string, storagePath string) (id string, name string,
 	defer f.Close()
 	//f.Write(unbased)
 
-	fullname = f.Name()
+	fullpath = f.Name()
 	fileinfo, nil := f.Stat()
 	name = fileinfo.Name()
 
-	return id, name, fullname, nil
+	return id, name, fullpath, nil
 }

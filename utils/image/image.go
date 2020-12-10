@@ -27,8 +27,8 @@ import (
 //
 func SaveAsFile(imageBase64 string, storagePath string) (id string, name string, fullpath string, err error) {
 
-	headerIndex := strings.Index(imageBase64, ",")
-	rawImage := imageBase64[headerIndex+1:]
+	schemaEndIndex := strings.Index(imageBase64, ",")
+	rawImage := imageBase64[schemaEndIndex+1:]
 
 	// Encoded Image DataUrl //
 	unbased, _ := base64.StdEncoding.DecodeString(rawImage)
@@ -46,8 +46,8 @@ func SaveAsFile(imageBase64 string, storagePath string) (id string, name string,
 	// Path to store the image //
 	os.MkdirAll(newpath, os.ModePerm)
 	id, _ = utils.GetUUID()
-	imageTag := imageBase64[5:headerIndex]
-	imageType := strings.TrimSuffix(imageTag, ";base64")
+	schemaSchema := imageBase64[5:schemaEndIndex]
+	imageType := strings.TrimSuffix(schemaSchema, ";base64")
 
 	var f *os.File
 

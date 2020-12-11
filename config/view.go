@@ -9,7 +9,7 @@
 package config
 
 import (
- 	"github.com/joshua-chen/go-commons/utils"
+	utilspath	"github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 
@@ -26,8 +26,8 @@ func RegisterView(app *iris.Application) {
 }
 
 func registerView(app *iris.Application, viewPath string) bool {
-	path := utils.GetAbsolutePath(viewPath)
-	existed:= utils.PathExisted(path)
+	path := utilspath.GetFullPath(viewPath)
+	existed:= utilspath.PathExisted(path)
 	if !existed {
 		golog.Warnf("[registerView]==> %s, not exist! register ignored! ", path)
 		return false

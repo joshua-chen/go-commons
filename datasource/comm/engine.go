@@ -6,14 +6,14 @@
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:39:53
  */
-package sys
+package common
 
 import (
 	"github.com/joshua-chen/go-commons/datasource"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/xormplus/core"
 	"github.com/xormplus/xorm"
+
 )
 
 // 主库，单例

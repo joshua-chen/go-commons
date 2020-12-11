@@ -3,7 +3,7 @@ package config
 import (
 	"strings"
 
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath	"github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/core/router"
@@ -17,8 +17,8 @@ func HandleUpload(app *iris.Application) bool {
 		return false
 	}
 
-	path := utils.GetAbsolutePath(uploadPath)
-	existed:= utils.PathExisted(path)
+	path := utilspath.GetFullPath(uploadPath)
+	existed:= utilspath.PathExisted(path)
 	if !existed {
 		golog.Warnf("[HandleUpload]==> %s, not exist! register ignored! ", path)
 		return false

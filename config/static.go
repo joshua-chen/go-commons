@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath "github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/core/router"
@@ -17,8 +17,8 @@ func HandleStatic(app *iris.Application) bool {
 	if (reflect.DeepEqual(static, Static{}) || strings.Trim(static.Directory, "") == "") {
 		return false
 	}
-	path := utils.GetAbsolutePath(static.Directory)
-	existed := utils.PathExisted(path)
+	path := utilspath.GetFullPath(static.Directory)
+	existed := utilspath.PathExisted(path)
 	if !existed {
 		golog.Warnf("[HandleStatic]==> %s, not exist! register ignored! ", path)
 		return false

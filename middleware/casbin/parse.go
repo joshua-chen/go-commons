@@ -24,7 +24,7 @@ func GetAllResourcesByUID(uid string) map[string]interface{} {
 	e := GetEnforcer()
 
 	myRes := e.GetPermissionsForUser(uid)
-	golog.Infof("myRes=> %s", myRes)
+	golog.Infof("GetPermissionsForUser=> %s", myRes)
 
 	// 获取用户的隐形角色
 	implicitRoles := e.GetImplicitRolesForUser(uid)

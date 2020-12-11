@@ -16,7 +16,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath	"github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	yamlutil "gopkg.in/yaml.v2"
 
@@ -224,7 +224,7 @@ func ReadYaml(path string, out interface{}) error {
 
 func readYamlFile(path string, out interface{}) error {
 
-	path = utils.GetAbsolutePath(path) 
+	path = utilspath.GetFullPath(path) 
 	golog.Info("Yaml path==========>" + path)
 	yamlS, err := ioutil.ReadFile(path)
 	if err != nil {

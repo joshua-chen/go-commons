@@ -15,7 +15,7 @@ import (
 	_ "github.com/CloudyKit/jet"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joshua-chen/go-commons/exception"
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath "github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	_ "github.com/xormplus/core"
 	"github.com/xormplus/xorm"
@@ -44,9 +44,9 @@ func RegisterSql(engine *xorm.Engine) {
 }
 
 func registerSql(engine *xorm.Engine, sqlPath string) bool {
-	path := utils.GetAbsolutePath(sqlPath)
+	path := utilspath.GetFullPath(sqlPath)
 
-	existed := utils.PathExisted(path)
+	existed := utilspath.PathExisted(path)
 	if !existed {
 		golog.Warnf("[registerSql]==> %s, not exist! register ignored! ", path)
 		return false

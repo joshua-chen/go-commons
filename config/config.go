@@ -18,7 +18,6 @@
 package config
 
 import (
-	_ "bytes"
 	_ "compress/gzip"
 	_ "fmt"
 	_ "io"
@@ -28,7 +27,7 @@ import (
 	_ "strings"
 	_ "time"
 
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath	"github.com/joshua-chen/go-commons/utils/path"
 	"github.com/joshua-chen/go-commons/utils/yaml"
 	"github.com/kataras/golog"
 	_ "gopkg.in/yaml.v2"
@@ -41,7 +40,7 @@ func init() {
 	yaml.ReadYaml("config/db.yml", &DBConfig)
 
 	if AppConfig.AnonymousRequest.Path != "" {
-		existed := utils.PathExisted(AppConfig.AnonymousRequest.Path)
+		existed := utilspath.PathExisted(AppConfig.AnonymousRequest.Path)
 		if existed {
 			var AnonymousRequest AnonymousRequest
 			yaml.ReadYaml(AppConfig.AnonymousRequest.Path, &AnonymousRequest)

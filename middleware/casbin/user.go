@@ -30,10 +30,10 @@ func CheckRootExit() bool {
 	// root is existed?
 	exit, err := e.Exist(&models.User{Username: username})
 	if err != nil {
-		golog.Fatalf("@@@ When check Root User is exited? happened error. %s", err.Error())
+		golog.Fatalf("@ When check Root User is exited? happened error. %s", err.Error())
 	}
 	if exit {
-		golog.Info("@@@ Root User is existed.")
+		golog.Info("@ Root User is existed.")
 
 		// 初始化rbac_model
 		r := models.User{Username: username}
@@ -54,7 +54,7 @@ func CreateRoot() {
 
 	e := datasource.MasterEngine()
 	if _, err := e.Insert(&newRoot); err != nil {
-		golog.Fatalf("@@@ When create Root User happened error. %s", err.Error())
+		golog.Fatalf("@ When create Root User happened error. %s", err.Error())
 	}
 	rooId := strconv.FormatInt(newRoot.Id, 10)
 	SetRbacModel(rooId)

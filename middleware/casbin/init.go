@@ -12,6 +12,7 @@ import (
 	_ "github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/models"
 	"github.com/kataras/golog"
+
 )
 
 func init() {
@@ -44,7 +45,7 @@ func addRoleMenu() {
 	}
 	effect, err := models.CreateRoleMenu(rMenus...)
 	if err != nil {
-		golog.Fatalf("**@@@@@@@@@@@0> %d, %s", effect, err.Error())
+		golog.Fatalf("**@@> %d, %s", effect, err.Error())
 	}
-	golog.Infof("@@@@@@@@@-> %s, %s", effect, err.Error())
+	golog.Infof("@@-> %s, %s", effect, err.Error())
 }

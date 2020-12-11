@@ -15,6 +15,7 @@
 package casbin
 
 import (
+	"encoding/json"
 	"errors"
 	"runtime"
 
@@ -24,6 +25,7 @@ import (
 	"github.com/kataras/golog"
 	"github.com/lib/pq"
 	"github.com/xormplus/xorm"
+
 )
 
 // Adapter represents the Xorm adapter for policy storage.
@@ -179,7 +181,8 @@ func (a *Adapter) LoadPolicy(model model.Model) error {
 		loadPolicyLine(line, model)
 	}
 
-	golog.Debugf("CasbinRule model %s: ", lines)
+	jsonData, _ := json.Marshal(lines)
+	golog.Debugf("CasbinRule model %s: ", string(jsonData))
 
 	return nil
 }

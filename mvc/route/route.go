@@ -9,9 +9,11 @@
 package route
 
 import (
-	"github.com/joshua-chen/go-commons/config"
+	"strings"
 
+	"github.com/joshua-chen/go-commons/config"
 	"github.com/kataras/iris/v12"
+
 )
 
 func PartyFunc(app *iris.Application, path string, fn func(router iris.Party)) {
@@ -19,14 +21,16 @@ func PartyFunc(app *iris.Application, path string, fn func(router iris.Party)) {
 	api.PartyFunc(path, fn)
 }
 func PartyCommon(app *iris.Application, fn func(router iris.Party)) {
-	PartyFunc(app, config.AppConfig.APIPrefix.Common, fn)
+	path := strings.TrimPrefix(config.AppConfig.APIPrefix.Common, config.AppConfig.APIPrefix.Base)
+	PartyFunc(app, path, fn)
 }
 
 func PartyWap(app *iris.Application, fn func(router iris.Party)) {
-	//api := app.Party(config.AppConfig.APIPrefix.Wap)
-	PartyFunc(app, config.AppConfig.APIPrefix.Wap, fn)
+	path := strings.TrimPrefix(config.AppConfig.APIPrefix.Wap, config.AppConfig.APIPrefix.Base)
+	PartyFunc(app, path, fn)
 }
 
 func PartyWeb(app *iris.Application, fn func(router iris.Party)) {
-	PartyFunc(app, config.AppConfig.APIPrefix.Web, fn)
+	path := strings.TrimPrefix(config.AppConfig.APIPrefix.Web, config.AppConfig.APIPrefix.Base)
+	PartyFunc(app, path, fn)
 }

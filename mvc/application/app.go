@@ -18,7 +18,7 @@ import (
 	"github.com/joshua-chen/go-commons/middleware/logger"
 	_ "github.com/joshua-chen/go-commons/middleware/recover"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath "github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
@@ -93,7 +93,7 @@ func newApp() *iris.Application {
 	yaag.Init(&yaag.Config{
 		On:       true,
 		DocTitle: "Iris",
-		DocPath:  "apidoc.html",
+		DocPath:   "apidoc.html",
 		BaseUrls: map[string]string{"Production": "", "Staging": ""},
 	})
 	app.Use(irisyaag.New())
@@ -108,40 +108,6 @@ func newApp() *iris.Application {
 	app.Use(sillyConvertedToIon)
 	*/
 
-	/*
-
-
-			//注册视图文件
-			app.RegisterView(iris.HTML("./static", ".html"))
-			app.Get("/", func(context context.Context) {
-				context.View("index.html")
-			})
-
-
-
-		authConfig := basicauth.Config{
-			Users:   map[string]string{"wangshubo": "wangshubo", "superWang": "superWang"},
-			Realm:   "Authorization Required",
-			Expires: time.Duration(30) * time.Minute,
-		}
-
-		authentication := basicauth.New(authConfig)
-	*/
-
-	/*app.Get("/", func(ctx context.Context) { ctx.Redirect("/admin") })
-
-	needAuth := app.Party("/admin", authentication)
-	{
-		//http://localhost:8080/admin
-		needAuth.Get("/", h)
-		// http://localhost:8080/admin/profile
-		needAuth.Get("/profile", h)
-
-		// http://localhost:8080/admin/settings
-		needAuth.Get("/settings", h)
-	}
-	*/
-
 	return app
 }
 
@@ -150,7 +116,7 @@ func newApp() *iris.Application {
  */
 func configation(app *iris.Application) {
 
-	path := utils.GetAbsolutePath("./config/iris.yml")
+	path := utilspath.GetFullPath("./config/iris.yml")
 	//配置 字符编码
 	app.Configure(iris.WithConfiguration(iris.YAML(path)))
 	//

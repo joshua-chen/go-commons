@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/utils"
+	utilspath	"github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
 	_ "github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
@@ -85,8 +85,8 @@ func NewRequestLoggerForGolog() (handler context.Handler, close func() error) {
 //根据日期获取文件名，文件日志以最常用的方式工作
 //但这些只是好的命名方式。
 func todayFilename(dir string) string {
-	if !utils.PathExisted(dir) {
-		err := utils.MakeDir(dir)
+	if !utilspath.PathExisted(dir) {
+		err := utilspath.MakeDir(dir)
 		if err != nil {
 			panic(err)
 		}

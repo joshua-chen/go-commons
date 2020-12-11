@@ -19,44 +19,48 @@ import (
 var AppConfig AppInfo
 
 type AppInfo struct {
-	Port       string   `yaml:"port"`
+	Port             string           `yaml:"port"`
 	AnonymousRequest AnonymousRequest `yaml:"anonymousRequest"`
-	Static   Static   `yaml:"static"`
-	JwtTimeout int64    `yaml:"jwtTimeout"`
-	LogLevel   string   `yaml:"logLevel"`
-	Secret     string   `yaml:"secret"`
-	APIPrefix  APIPrefix   `yaml:"apiPrefix"`
-	SQLPath   []string   `yaml:"sqlPath"`
-	ViewPath   []string   `yaml:"viewPath"`
-	UploadPath   string   `yaml:"uploadPath"`
-	Swagger Swagger   `yaml:"swagger"`
+	Static           Static           `yaml:"static"`
+	JwtTimeout       int64            `yaml:"jwtTimeout"`
+	LogLevel         string           `yaml:"logLevel"`
+	Secret           string           `yaml:"secret"`
+	APIPrefix        APIPrefix        `yaml:"apiPrefix"`
+	SQLPath          []string         `yaml:"sqlPath"`
+	ViewPath         []string         `yaml:"viewPath"`
+	UploadPath       string           `yaml:"uploadPath"`
+	Log              Log              `yaml:"log"`
+	Swagger          Swagger          `yaml:"swagger"`
 }
 
-type Static  struct{
- 	RequestPath string `yaml:"requestPath"`
-	Directory  string `yaml:"directory"` 
-} 
- 
+type Static struct {
+	RequestPath string `yaml:"requestPath"`
+	Directory   string `yaml:"directory"`
+}
+type Log struct {
+	DeleteFileOnExit bool `yaml:"deleteFileOnExit"`
+	Directory  string `yaml:"directory"`
+}
 
-type AnonymousRequest struct{
-	Path string `yaml:"path"`
-	Urls []string `yaml:"urls"`
+type AnonymousRequest struct {
+	Path     string   `yaml:"path"`
+	Urls     []string `yaml:"urls"`
 	Prefixes []string `yaml:"prefixes"`
 	Suffixes []string `yaml:"suffixes"`
 }
-type APIPrefix struct{
-	Base string `yaml:"base"`
-	Web string `yaml:"web"`
-	Wap string `yaml:"wap"`
+type APIPrefix struct {
+	Base   string `yaml:"base"`
+	Web    string `yaml:"web"`
+	Wap    string `yaml:"wap"`
 	Common string `yaml:"common"`
 }
 
-type Swagger struct{
+type Swagger struct {
 	Docs SwaggerDocs `yaml:"docs"`
 }
 
-type SwaggerDocs struct{
-	Web string `yaml:"web"`
-	Wap string `yaml:"wap"`
+type SwaggerDocs struct {
+	Web    string `yaml:"web"`
+	Wap    string `yaml:"wap"`
 	Common string `yaml:"common"`
 }

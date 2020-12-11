@@ -13,12 +13,12 @@ import (
 	_ "github.com/joshua-chen/go-commons/middleware/auth"
 	_ "github.com/joshua-chen/go-commons/middleware/cors"
 	_ "github.com/joshua-chen/go-commons/middleware/recover"
+	"github.com/joshua-chen/go-commons/middleware/logger"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
- 	"github.com/kataras/iris/v12/middleware/logger"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
 	_ "github.com/kataras/iris/v12/mvc"
 	_ "github.com/kataras/iris/v12/sessions"
@@ -49,8 +49,10 @@ func newApp() *iris.Application {
 	// Optionally, add two built'n handlers
 	// that can recover from any http-relative panics
 	// and log the requests to the terminal.
+	
+	app.Use(logger.NewConsoleLogger())
+ 	app.Use(logger.NewRequestLogger())
 	app.Use(recover_middleware.New())
-	app.Use(logger.New())
 	app.Use(middleware.Instance().Recover.New())
 	app.Use(middleware.Instance().Auth.New())
 	app.Use(middleware.Instance().Cors.New()) // cors

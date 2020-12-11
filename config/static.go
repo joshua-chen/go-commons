@@ -18,7 +18,7 @@ func HandleStatic(app *iris.Application) bool {
 		return false
 	}
 	path := utils.GetAbsolutePath(static.Directory)
-	existed, _ := utils.PathExisted(path)
+	existed := utils.PathExisted(path)
 	if !existed {
 		golog.Warnf("[HandleStatic]==> %s, not exist! register ignored! ", path)
 		return false

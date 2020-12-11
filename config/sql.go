@@ -29,7 +29,7 @@ func RegisterSql(engine *xorm.Engine) {
 	success := false
 	for _, sqlPath := range AppConfig.SQLPath {
 		if sqlPath != "" {
-			success = registerSql(engine, sqlPath)			
+			success = registerSql(engine, sqlPath)
 		}
 	}
 
@@ -45,9 +45,9 @@ func RegisterSql(engine *xorm.Engine) {
 
 func registerSql(engine *xorm.Engine, sqlPath string) bool {
 	path := utils.GetAbsolutePath(sqlPath)
-	 
-	exists, _ := utils.PathExisted(path)
-	if !exists { 
+
+	existed := utils.PathExisted(path)
+	if !existed {
 		golog.Warnf("[registerSql]==> %s, not exist! register ignored! ", path)
 		return false
 	}

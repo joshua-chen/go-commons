@@ -18,7 +18,7 @@ func HandleUpload(app *iris.Application) bool {
 	}
 
 	path := utils.GetAbsolutePath(uploadPath)
-	existed, _ := utils.PathExisted(path)
+	existed:= utils.PathExisted(path)
 	if !existed {
 		golog.Warnf("[HandleUpload]==> %s, not exist! register ignored! ", path)
 		return false

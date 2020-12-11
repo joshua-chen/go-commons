@@ -27,7 +27,7 @@ func RegisterView(app *iris.Application) {
 
 func registerView(app *iris.Application, viewPath string) bool {
 	path := utils.GetAbsolutePath(viewPath)
-	existed, _ := utils.PathExisted(path)
+	existed:= utils.PathExisted(path)
 	if !existed {
 		golog.Warnf("[registerView]==> %s, not exist! register ignored! ", path)
 		return false

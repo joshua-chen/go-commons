@@ -12,7 +12,7 @@ import (
 	"strings"
 
 	"github.com/joshua-chen/go-commons/config"
-	"github.com/kataras/iris/v12"
+ 	"github.com/kataras/iris/v12"
 
 )
 
@@ -34,3 +34,4 @@ func PartyWeb(app *iris.Application, fn func(router iris.Party)) {
 	path := strings.TrimPrefix(config.AppConfig.APIPrefix.Web, config.AppConfig.APIPrefix.Base)
 	PartyFunc(app, path, fn)
 }
+ 

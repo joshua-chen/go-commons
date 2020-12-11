@@ -3,6 +3,7 @@ package config
 import (
 	_ "github.com/kataras/golog"
 	_ "gopkg.in/yaml.v2"
+
 )
 
 var (
@@ -28,7 +29,7 @@ type DBInfo struct {
 	Port         int    `yaml:"port"`
 	Database     string `yaml:"database"`
 	Charset      string `yaml:"charset"`
-	ShowSql      bool   `yaml:"showSql"`
+	ShowSQL      bool   `yaml:"showSql"`
 	LogLevel     string `yaml:"logLevel"`
 	MaxIdleConns int    `yaml:"maxIdleConns"`
 	MaxOpenConns int    `yaml:"maxOpenConns"`

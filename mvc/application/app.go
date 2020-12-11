@@ -20,10 +20,9 @@ import (
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	utilspath "github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
-	"github.com/kataras/iris/v12"
+ 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
-	_ "github.com/kataras/iris/v12/mvc"
 	_ "github.com/kataras/iris/v12/sessions"
 
 )
@@ -107,7 +106,7 @@ func newApp() *iris.Application {
 	sillyConvertedToIon := iris.FromStd(sillyHTTPHandler)
 	app.Use(sillyConvertedToIon)
 	*/
-
+	
 	return app
 }
 

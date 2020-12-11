@@ -105,7 +105,7 @@ func SlaveEngine() *xorm.Engine {
 
 //
 func configure(engine *xorm.Engine, info *config.DBInfo) {
-	engine.ShowSQL(info.ShowSql)
+	engine.ShowSQL(info.ShowSQL)
 	engine.SetTZLocation(config.SysTimeLocation)
 	if info.MaxIdleConns > 0 {
 		engine.SetMaxIdleConns(info.MaxIdleConns)

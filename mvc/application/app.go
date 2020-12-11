@@ -17,10 +17,11 @@ import (
 	_ "github.com/joshua-chen/go-commons/middleware/cors"
 	"github.com/joshua-chen/go-commons/middleware/logger"
 	_ "github.com/joshua-chen/go-commons/middleware/recover"
+	"github.com/joshua-chen/go-commons/mvc"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	utilspath "github.com/joshua-chen/go-commons/utils/path"
 	"github.com/kataras/golog"
- 	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	recover_middleware "github.com/kataras/iris/v12/middleware/recover"
 	_ "github.com/kataras/iris/v12/sessions"
@@ -100,6 +101,7 @@ func newApp() *iris.Application {
 	config.RegisterView(app)
 	config.HandleStatic(app)
 	config.HandleUpload(app)
+	mvc.ConfigureHome(app)
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)
 	})

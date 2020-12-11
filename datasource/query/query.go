@@ -43,8 +43,8 @@ func New(engine *xorm.Engine) *Query {
 //
 func (q *Query) LimitSQL(limit, start int, sql string, args ...interface{}) *Query {
 
-	q.countSession = q.engine.SQL(sql, args)
-	q.rowsSession = q.engine.SQL(sql, args).Limit(limit, start)
+	q.countSession = q.engine.SQL(sql, args...)
+	q.rowsSession = q.engine.SQL(sql, args...).Limit(limit, start)
 
 	return q
 }
@@ -60,7 +60,7 @@ func (q *Query) FindAndCount(rowsSlicePtr interface{}) (int64, error) {
 //
 func (q *Query) PaginationSQL(page *request.Pagination, sql string, args ...interface{}) *Query {
 
-	q.LimitSQL(page.Limit, page.Offset, sql, args)
+	q.LimitSQL(page.Limit, page.Offset, sql, args...)
 
 	if page.SortName != "" {
 		switch page.SortOrder {

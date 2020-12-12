@@ -86,7 +86,7 @@ func Configure() *JWT {
 			ctx.JSON(response.NewUnauthorizedResult(errMsg))
 		},
 		// 指定func用于提取请求中的token
-		Extractor: FromAuthHeader,
+		Extractor: GetToken,
 		// if the token was expired, expiration error will be returned
 		Expiration:          true,
 		Debug:               true,
@@ -108,10 +108,13 @@ func Filter(ctx context.Context) bool {
 }
 
 //
-func FromAuthHeader(ctx context.Context) (string, error) {
+func GetToken(ctx context.Context) (string, error) {
 	auth := ctx.GetHeader("Authorization")
 	if auth == "" {
 		auth = ctx.GetHeader("X-Token")
+	}
+	if auth == "" {
+		auth = ctx.GetCookie("X-Token")
 	}
 	if auth == "" {
 		return "", fmt.Errorf("Authorization header is empty") // No error, just no token
@@ -212,13 +215,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 		Username: username,
 	}
 	return &user, true
-}
-
-func GetToken(ctx context.Context) string {
-	token, _ := FromAuthHeader(ctx)
-
-	return token
-}
+} 
 
 func GetUserID(token string) int {
 	var userId = 0

@@ -33,7 +33,7 @@ func registerView(app *iris.Application, viewPath string) bool {
 		return false
 	}
 
-	app.RegisterView(iris.HTML(path, ".html"))
+	app.RegisterView(iris.HTML(viewPath, ".html"))
 	golog.Infof("[registerView]==> %s, ok", path)
 
 	return true

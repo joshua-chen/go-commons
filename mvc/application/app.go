@@ -101,7 +101,7 @@ func newApp() *iris.Application {
 	config.RegisterView(app)
 	config.HandleStatic(app)
 	config.HandleUpload(app)
-	mvc.ConfigureHome(app)
+	mvc.ConfigureMain(app)
 	/*sillyHTTPHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		println(r.RequestURI)
 	})

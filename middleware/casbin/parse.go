@@ -46,6 +46,32 @@ func GetAllResourcesByUID(uid string) map[string]interface{} {
 func GetAllRoleByUID(uid string) []string {
 	e := GetEnforcer()
 	roles := e.GetImplicitRolesForUser(uid)
+	
 	golog.Infof("roles=> %s", roles)
 	return roles
+}
+
+
+func GetPermissionsByUID(uid string) [][]string {
+	e := GetEnforcer()
+	perms := e.GetPermissionsForUser(uid)
+	
+	golog.Infof("perms=> %s", perms)
+	return perms
+}
+
+func AddPermissionForUser(uid string,permission ...string) bool {
+	e := GetEnforcer()
+	success := e.AddPermissionForUser(uid,permission...)
+	
+	golog.Infof("AddPermissionForUser.success=> %s", success)
+	return success
+}
+
+func AddRoleForUser(uid string,role string) bool {
+	e := GetEnforcer()
+	success := e.AddRoleForUser(uid,role )
+	
+	golog.Infof("AddRoleForUser.success=> %s", success)
+	return success
 }

@@ -10,8 +10,8 @@ package casbin
 
 import (
 	_ "github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware/models"
-	"github.com/kataras/golog"
+	_"github.com/joshua-chen/go-commons/middleware/models"
+	_"github.com/kataras/golog"
 
 )
 
@@ -36,6 +36,7 @@ func initRootUser() {
 }
 
 func addRoleMenu() {
+	/*
 	// 添加role-menu关系
 	rMenus := []*models.RoleMenu{
 		{RoleId: 68, Mid: 2},
@@ -47,5 +48,7 @@ func addRoleMenu() {
 	if err != nil {
 		golog.Fatalf("**@@> %d, %s", effect, err.Error())
 	}
+	
 	golog.Infof("@@-> %s, %s", effect, err.Error())
+	*/
 }

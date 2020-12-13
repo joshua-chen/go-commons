@@ -9,7 +9,7 @@
 package jwt
 
 import (
-	"fmt"
+ 	"fmt"
 	_ "log"
 	"strings"
 	"sync"
@@ -93,8 +93,8 @@ func Configure() *JWT {
 		EnableAuthOnOptions: false,
 	}
 	instance.Config = c
-	//return &JWT{Config: c}
-	golog.Debugf("instance.Config: %s", instance.Config)
+	golog.Debugf("instance.Config: %s", c)
+
 	return instance
 }
 
@@ -104,7 +104,7 @@ func Filter(ctx context.Context) bool {
 		golog.Errorf("Check jwt error, %s", err)
 		return false
 	}
-	return true	
+	return true
 }
 
 //
@@ -215,7 +215,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 		Username: username,
 	}
 	return &user, true
-} 
+}
 
 func GetUserID(token string) int {
 	var userId = 0
@@ -248,7 +248,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	token, err := m.Config.Extractor(ctx)
 	// If an error occurs, call the error handler and return an error
 	if err != nil {
- 		m.Config.ErrorHandler(ctx, msg.TokenExactFailed)
+		m.Config.ErrorHandler(ctx, msg.TokenExactFailed)
 		return fmt.Errorf("Error extracting token: %v", err)
 	}
 
@@ -260,7 +260,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 			// No error, just no token (and that is ok given that CredentialsOptional is true)
 			return nil
 		}
- 		// If we get here, the required token is missing
+		// If we get here, the required token is missing
 		m.Config.ErrorHandler(ctx, msg.TokenParseFailedAndEmpty)
 		return fmt.Errorf(msg.TokenParseFailedAndEmpty)
 	}
@@ -278,7 +278,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 		message := fmt.Sprintf("Expected %s signing method but token specified %s",
 			m.Config.SigningMethod.Alg(),
 			parsedToken.Header["alg"])
- 		m.Config.ErrorHandler(ctx, err.Error()) // 算法错误
+		m.Config.ErrorHandler(ctx, err.Error()) // 算法错误
 		return fmt.Errorf("Error validating token algorithm: %s", message)
 	}
 

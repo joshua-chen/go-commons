@@ -1,6 +1,6 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: joshua
  * @Date: 2020-05-19 09:29:27
  * @LastEditors: joshua
@@ -11,9 +11,10 @@ package json
 import (
 	"encoding/json"
 	"os"
+
 )
 
-func GetJson(path string , s interface{})  interface{}{
+func GetJson(path string, s interface{}) interface{} {
 	file, err := os.Open(path)
 	if err != nil {
 		panic(err.Error())
@@ -24,4 +25,14 @@ func GetJson(path string , s interface{})  interface{}{
 		panic(err.Error())
 	}
 	return &s
+}
+
+func ToJson(obj interface{}) (string, error) {
+
+	jsonBytes, err := json.Marshal(obj)
+	if err != nil {
+		return "", err
+	}
+
+	return string(jsonBytes), nil
 }

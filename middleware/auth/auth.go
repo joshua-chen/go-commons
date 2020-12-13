@@ -61,10 +61,11 @@ func New() context.Handler {
 		if(ctx.Method() == iris.MethodOptions){
 			ctx.Next()
 			return
-		}
+		} 
 
 		// jwt token拦截
 		if !jwt.Filter(ctx) {
+			
 			return
 		}
 

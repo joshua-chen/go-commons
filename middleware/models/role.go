@@ -28,7 +28,7 @@ type CasbinRule struct {
 
 //{"admin", "/admin*", "GET|POST|DELETE|PUT", ".*", "角色管理"},
 func (m *CasbinRule) TableName() string {
-	return "sys_casbin_rule"
+	return "sys_privilege_casbin"
 }
 
 func GetPaginationRoles(page *request.Pagination) ([]*CasbinRule, int64, error) {

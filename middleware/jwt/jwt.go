@@ -159,7 +159,7 @@ func NewToken(user *models.User) (string, error) {
 	expireTime := time.Now().Add(time.Duration(config.AppConfig.JwtTimeout) * time.Second)
 
 	claims := Claims{
-		user.Id,
+		user.ID,
 		user.Username,
 		//user.Password,
 		jwt.StandardClaims{
@@ -211,7 +211,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 	}
 
 	user := models.User{
-		Id:       int64(id),
+		ID:       int64(id),
 		Username: username,
 	}
 	return &user, true

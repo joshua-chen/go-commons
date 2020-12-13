@@ -23,7 +23,7 @@ type  Privilege struct {
 	Name string `xorm:"varchar(50) notnull" json:"name"`
 	Type string `xorm:"varchar(50) notnull" json:"type"`//menu，action
 	RoleID int64 `xorm:"bigint notnull" json:"role_id"`
-	ObjID int64 `xorm:"bigint notnull" json:"obj_id"`
+	PermID int64 `xorm:"bigint notnull" json:"perm_id"`
 }
 
 //
@@ -46,7 +46,7 @@ func GetMenuPrivilegesByRoleID(role_id int64) ([]*Privilege,  error) {
 
 	return entities, err
 }
-
+//
 func GetActionPrivilegesByRoleID(role_id int64) ([]*Privilege,  error) {
 	e := datasource.MasterEngine() 
 
@@ -57,3 +57,30 @@ func GetActionPrivilegesByRoleID(role_id int64) ([]*Privilege,  error) {
 
 	return entities, err
 }
+
+ 
+ 
+func GetPrivilegesByRoleID(role_id string) ([]*Privilege, error)  {
+	e := datasource.MasterEngine()  
+	entities := make([]*Privilege, 0)
+	err := e.Where("role_id=?",role_id).Find(&entities)
+
+	return entities, err 
+}
+
+//
+func GetPrivilegesByUID(uid string) ([]*Privilege, error)  {
+	e := datasource.MasterEngine()
+	sql := `
+SELECT * FROM sys_privilege
+WHERE role_id in
+(
+SELECT  role_id FROM sys_user_role ur   WHERE ur.user_id=?
+) `
+
+	entities := make([]*Privilege, 0)
+	err := e.SQL(sql, uid).Find(&entities)
+
+	return entities, err 
+}
+ 

@@ -13,7 +13,7 @@ import (
 	"sync"
 
 	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware/casbin"
+_"github.com/joshua-chen/go-commons/middleware/casbin"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
 	_ "github.com/joshua-chen/go-commons/mvc/context"
 	"github.com/joshua-chen/go-commons/utils"
@@ -69,11 +69,17 @@ func New() context.Handler {
 			return
 		}
 
+		// 权限拦截
+		if !Filter(ctx){
+			return
+		}
+		/*
 		// casbin权限拦截
 		ok := casbin.Filter(ctx)
 		if !ok {
 			return
 		}
+		*/
 
 		// Pass to real API
 		ctx.Next()
@@ -118,3 +124,5 @@ func checkURL(requestPath string) bool {
 	// strings.Index(requestPath,v)
 	return false
 }
+
+

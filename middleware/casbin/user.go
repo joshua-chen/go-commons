@@ -38,7 +38,7 @@ func CheckRootExit() bool {
 		// 初始化rbac_model
 		r := models.User{Username: username}
 		if exit, _ := e.Get(&r); exit {
-			SetRbacModel(strconv.FormatInt(r.Id, 10))
+			SetRbacModel(strconv.FormatInt(r.ID, 10))
 			CreateSystemRole()
 		}
 	}
@@ -56,7 +56,7 @@ func CreateRoot() {
 	if _, err := e.Insert(&newRoot); err != nil {
 		golog.Fatalf("@ When create Root User happened error. %s", err.Error())
 	}
-	rooId := strconv.FormatInt(newRoot.Id, 10)
+	rooId := strconv.FormatInt(newRoot.ID, 10)
 	SetRbacModel(rooId)
 
 	addAllpolicy(rooId)

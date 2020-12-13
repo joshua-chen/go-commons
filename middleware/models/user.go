@@ -14,7 +14,7 @@ import (
 )
 
 type User struct {
-	Id         int64     `xorm:"pk autoincr bigint notnull" json:"id"  form:"id"`
+	ID         int64     `xorm:"pk autoincr bigint notnull" json:"id"  form:"id"`
 	Username   string    `json:"username" form:"username"`
 	Password   string    `xorm:"notnull" json:"password" form:"password"`
 	Token      string    `json:"-"`
@@ -37,5 +37,4 @@ type User struct {
 //
 func(m *User) TableName() string {
 	return "sys_user"
-}
- 
+} 

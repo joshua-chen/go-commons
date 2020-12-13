@@ -146,7 +146,7 @@ func Filter(ctx context.Context) bool {
 		return false
 	}
 
-	uid := strconv.Itoa(int(user.Id))
+	uid := strconv.Itoa(int(user.ID))
 	yes := GetEnforcer().Enforce(uid, ctx.Path(), ctx.Method(), ".*")
 	if !yes {
 		response.Unauthorized(ctx, msg.PermissionsLess, nil)

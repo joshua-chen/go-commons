@@ -10,10 +10,16 @@ package models
 
 import (
 	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/datasource/time"
 	"github.com/joshua-chen/go-commons/mvc/context/request"
 
 )
-
+type Role struct {
+	ID       int64  `xorm:"pk autoincr bigint notnull" json:"id" form:"id"`
+	Name      string `xorm:"varchar(100) index" json:"name"`
+	Description     string `xorm:"varchar(100) index" json:"description"`
+	CreateAt time.JsonTime `xorm:"datetime" json:"create_at"  form:"create_at"`
+}
 type CasbinRule struct {
 	Id         int64  `xorm:"pk autoincr bigint notnull" json:"id" form:"id"`
 	PType      string `xorm:"varchar(100) index" json:"p_type"`
@@ -65,3 +71,5 @@ func DeleteByRoles(rids []int64) (effect int64, err error) {
 	}
 	return
 }
+
+ 

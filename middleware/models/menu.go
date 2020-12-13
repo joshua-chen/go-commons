@@ -2,10 +2,10 @@ package models
 
 import (
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/datasource/query"
 	"github.com/joshua-chen/go-commons/mvc/context/request"
 
 )
@@ -36,15 +36,14 @@ type (
 
 	// 子菜单
 	Children struct {
-		Id2          int64  `xorm:"pk autoincr bigint notnull" json:"id"`
+		ID2          int64  `xorm:"pk autoincr bigint notnull" json:"id"`
 		Path2        string `xorm:"varchar(64) notnull" json:"path"`
-		Modular2     string `xorm:"varchar(64) notnull" json:"modular"`
 		Component2   string `xorm:"varchar(64) notnull" json:"component"`
 		Name2        string `xorm:"varchar(64) notnull" json:"name"`
 		Icon2        string `xorm:"varchar(64) notnull" json:"icon"`
 		KeepAlive2   string `xorm:"varchar(64) notnull" json:"keep_alive"`
 		RequireAuth2 string `xorm:"varchar(64) notnull" json:"require_auth"`
-		ParentId2    string `xorm:"bigint notnull" json:"parent_id"`
+		ParentID2    string `xorm:"bigint notnull" json:"parent_id"`
 		Enabled2     string `xorm:"tinyint(1) notnull" json:"enabled"`
 	}
 
@@ -66,7 +65,6 @@ func DynamicMenuTree(uid int64) []Menu {
 SELECT
 	m1.id, m1.path, m1.modular, m1.component, m1.icon, m1.name, m1.require_auth,
 	m2.id AS id2,
-	m2.modular AS modular2,
 	m2.component AS component2,
 	m2.icon AS icon2,
 	m2.keep_alive AS keep_alive2,
@@ -79,7 +77,7 @@ WHERE m1.id = m2.parent_id
 	AND m2.id IN 
 (
 		SELECT rm.mid
-		FROM role_menu rm WHERE rm.role_id in
+		FROM sys_privilege rm WHERE rm.role_id in
 		(
 			SELECT id FROM casbin_rule 
 			WHERE 
@@ -111,47 +109,20 @@ AND m2.enabled=true order by m1.id, m2.id
 	return menus
 }
 
-func GetPaginationMenus(page *request.Pagination) ([]*Menu, int64, error) {
+
+func GetMenusByRoleID(role_id int64, page *request.Pagination) ([]*Action, int64, error) {
 	e := datasource.MasterEngine()
-	menuList := make([]*Menu, 0)
-
-	s := e.Limit(page.Limit, page.Offset)
-	if page.SortName != "" {
-		switch page.SortOrder {
-		case "asc":
-			s.Asc(page.SortName)
-		case "desc":
-			s.Desc(page.SortName)
-		}
-	}
-	count, err := s.FindAndCount(&menuList)
-
-	return menuList, count, err
-}
-
-func GetMenusByRoleid(role_id int64, page *request.Pagination) ([]*Menu, int64, error) {
-	e := datasource.MasterEngine()
-	sql := fmt.Sprintf(`
-SELECT * FROM menu
+	sql := `
+SELECT * FROM sys_menu
 WHERE id in
 (
-SELECT mid FROM sys_role_menu WHERE role_id=%d
-)
-`, role_id)
+SELECT obj_id FROM sys_privilege WHERE  role_id=? and type=?
+) `
 
-	if page.SortName != "" {
-		sql += " ORDER BY "
-		switch page.SortOrder {
-		case "asc":
-			sql += page.SortName + " ASC"
-		case "desc":
-			sql += page.SortName + " DESC"
-		}
-	}
-	sql += " LIMIT " + strconv.Itoa(page.Offset) + ", " + strconv.Itoa(page.Limit)
+	entities := make([]*Action, 0)
 
-	menus := make([]*Menu, 0)
-	err := e.SQL(sql).Find(&menus)
+	count, err := query.New(e).PaginationSQL(page, sql, role_id, PrivilegeTypeCodeMenu).FindAndCount(&entities)
 
-	return menus, 10, err
+	return entities, count, err
 }
+ 

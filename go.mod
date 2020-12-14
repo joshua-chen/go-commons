@@ -78,7 +78,7 @@ replace github.com/joshua-chen/go-commons/middleware/auth => ./middleware/auth
 
 replace github.com/joshua-chen/go-commons/middleware/recover => ./middleware/recover
 
-replace github.com/joshua-chen/go-commons/middleware/models => ./middleware/models
+replace github.com/joshua-chen/go-commons/middleware/perm => ./middleware/perm
 
 replace github.com/joshua-chen/go-commons/utils/yaml => ./utils/yaml
 

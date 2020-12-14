@@ -16,6 +16,7 @@ type Query struct {
 	lastSQL      string
 	countSession *xorm.Session
 	rowsSession  *xorm.Session
+	session  *xorm.Session
 }
 
 var (
@@ -39,7 +40,12 @@ func New(engine *xorm.Engine) *Query {
 		engine: engine,
 	}
 }
+func (q *Query) Limit(limit, start int) *Query {
 
+	q.session = q.engine.Limit(limit, start)
+
+	return q
+}
 //
 func (q *Query) LimitSQL(limit, start int, sql string, args ...interface{}) *Query {
 
@@ -48,10 +54,19 @@ func (q *Query) LimitSQL(limit, start int, sql string, args ...interface{}) *Que
 
 	return q
 }
+func (q *Query) Where(query string,args ...interface{}) *Query {
 
+	q.session = q.engine.Where(query, args...)
+
+	return q
+}
 //
 func (q *Query) FindAndCount(rowsSlicePtr interface{}) (int64, error) {
 
+	if( q.session!= nil ){
+		count,err := q.session.FindAndCount(rowsSlicePtr)
+		return int64(count), err
+	}
 	count, err := q.countSession.Query().Count()
 	err = q.rowsSession.Find(rowsSlicePtr)
 	return int64(count), err
@@ -73,5 +88,21 @@ func (q *Query) PaginationSQL(page *request.Pagination, sql string, args ...inte
 		}
 	}
 
+	return q
+}
+
+func (q *Query) Pagination(page *request.Pagination) (*Query) {
+
+	q.session = q.engine.Limit(page.Limit, page.Offset)
+
+	if page.SortName != "" {
+		switch page.SortOrder {
+		case "asc":
+			q.session.Asc(page.SortName)
+		case "desc":
+			q.session.Desc(page.SortName)
+		}
+	}
+	//count, err := session.FindAndCount(rowsSlicePtr)
 	return q
 }

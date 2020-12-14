@@ -21,9 +21,10 @@ import (
 )
 
 func Filter(ctx context.Context) bool {
-
+	path:=ctx.Path()
+	golog.Debug("path===> ",path )
 	if !ctx.IsAjax() {
-		return true
+		//return true
 	}
 	user, ok := jwt.ParseToken(ctx)
 	if !ok {

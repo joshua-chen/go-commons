@@ -29,6 +29,7 @@ type User struct {
 	CreateAt time.Time  `xorm:"null" json:"create_at" form:"create_at"`
 	UpdateAt time.Time  `xorm:"null" json:"update_at" form:"update_at"`
 	Roles  []string   `xorm:"-" json:"roles" `
+	Menus  []*Menu   `xorm:"-" json:"menus" `
 }
 
  

@@ -62,7 +62,7 @@ func Instance() *JWT {
 // jwt中间件配置
 func Configure() *JWT {
 
-	instance := Instance()
+	instance :=  &JWT{}
 
 	c := Config{
 		ContextKey: DefaultContextKey,
@@ -195,7 +195,8 @@ func ParseTokenString(tokenString string, key string) (interface{}, bool) {
 }
 func ParseToken(ctx context.Context) (*perm.User, bool) {
 	//token := GetToken(ctx)
-	mapClaims := (Instance().Get(ctx).Claims).(jwt.MapClaims)
+	instance := Configure()
+	mapClaims := (instance.Get(ctx).Claims).(jwt.MapClaims)
 
 	id, ok1 := mapClaims["id"].(float64)
 	username, ok2 := mapClaims["username"].(string)

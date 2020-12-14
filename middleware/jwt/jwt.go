@@ -9,18 +9,15 @@
 package jwt
 
 import (
- 	"fmt"
-	_ "log"
+	"fmt"
 	"strings"
 	"sync"
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	_ "github.com/dgrijalva/jwt-go/request"
-	_ "github.com/iris-contrib/middleware/cors"
 	_ "github.com/iris-contrib/middleware/jwt"
 	"github.com/joshua-chen/go-commons/config"
-	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	"github.com/kataras/golog"
@@ -154,7 +151,7 @@ func FromFirst(extractors ...TokenExtractor) TokenExtractor {
 }
 
 // 在登录成功的时候生成token
-func NewToken(user *models.User) (string, error) {
+func NewToken(user *perm.User) (string, error) {
 	//expireTime := time.Now().Add(60 * time.Second)
 	expireTime := time.Now().Add(time.Duration(config.AppConfig.JwtTimeout) * time.Second)
 
@@ -197,7 +194,7 @@ func ParseTokenString(tokenString string, key string) (interface{}, bool) {
 	fmt.Println(err)
 	return "", false
 }
-func ParseToken(ctx context.Context) (*models.User, bool) {
+func ParseToken(ctx context.Context) (*perm.User, bool) {
 	//token := GetToken(ctx)
 	mapClaims := (Instance().Get(ctx).Claims).(jwt.MapClaims)
 
@@ -210,7 +207,7 @@ func ParseToken(ctx context.Context) (*models.User, bool) {
 		return nil, false
 	}
 
-	user := models.User{
+	user := perm.User{
 		ID:       int64(id),
 		Username: username,
 	}

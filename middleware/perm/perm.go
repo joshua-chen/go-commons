@@ -6,15 +6,16 @@
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:00:47
  */
-package auth
+package perm
 
 import (
 	_ "github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/exception"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
-	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
+	"github.com/kataras/golog"
 	_ "github.com/kataras/golog"
 	"github.com/kataras/iris/v12/context"
 
@@ -22,7 +23,7 @@ import (
 
 func Filter(ctx context.Context) bool {
 
-	if !ctx.IsAjax(){
+	if !ctx.IsAjax() {
 		return true
 	}
 	user, ok := jwt.ParseToken(ctx)
@@ -36,17 +37,16 @@ func Filter(ctx context.Context) bool {
 		ctx.StopExecution()
 		return false
 	}
-
+	golog.Debug("HasPrivilege===> ", yes)
 	return true
 }
 
-
-func Enforce(uid int64, path string, method string) bool{
-	yes, err := models.HasPrivilege(uid, path,method)
+func Enforce(uid int64, path string, method string) bool {
+	yes, err := perm.HasPrivilege(uid, path, method)
 
 	if err != nil {
 		exception.Fatal(err)
 	}
-	
+
 	return yes
 }

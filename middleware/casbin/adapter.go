@@ -254,7 +254,7 @@ func (a *Adapter) RemovePolicy(sec string, ptype string, rule []string) error {
 
 // RemoveFilteredPolicy removes policy rules that match the filter from the storage.
 func (a *Adapter) RemoveFilteredPolicy(sec string, ptype string, fieldIndex int, fieldValues ...string) error {
-	line := models.CasbinRule{}
+	line := perm.CasbinRule{}
 
 	line.PType = ptype
 	if fieldIndex <= 0 && 0 < fieldIndex+len(fieldValues) {

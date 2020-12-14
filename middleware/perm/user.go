@@ -6,7 +6,7 @@
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:26:34
  */
-package models
+package perm
 
 import (
 	"time"

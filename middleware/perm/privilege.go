@@ -6,7 +6,7 @@
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:40:58
  */
-package models
+package perm
 
 import (
 	"github.com/joshua-chen/go-commons/datasource"

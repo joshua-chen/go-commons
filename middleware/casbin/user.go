@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"github.com/joshua-chen/go-commons/datasource"
-	"github.com/joshua-chen/go-commons/middleware/models"
 	"github.com/joshua-chen/go-commons/utils/security/aes"
 	"github.com/kataras/golog"
 
@@ -28,7 +27,7 @@ const (
 func CheckRootExit() bool {
 	e := datasource.MasterEngine()
 	// root is existed?
-	exit, err := e.Exist(&models.User{Username: username})
+	exit, err := e.Exist(&perm.User{Username: username})
 	if err != nil {
 		golog.Fatalf("@ When check Root User is exited? happened error. %s", err.Error())
 	}
@@ -36,7 +35,7 @@ func CheckRootExit() bool {
 		golog.Info("@ Root User is existed.")
 
 		// 初始化rbac_model
-		r := models.User{Username: username}
+		r := perm.User{Username: username}
 		if exit, _ := e.Get(&r); exit {
 			SetRbacModel(strconv.FormatInt(r.ID, 10))
 			CreateSystemRole()
@@ -46,7 +45,7 @@ func CheckRootExit() bool {
 }
 
 func CreateRoot() {
-	newRoot := models.User{
+	newRoot := perm.User{
 		Username:   username,
 		Password:   aes.AESEncrypt([]byte(password)),
 		CreateAt: time.Now(),

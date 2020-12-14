@@ -9,13 +9,12 @@
 package auth
 
 import (
-	_ "strings"
 	"sync"
 
 	"github.com/joshua-chen/go-commons/config"
-_"github.com/joshua-chen/go-commons/middleware/casbin"
+	_ "github.com/joshua-chen/go-commons/middleware/casbin"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
-	_ "github.com/joshua-chen/go-commons/mvc/context"
+	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
@@ -70,7 +69,7 @@ func New() context.Handler {
 		}
 
 		// 权限拦截
-		if !Filter(ctx){
+		if !perm.Filter(ctx){
 			return
 		}
 		/*

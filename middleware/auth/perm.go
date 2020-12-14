@@ -6,7 +6,7 @@
  * @LastEditors: joshua
  * @LastEditTime: 2020-05-28 16:00:47
  */
-package perm
+package auth
 
 import (
 	_ "github.com/joshua-chen/go-commons/config"
@@ -16,7 +16,6 @@ import (
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
 	"github.com/kataras/golog"
-	_ "github.com/kataras/golog"
 	"github.com/kataras/iris/v12/context"
 
 )

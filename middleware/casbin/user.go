@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/joshua-chen/go-commons/datasource"
+	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/utils/security/aes"
 	"github.com/kataras/golog"
 

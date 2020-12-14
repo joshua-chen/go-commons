@@ -21,7 +21,7 @@ import (
 
 	"github.com/casbin/casbin/model"
 	"github.com/casbin/casbin/persist"
-	"github.com/joshua-chen/go-commons/middleware/models"
+	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/kataras/golog"
 	"github.com/lib/pq"
 	"github.com/xormplus/xorm"
@@ -129,20 +129,20 @@ func (a *Adapter) close() {
 }
 
 func (a *Adapter) createTable() {
-	err := a.engine.Sync2(new(models.CasbinRule))
+	err := a.engine.Sync2(new(perm.CasbinRule))
 	if err != nil {
 		panic(err)
 	}
 }
 
 func (a *Adapter) dropTable() {
-	err := a.engine.DropTables(new(models.CasbinRule))
+	err := a.engine.DropTables(new(perm.CasbinRule))
 	if err != nil {
 		panic(err)
 	}
 }
 
-func loadPolicyLine(line models.CasbinRule, model model.Model) {
+func loadPolicyLine(line perm.CasbinRule, model model.Model) {
 	lineText := line.PType
 	if line.Sub != "" {
 		lineText += ", " + line.Sub
@@ -171,7 +171,7 @@ func loadPolicyLine(line models.CasbinRule, model model.Model) {
 
 // LoadPolicy loads policy from database.
 func (a *Adapter) LoadPolicy(model model.Model) error {
-	var lines []models.CasbinRule
+	var lines []perm.CasbinRule
 	err := a.engine.Find(&lines)
 	if err != nil {
 		return err
@@ -187,8 +187,8 @@ func (a *Adapter) LoadPolicy(model model.Model) error {
 	return nil
 }
 
-func savePolicyLine(ptype string, rule []string) models.CasbinRule {
-	line := models.CasbinRule{}
+func savePolicyLine(ptype string, rule []string) perm.CasbinRule {
+	line := perm.CasbinRule{}
 
 	line.PType = ptype
 	if len(rule) > 0 {
@@ -218,7 +218,7 @@ func (a *Adapter) SavePolicy(model model.Model) error {
 	a.dropTable()
 	a.createTable()
 
-	var lines []models.CasbinRule
+	var lines []perm.CasbinRule
 
 	for ptype, ast := range model["p"] {
 		for _, rule := range ast.Policy {

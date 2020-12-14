@@ -12,9 +12,7 @@ import (
 	"sync"
 
 	"github.com/joshua-chen/go-commons/config"
-	_ "github.com/joshua-chen/go-commons/middleware/casbin"
 	"github.com/joshua-chen/go-commons/middleware/jwt"
-	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/utils"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
@@ -69,7 +67,7 @@ func New() context.Handler {
 		}
 
 		// 权限拦截
-		if !perm.Filter(ctx){
+		if !Filter(ctx){
 			return
 		}
 		/*

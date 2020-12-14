@@ -17,7 +17,6 @@ import (
  type Claims struct {
 	ID       int64  `json:"id"`
 	Username string `json:"username"`
-	//Password string `json:"password"`
-	//User models.User `json:"user"`
+	//Password string `json:"password"`	
 	jwt.StandardClaims
 }

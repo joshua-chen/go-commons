@@ -15,7 +15,6 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	_ "github.com/iris-contrib/middleware/jwt"
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/mvc/context/response"

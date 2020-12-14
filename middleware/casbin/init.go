@@ -10,7 +10,7 @@ package casbin
 
 import (
 	_ "github.com/joshua-chen/go-commons/config"
-	_"github.com/joshua-chen/go-commons/middleware/models"
+	_"github.com/joshua-chen/go-commons/middleware/perm"
 	_"github.com/kataras/golog"
 
 )
@@ -38,13 +38,13 @@ func initRootUser() {
 func addRoleMenu() {
 	/*
 	// 添加role-menu关系
-	rMenus := []*models.RoleMenu{
+	rMenus := []*perm.RoleMenu{
 		{RoleId: 68, Mid: 2},
 		{RoleId: 68, Mid: 3},
 		{RoleId: 68, Mid: 4},
 		{RoleId: 68, Mid: 5},
 	}
-	effect, err := models.CreateRoleMenu(rMenus...)
+	effect, err := perm.CreateRoleMenu(rMenus...)
 	if err != nil {
 		golog.Fatalf("**@@> %d, %s", effect, err.Error())
 	}

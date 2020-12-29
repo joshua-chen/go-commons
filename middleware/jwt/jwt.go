@@ -197,7 +197,7 @@ func ParseToken(ctx context.Context) (*perm.User, bool) {
 	//token := GetToken(ctx)
 	instance := Configure()
 	mapClaims := (instance.Get(ctx).Claims).(jwt.MapClaims)
-
+	
 	id, ok1 := mapClaims["id"].(float64)
 	username, ok2 := mapClaims["username"].(string)
 

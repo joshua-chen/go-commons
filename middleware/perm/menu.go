@@ -19,22 +19,21 @@ type (
 	Menu struct {
 		ID          int64     `xorm:"pk autoincr bigint notnull" json:"id"`
 		URL         string    `xorm:"varchar(255) notnull" json:"url"`
-		Redirect     string    `xorm:"varchar(255) notnull" json:"redirect"`
+		Redirect    string    `xorm:"varchar(255) notnull" json:"redirect"`
 		Component   string    `xorm:"varchar(64) notnull" json:"component"`
 		Name        string    `xorm:"varchar(64) notnull" json:"name"`
-		Title  string    `xorm:"varchar(64) notnull" json:"title"`
+		Title  		string    `xorm:"varchar(64) notnull" json:"title"`
+		TitlePath   string    `xorm:"-" json:"title_path"`
 		Icon        string    `xorm:"varchar(64) notnull" json:"icon"`
 		KeepAlive   string    `xorm:"varchar(64) notnull" json:"keep_alive"`
 		RequireAuth string    `xorm:"varchar(64) notnull" json:"require_auth"`
-		ParentID   string    `xorm:"bigint notnull" json:"parent_id"`
-		Hidden     bool    `xorm:"tinyint(1) notnull" json:"hidden"`
-		Enabled     string    `xorm:"tinyint(1) notnull" json:"enabled"`
-		CreateAt  time.JsonTime `json:"create_at"`
-		UpdateAt  time.JsonTime `json:"update_at"`
-
+		ParentID   	string    `xorm:"bigint notnull" json:"parent_id"`
+		Hidden     	bool    `xorm:"tinyint(1) notnull" json:"hidden"`
+		Enabled     bool    `xorm:"tinyint(1) notnull" json:"enabled"`
+		CreateAt  	time.JsonTime `json:"create_at"`
+		UpdateAt  	time.JsonTime `json:"update_at"`
 		Children []*Menu `xorm:"-" json:"children"`
 		Level        int    `xorm:"-" json:"level"`
-		LevelPath        string    `xorm:"-" json:"level_path"`
 	}
 
 )

@@ -31,6 +31,7 @@ type AppInfo struct {
 	UploadPath       string           `yaml:"uploadPath"`
 	Log              Log              `yaml:"log"`
 	Swagger          Swagger          `yaml:"swagger"`
+	Redis  			 Redis          `yaml:"redis"`
 }
 
 type Static struct {
@@ -41,7 +42,10 @@ type Log struct {
 	DeleteFileOnExit bool `yaml:"deleteFileOnExit"`
 	Directory  string `yaml:"directory"`
 }
-
+type Redis struct {
+	Port string `yaml:"port"`
+	Host   string `yaml:"host"`
+}
 type AnonymousRequest struct {
 	Path     string   `yaml:"path"`
 	Urls     []string `yaml:"urls"`

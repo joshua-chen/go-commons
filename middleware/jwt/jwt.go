@@ -15,16 +15,20 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
+	redigoredis "github.com/garyburd/redigo/redis"
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
 	"github.com/joshua-chen/go-commons/mvc/context/response/msg"
+	"github.com/joshua-chen/go-commons/utils/redis"
 	"github.com/kataras/golog"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/context"
 	"github.com/spf13/cast"
 
 )
+
+const BlacklistTokenKeyPrefix = "BlacklistToken:"
 
 type (
 	// A function called whenever an error is encountered
@@ -62,7 +66,7 @@ func Instance() *JWT {
 // jwt中间件配置
 func Configure() *JWT {
 
-	instance :=  &JWT{}
+	instance := &JWT{}
 
 	c := Config{
 		ContextKey: DefaultContextKey,
@@ -197,7 +201,7 @@ func ParseToken(ctx context.Context) (*perm.User, bool) {
 	//token := GetToken(ctx)
 	instance := Configure()
 	mapClaims := (instance.Get(ctx).Claims).(jwt.MapClaims)
-	
+
 	id, ok1 := mapClaims["id"].(float64)
 	username, ok2 := mapClaims["username"].(string)
 
@@ -294,7 +298,22 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 		}
 	}
 
-	//m.logf("JWT: %v", parsedToken)
+	//
+	//检查token黑名单 todo
+	//
+	conn, err := redis.NewConn()
+	if err != nil {
+		golog.Debug("redis.NewConn error")
+	}
+	if conn != nil {
+		defer conn.Close()
+
+		blacklistToken, err := redigoredis.String(conn.Do("GET", BlacklistTokenKeyPrefix + token))
+
+		if err == nil && blacklistToken != "" { //在过期的黑名单中
+			return fmt.Errorf(msg.TokenInBlacklist)
+		}
+	}
 
 	// If we get here, everything worked and we can set the
 	// user property in context.

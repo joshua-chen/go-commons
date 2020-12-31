@@ -15,7 +15,6 @@ import (
 	"time"
 
 	jwt "github.com/dgrijalva/jwt-go"
-	redigoredis "github.com/garyburd/redigo/redis"
 	"github.com/joshua-chen/go-commons/config"
 	"github.com/joshua-chen/go-commons/middleware/perm"
 	"github.com/joshua-chen/go-commons/mvc/context/response"
@@ -301,14 +300,12 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	//
 	//检查token黑名单 todo
 	//
-	conn, err := redis.NewConn()
-	if err != nil {
-		golog.Debug("redis.NewConn error")
-	}
-	if conn != nil {
-		defer conn.Close()
+	client := redis.NewClient()
+	 
+	if client != nil {
+		defer client.Close()
 
-		blacklistToken, err := redigoredis.String(conn.Do("GET", BlacklistTokenKeyPrefix + token))
+		blacklistToken, err := client.Get(BlacklistTokenKeyPrefix + token).Result()
 
 		if err == nil && blacklistToken != "" { //在过期的黑名单中
 			return fmt.Errorf(msg.TokenInBlacklist)

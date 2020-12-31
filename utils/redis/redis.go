@@ -44,8 +44,8 @@ func NewClient() (*goredis.Client)  {
 		url := redisConfig.Host + ":" + redisConfig.Port
 		client := goredis.NewClient(&goredis.Options{
 			Addr:    url,
-			Password: "",
-			DB:       0,
+			Password: redisConfig.Password,
+			DB:     redisConfig.DB,
 		}) 
 
 		return client

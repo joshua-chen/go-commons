@@ -45,6 +45,8 @@ type Log struct {
 type Redis struct {
 	Port string `yaml:"port"`
 	Host   string `yaml:"host"`
+	Password string `yaml:"password"`
+	DB int `yaml:"db"`
 }
 type AnonymousRequest struct {
 	Path     string   `yaml:"path"`

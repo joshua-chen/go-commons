@@ -12,14 +12,14 @@ import (
 	"reflect"
 	"sync"
 
-	redigoredis "github.com/garyburd/redigo/redis"
+	goredis "github.com/go-redis/redis"
 	"github.com/joshua-chen/go-commons/config"
-	"github.com/kataras/golog"
+	//"github.com/kataras/golog"
 
 )
 
 type Redis struct {
-	Conn redigoredis.Conn
+	Client goredis.Client
 }
 
 var (
@@ -37,18 +37,19 @@ func Instance() *Redis {
 	}
 	return instance
 }
-func NewConn() (redigoredis.Conn, error) {
+func NewClient() (*goredis.Client)  {
 	redisConfig := config.AppConfig.Redis
 	if !reflect.DeepEqual(redisConfig, config.Redis{}) && redisConfig.Host != "" {
+
 		url := redisConfig.Host + ":" + redisConfig.Port
-		c, err := redigoredis.Dial("tcp", url)
+		client := goredis.NewClient(&goredis.Options{
+			Addr:    url,
+			Password: "",
+			DB:       0,
+		}) 
 
-		if err != nil {
-			golog.Warn("redis connect err", err)
-		}
-
-		return c, err
+		return client
 	}
 
-	return nil, nil
+	return nil
 }

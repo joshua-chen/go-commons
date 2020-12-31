@@ -27,7 +27,7 @@ import (
 
 )
 
-const BlacklistTokenKeyPrefix = "BlacklistToken:"
+const TokenBlacklistKeyPrefix = "TokenBlacklist:"
 
 type (
 	// A function called whenever an error is encountered
@@ -305,7 +305,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	if client != nil {
 		defer client.Close()
 
-		blacklistToken, err := client.Get(BlacklistTokenKeyPrefix + token).Result()
+		blacklistToken, err := client.Get(TokenBlacklistKeyPrefix + token).Result()
 
 		if err == nil && blacklistToken != "" { //在过期的黑名单中
 			return fmt.Errorf(msg.TokenInBlacklist)

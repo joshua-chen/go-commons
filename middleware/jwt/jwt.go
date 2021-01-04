@@ -28,6 +28,7 @@ import (
 )
 
 const TokenBlacklistKeyPrefix = "TokenBlacklist:"
+const JWTLogPrefix = "[JWT] "
 
 type (
 	// A function called whenever an error is encountered
@@ -100,7 +101,7 @@ func Configure() *JWT {
 func Filter(ctx context.Context) bool {
 	instance := Configure()
 	if err := instance.CheckJWT(ctx); err != nil {
-		golog.Errorf("Check jwt error, %s", err)
+		golog.Errorf(JWTLogPrefix+"Check jwt error, %s", err)
 		return false
 	}
 	return true
@@ -230,9 +231,9 @@ func GetUserID(token string) int {
 
 // Get returns the user (&token) information for this client/request
 func (m *JWT) Get(ctx context.Context) *jwt.Token {
-	golog.Debugf("ContextKey: %s", m.Config.ContextKey)
-	golog.Debugf("ctx.Values(): %s", ctx.Values())
-	golog.Debugf("m.Config: %s", m.Config)
+	golog.Debugf(JWTLogPrefix+"ContextKey: %s", m.Config.ContextKey)
+	golog.Debugf(JWTLogPrefix+"ctx.Values(): %s", ctx.Values())
+	golog.Debugf(JWTLogPrefix+"m.Config: %s", m.Config)
 	return ctx.Values().Get(m.Config.ContextKey).(*jwt.Token)
 }
 
@@ -256,7 +257,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	if token == "" {
 		// Check if it was required
 		if m.Config.CredentialsOptional {
-			golog.Debug("No credentials found (CredentialsOptional=true)")
+			golog.Debug(JWTLogPrefix + "No credentials found (CredentialsOptional=true)")
 			// No error, just no token (and that is ok given that CredentialsOptional is true)
 			return nil
 		}
@@ -284,7 +285,6 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 
 	// Check if the parsed token is valid...
 	if !parsedToken.Valid {
-		golog.Errorf(msg.TokenParseFailedAndInvalid)
 		m.Config.ErrorHandler(ctx, msg.TokenParseFailedAndInvalid)
 		return fmt.Errorf(msg.TokenParseFailedAndInvalid)
 	}
@@ -301,7 +301,7 @@ func (m *JWT) CheckJWT(ctx context.Context) error {
 	//检查token黑名单 todo
 	//
 	client := redis.NewClient()
-	 
+
 	if client != nil {
 		defer client.Close()
 
